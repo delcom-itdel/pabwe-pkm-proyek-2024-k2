@@ -15,3 +15,9 @@
 | 11S22026 | Riovan Samuel Sihombing      | Riovan716     |
 | 11S22027 | Kevin Aditia Armando Harianja| Adtyarhz      |
 | 11S22053 | Tabita Novi Sinaga           | tabita191103  |
+
+# Logs
+
+## [01-11-2024]
+
+- Installation: Create Proyek Laravel (11S22025 - Martha Yulinda Lbn Tobing)
