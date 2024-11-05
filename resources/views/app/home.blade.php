@@ -64,8 +64,9 @@
             </ul>
           </li>
           <li><a href="index.html#features">Sarana & Prasarana</a></li>
-          <li class="dropdown"><a href="#services"><span>Informasi</span> <i
-                class="bi bi-chevron-down toggle-dropdown"></i></a>
+
+          <li class="dropdown"><a href="#services"><span>Informasi</span>
+              <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#">PPDB</a></li>
               <li><a href="#">Berita & Artikel</a></li>
@@ -75,12 +76,12 @@
             </ul>
           </li>
 
-          <li class="dropdown"><a href="#services"><span>Platoform Kami</span> <i
-                class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li class="dropdown"><a href="#services"><span>Platform Kami</span>
+              <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <div class="nav-buttons mb-4">
-                <a href="{{ route('login') }}" class="nav-button">SIS</a>
-              </div>
+
+              <li><a href="{{ route('login') }}">SIS</a></li>
+
             </ul>
           </li>
           <li><a href="index.html#contact">Contact</a></li>
