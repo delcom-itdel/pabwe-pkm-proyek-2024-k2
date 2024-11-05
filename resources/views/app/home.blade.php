@@ -78,7 +78,9 @@
           <li class="dropdown"><a href="#services"><span>Platoform Kami</span> <i
                 class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#">SIS</a></li>
+              <div class="nav-buttons mb-4">
+                <a href="{{ route('login') }}" class="nav-button">SIS</a>
+              </div>
             </ul>
           </li>
           <li><a href="index.html#contact">Contact</a></li>
@@ -86,7 +88,7 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted" href="index.html#about">Get Started</a>
+
 
     </div>
   </header>
