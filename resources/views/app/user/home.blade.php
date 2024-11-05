@@ -48,7 +48,7 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="#" class="active">Beranda</a></li>
+          <li><a href="#hero" class="active">Beranda</a></li>
           <li class="dropdown"><a href="#about"><span>Profil</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#">Sejarah</a></li>
