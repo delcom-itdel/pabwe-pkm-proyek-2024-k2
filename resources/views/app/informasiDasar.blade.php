@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 
 <head>
@@ -115,8 +115,9 @@
   </div>
   <div style="padding: 2em;">
     <h1>Informasi Dasar</h1>
-    <form action="{{ route('submitInformasiDasar') }}" method="POST">
+    <form action="{{ route('updateInformasiDasar') }}" method="POST">
       @csrf
+      @method('PUT') <!-- Menggunakan PUT method untuk memastikan data diupdate bukan ditambahkan -->
       <!-- Field Kontak Phone -->
       <div>
         <label for="kontak_phone">Kontak Phone:</label>
@@ -146,10 +147,8 @@
     <div style="color: green;">
       {{ session('success') }}
     </div>
-  @endif
-
+    @endif
 
 </body>
-
 
 </html>

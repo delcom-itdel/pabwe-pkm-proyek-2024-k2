@@ -31,4 +31,4 @@ Route::get('/informasiDasar', function () {
     return view('app/informasiDasar');
 })->name('informasiDasar');
 
-Route::post('/storeInformasiDasar', [App\Http\Controllers\AdminController::class, 'storeInformasiDasar'])->name('submitInformasiDasar');
+Route::put('/informasi-dasar', [App\Http\Controllers\AdminController::class, 'updateInformasiDasar'])->name('updateInformasiDasar');
