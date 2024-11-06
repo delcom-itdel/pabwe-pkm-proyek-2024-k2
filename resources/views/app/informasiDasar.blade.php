@@ -113,6 +113,43 @@
     <h1>Informaasi Dasar</h1>
     <p></p>
   </div>
+  <div style="padding: 2em;">
+    <h1>Informasi Dasar</h1>
+    <form action="{{ route('submitInformasiDasar') }}" method="POST">
+      @csrf
+      <!-- Field Kontak Phone -->
+      <div>
+        <label for="kontak_phone">Kontak Phone:</label>
+        <input type="text" name="kontak_phone" id="kontak_phone"
+          value="{{ session('data.kontak_phone') ?? $data->kontak_phone ?? '' }}" required>
+      </div>
+
+      <!-- Field Kontak Email -->
+      <div>
+        <label for="kontak_email">Kontak Email:</label>
+        <input type="email" name="kontak_email" id="kontak_email"
+          value="{{ session('data.kontak_email') ?? $data->kontak_email ?? '' }}" required>
+      </div>
+
+      <!-- Field Nama Lokasi -->
+      <div>
+        <label for="nama_lokasi">Nama Lokasi:</label>
+        <input type="text" name="nama_lokasi" id="nama_lokasi"
+          value="{{ session('data.nama_lokasi') ?? $data->nama_lokasi ?? '' }}" required>
+      </div>
+
+      <button type="submit">Simpan</button>
+    </form>
+
+    <!-- Menampilkan Pesan Sukses -->
+    @if(session('success'))
+    <div style="color: green;">
+      {{ session('success') }}
+    </div>
+  @endif
+
+
 </body>
+
 
 </html>
