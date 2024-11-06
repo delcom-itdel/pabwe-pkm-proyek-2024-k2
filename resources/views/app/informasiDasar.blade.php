@@ -110,8 +110,8 @@
 
   <!-- Main Content -->
   <div style="padding: 2em;">
-    <h1>Welcome to the Admin Dashboard</h1>
-    <p>You are now logged in.</p>
+    <h1>Informaasi Dasar</h1>
+    <p></p>
   </div>
 </body>
 
