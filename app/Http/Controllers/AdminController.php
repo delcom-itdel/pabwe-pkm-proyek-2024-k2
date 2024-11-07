@@ -41,9 +41,6 @@ class AdminController extends Controller
             ->with('data', $request->only('kontak_phone', 'kontak_email', 'nama_lokasi'));
     }
 
-    public function sejarah()
-    {
-        return view('app.adminSejarah'); // Mengarah ke resources/views/app/sejarah.blade.php
-    }
+
 
 }
