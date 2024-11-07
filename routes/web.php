@@ -47,8 +47,8 @@ Route::middleware(['auth', 'check.roles:Admin,Editor'])->group(function () {
 
     Route::put('/informasi-dasar', [AdminController::class, 'updateInformasiDasar'])->name('updateInformasiDasar');
 
-     // Route for the Profil Informasi Dasar page
-     Route::get('/profilInformasiDasar', function () {
+    // Route for the Profil Informasi Dasar page
+    Route::get('/profilInformasiDasar', function () {
         return view('app.profilInformasiDasar');
     })->name('profilInformasiDasar');
 
@@ -95,3 +95,49 @@ Route::get('/arsip', [ProfilController::class, 'arsip'])->name('arsip');
 
 // Rute untuk Hubungi Kami
 Route::get('/hubungi-kami', [ProfilController::class, 'hubungiKami'])->name('hubungiKami');
+
+
+//admin
+Route::get('/staff', function () {
+    return view('app/admin/staff');
+})->name('staff');
+
+Route::get('/prestasi', function () {
+    return view('app/admin/prestasi');
+})->name('prestasi');
+
+Route::get('/alumni2', function () {
+    return view('app/admin/alumni2');
+})->name('alumni2');
+
+Route::get('/sarana', function () {
+    return view('app/admin/sarana');
+})->name('sarana');
+
+Route::get('/adminppdb', function () {
+    return view('app/admin/adminppdb');
+})->name('adminppdb');
+
+Route::get('/berita', function () {
+    return view('app/admin/berita');
+})->name('berita');
+
+Route::get('/galeri', function () {
+    return view('app/admin/galeri');
+})->name('galeri');
+
+Route::get('/arsip', function () {
+    return view('app/admin/arsip');
+})->name('arsip');
+
+Route::get('/hubungi', function () {
+    return view('app/admin/hubungi');
+})->name('hubungi');
+
+Route::get('/informasi2', function () {
+    return view('app/admin/informasi2');
+})->name('informasi2');
+
+Route::get('/informasi3', function () {
+    return view('app/admin/informasi3');
+})->name('informasi3');

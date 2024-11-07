@@ -57,23 +57,28 @@
               <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
 
-              <li><a href="{{ route('informasiDasar') }}">Informasi Dasar</a></li>
+              <li><a href="{{ route('informasi2') }}">Informasi Dasar</a></li>
             </ul>
           </li>
           <li class="dropdown"><a href="#services"><span>Profil</span>
               <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-
-              <li><a href="{{ route('profilInformasiDasar') }}">Informasi Dasar</a></li>
+              <li><a href="{{ route('informasi3') }}">Informasi Dasar</a></li>
+              <li><a href="{{ route('staff') }}">Staff Guru & Karyawan</a></li>
+              <li><a href="{{ route('prestasi') }}">Prestasi</a></li>
+              <li><a href="{{ route('alumni') }}">Alumni</a></li>
             </ul>
           </li>
+          <li><a href="{{ route('sarana') }}">Sarana & Prasarana</a></li>
           <li class="dropdown"><a href="#services"><span>Informasi</span>
               <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
 
-              <li><a href="{{ route('informasiPbdb') }}">PPDB</a></li>
-              <li><a href="{{ route('informasiArsip') }}">Arsip</a></li>
-              <li><a href="{{ route('informasiHubungiKami') }}">Hubungi Kami</a></li>
+              <li><a href="{{ route('adminppdb') }}">PPDB</a></li>
+              <li><a href="{{ route('berita') }}">Berita & Artikel</a></li>
+              <li><a href="{{ route('galeri') }}">Galeri</a></li>
+              <li><a href="{{ route('arsip') }}">Arsip</a></li>
+              <li><a href="{{ route('hubungi') }}">Hubungi Kami</a></li>
             </ul>
           </li>
           <form action="{{ route('logout') }}" method="POST" class="logout-form">
