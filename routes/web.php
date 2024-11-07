@@ -32,6 +32,11 @@ Route::get('/informasiDasar', function () {
     return view('app/informasiDasar');
 })->name('informasiDasar');
 
+// Route for the Informasi Dasar profil page
+Route::get('/profilinformasiDasar', function () {
+    return view('app/profilInformasiDasar');
+})->name('profilinformasiDasar');
+
 Route::put('/informasi-dasar', [App\Http\Controllers\AdminController::class, 'updateInformasiDasar'])->name('updateInformasiDasar');
 
 // Rute untuk halaman Sejarah dan Visi Misi
