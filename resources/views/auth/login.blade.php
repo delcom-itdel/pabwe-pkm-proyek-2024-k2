@@ -5,93 +5,58 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
-  <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #f2f2f2;
-      font-family: Arial, sans-serif;
-    }
-
-    .login-container {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      width: 300px;
-    }
-
-    .login-container h2 {
-      text-align: center;
-      color: #333;
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 5px;
-      color: #333;
-    }
-
-    .form-group input {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-    }
-
-    .form-group input:focus {
-      outline: none;
-      border-color: #4CAF50;
-    }
-
-    .login-button {
-      width: 100%;
-      padding: 10px;
-      background-color: #4CAF50;
-      border: none;
-      border-radius: 4px;
-      color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .login-button:hover {
-      background-color: #45a049;
-    }
-  </style>
+  <link href="{{ asset('assets/img/logo.png')}}" rel="icon">
+  <!-- Link to Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body>
-  <h2>Login</h2>
-  <form action="{{ route('login.submit') }}" method="POST">
-    @csrf
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required>
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" required>
-    </div>
-    <button type="submit">Login</button>
-  </form>
+<body class="bg-light d-flex justify-content-center align-items-center vh-100">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <div class="card shadow-sm border-0">
+          <div class="card-header bg-white text-center border-0">
+            <img src="{{ asset('assets/img/logo.png') }}" alt="School Logo" class="img-fluid mb-3" style="max-width: 80px;">
+            <h5 class="mb-0">Sistem Informasi Sekolah (SIS)</h5>
+          </div>
+          <div class="card-body">
+            <form action="{{ route('login.submit') }}" method="POST">
+              @csrf
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="password">Kata Sandi</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="remember">
+                <label class="form-check-label" for="remember">Ingat Saya</label>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block mt-3">Masuk</button>
+            </form>
 
-  <!-- Display error message if credentials are incorrect -->
-  @if ($errors->any())
-    <div>
-    <ul>
-      @foreach ($errors->all() as $error)
-      <li>{{ $error }}</li>
-    @endforeach
-    </ul>
+            <!-- Display error message if credentials are incorrect -->
+            @if ($errors->any())
+              <div class="alert alert-danger mt-3">
+                <ul class="mb-0">
+                  @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                  @endforeach
+                </ul>
+              </div>
+            @endif
+          </div>
+        </div>
+      </div>
     </div>
-  @endif
+  </div>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
