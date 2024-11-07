@@ -60,4 +60,14 @@ class ProfilController extends Controller
     {
         return view('app.galeri');
     }
+
+    public function arsip()
+{
+    return view('app.arsip'); // Mengarah ke resources/views/app/arsip.blade.php
+}
+public function hubungiKami()
+{
+    return view('app.hubungiKami'); // Mengarah ke resources/views/app/hubungiKami.blade.php
+}
+
 }

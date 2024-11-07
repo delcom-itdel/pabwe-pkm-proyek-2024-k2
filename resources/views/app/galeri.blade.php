@@ -62,8 +62,8 @@
               <li><a href="{{ route('ppdb') }}">PPDB</a></li>
               <li><a href="{{ route('beritaArtikel') }}">Berita & Artikel</a></li>
               <li><a href="{{ route('galeri') }}">Galeri</a></li>
-              <li><a href="#">Arsip</a></li>
-              <li><a href="#">Hubungi Kami</a></li>
+              <li><a href="{{ route('arsip') }}">Arsip</a></li>
+              <li><a href="{{ route('hubungiKami') }}">Hubungi Kami</a></li>
             </ul>
           </li>
           <li class="dropdown"><a href="#services"><span>Platform Kami</span><i

@@ -1,11 +1,10 @@
-<!-- resources/views/app/beritaArtikel.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>SMAN 1 Balige</title>
+  <title>SMAN 1 Balige - Arsip</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -17,7 +16,7 @@
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap"
     rel="stylesheet">
 
   <!-- Vendor CSS Files -->
@@ -42,7 +41,7 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="{{ route('home') }}" class="active">Beranda</a></li>
+          <li><a href="{{ route('home') }}">Beranda</a></li>
           <li class="dropdown"><a href="#about"><span>Profil</span> <i
                 class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
@@ -78,19 +77,21 @@
       </nav>
     </div>
   </header>
+
   <!-- Main Content -->
   <main id="main" class="pt-5">
-    <section id="beritaArtikel" class="beritaArtikel-section mt-5">
+    <section id="arsip" class="arsip-section mt-5">
       <div class="container" data-aos="fade-up">
         <div class="section-title">
-          <h2>Berita & Artikel</h2>
+          <h2>Arsip</h2>
         </div>
         <p>
-          <!-- Tambahkan konten berita dan artikel di sini -->
+          <!-- Tambahkan konten arsip di sini -->
         </p>
       </div>
     </section>
   </main>
+
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
       class="bi bi-arrow-up-short"></i></a>

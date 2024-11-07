@@ -89,3 +89,9 @@ Route::get('/berita-artikel', [ProfilController::class, 'beritaArtikel'])->name(
 
 // Rute untuk Galeri
 Route::get('/galeri', [ProfilController::class, 'galeri'])->name('galeri');
+
+// Rute untuk Arsip
+Route::get('/arsip', [ProfilController::class, 'arsip'])->name('arsip');
+
+// Rute untuk Hubungi Kami
+Route::get('/hubungi-kami', [ProfilController::class, 'hubungiKami'])->name('hubungiKami');
