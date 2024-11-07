@@ -54,13 +54,13 @@
           <li class="dropdown"><a href="#about"><span>Profil</span> <i
                 class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-            <li><a href="{{ route('sejarah') }}">Sejarah</a></li>
-            <li><a href="{{ route('visiMisi') }}">Visi & Misi</a></li>
-            <li><a href="{{ route('struktur') }}">Struktur Organisasi</a></li>
-            <li><a href="{{ route('program') }}">Program Sekolah</a></li>
-            <li><a href="{{ route('staf') }}">Staf Guru & Karyawan</a></li>
-            <li><a href="{{ route('prestasi') }}">Prestasi</a></li>
-            <li><a href="{{ route('alumni') }}">Alumni</a></li>
+              <li><a href="{{ route('sejarah') }}">Sejarah</a></li>
+              <li><a href="{{ route('visiMisi') }}">Visi & Misi</a></li>
+              <li><a href="{{ route('struktur') }}">Struktur Organisasi</a></li>
+              <li><a href="{{ route('program') }}">Program Sekolah</a></li>
+              <li><a href="{{ route('staf') }}">Staf Guru & Karyawan</a></li>
+              <li><a href="{{ route('prestasi') }}">Prestasi</a></li>
+              <li><a href="{{ route('alumni') }}">Alumni</a></li>
             </ul>
           </li>
           <li><a href="{{ route('saranaPrasarana') }}">Sarana & Prasarana</a></li>
@@ -68,11 +68,11 @@
           <li class="dropdown"><a href="#services"><span>Informasi</span>
               <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-            <li><a href="{{ route('ppdb') }}">PPDB</a></li>
+              <li><a href="{{ route('ppdb') }}">PPDB</a></li>
               <li><a href="{{ route('beritaArtikel') }}">Berita & Artikel</a></li>
               <li><a href="{{ route('galeri') }}">Galeri</a></li>
-              <li><a href="#">Arsip</a></li>
-              <li><a href="#">Hubungi Kami</a></li>
+              <li><a href="{{ route('arsip') }}">Arsip</a></li>
+              <li><a href="{{ route('hubungiKami') }}">Hubungi Kami</a></li>
             </ul>
           </li>
 
@@ -715,29 +715,29 @@
 
         <div class="swiper init-swiper">
           <script type="application/json" class="swiper-config">
-            {
-              "loop": true,
-              "speed": 600,
-              "autoplay": {
-                "delay": 5000
+          {
+            "loop": true,
+            "speed": 600,
+            "autoplay": {
+              "delay": 5000
+            },
+            "slidesPerView": "auto",
+            "pagination": {
+              "el": ".swiper-pagination",
+              "type": "bullets",
+              "clickable": true
+            },
+            "breakpoints": {
+              "320": {
+                "slidesPerView": 1,
+                "spaceBetween": 40
               },
-              "slidesPerView": "auto",
-              "pagination": {
-                "el": ".swiper-pagination",
-                "type": "bullets",
-                "clickable": true
-              },
-              "breakpoints": {
-                "320": {
-                  "slidesPerView": 1,
-                  "spaceBetween": 40
-                },
-                "1200": {
-                  "slidesPerView": 3,
-                  "spaceBetween": 1
-                }
+              "1200": {
+                "slidesPerView": 3,
+                "spaceBetween": 1
               }
             }
+          }
           </script>
           <div class="swiper-wrapper">
 
