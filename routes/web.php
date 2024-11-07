@@ -36,9 +36,6 @@ Route::middleware(['auth', 'check.roles:Editor'])->group(function () {
     Route::get('/editor', function () {
         return view('app.editor.editor');
     })->name('editor');
-
-    // Rute untuk fitur yang spesifik untuk Editor (jika ada)
-    Route::get('/editor/users', [EditorController::class, 'getUsersRoleEditor'])->name('editor.users');
 });
 
 //accessible by Admin and Editor
