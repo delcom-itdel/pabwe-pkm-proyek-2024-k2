@@ -49,8 +49,8 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="{{ route('home') }}" class="active">Beranda</a></li>
-          <li class="dropdown"><a href="#about"><span>Profil</span> <i
+          <li><a href="{{ route('home') }}">Beranda</a></li>
+          <li class="dropdown"><a href="#about" class="active"><span>Profil</span> <i
                 class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
             <li><a href="{{ route('sejarah') }}">Sejarah</a></li>
@@ -62,7 +62,7 @@
             <li><a href="{{ route('alumni') }}">Alumni</a></li>
             </ul>
           </li>
-          <li><a href="index.html#features">Sarana & Prasarana</a></li>
+          <li><a href="{{ route('saranaPrasarana') }}">Sarana & Prasarana</a></li>
 
           <li class="dropdown"><a href="#services"><span>Informasi</span>
               <i class="bi bi-chevron-down toggle-dropdown"></i></a>
@@ -95,7 +95,7 @@
     <section id="sejarah" class="sejarah-section mt-5">
       <div class="container" data-aos="fade-up">
         <div class="section-title">
-          <h2>Sejarah</h2>
+          <h2>Sarana Prasarana</h2>
         </div>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce euismod, lacus eu convallis luctus, 

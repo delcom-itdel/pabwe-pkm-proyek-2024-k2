@@ -47,4 +47,9 @@ class ProfilController extends Controller
     {
         return view('app.ppdb');
     }
+
+    public function saranaPrasarana()
+    {
+        return view('app.saranaPrasarana');
+    }
 }

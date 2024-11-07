@@ -49,7 +49,7 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="{{ route('home') }}" class="active">Beranda</a></li>
+          <li><a href="{{ route('home') }}">Beranda</a></li>
           <li class="dropdown"><a href="#about"><span>Profil</span> <i
                 class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
@@ -64,7 +64,7 @@
           </li>
           <li><a href="index.html#features">Sarana & Prasarana</a></li>
 
-          <li class="dropdown"><a href="#services"><span>Informasi</span>
+          <li class="dropdown"><a href="#services" class="active"><span>Informasi</span>
               <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#">PPDB</a></li>

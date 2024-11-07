@@ -47,4 +47,4 @@ Route::get('/alumni', [ProfilController::class, 'alumni'])->name('alumni');
 Route::get('/ppdb', [ProfilController::class, 'ppdb'])->name('ppdb');
 
 //Rute untuk sarana prasarana
-Route::get('/sarana-prasarana', [ProfilController::class, 'saranaPrasarana'])->name('sarana-prasarana');
+Route::get('/saranaPrasarana', [ProfilController::class, 'saranaPrasarana'])->name('saranaPrasarana');

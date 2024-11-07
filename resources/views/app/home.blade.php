@@ -63,7 +63,7 @@
             <li><a href="{{ route('alumni') }}">Alumni</a></li>
             </ul>
           </li>
-          <li><a href="index.html#features">Sarana & Prasarana</a></li>
+          <li><a href="{{ route('saranaPrasarana') }}">Sarana & Prasarana</a></li>
 
           <li class="dropdown"><a href="#services"><span>Informasi</span>
               <i class="bi bi-chevron-down toggle-dropdown"></i></a>
