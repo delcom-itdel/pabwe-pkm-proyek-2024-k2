@@ -94,7 +94,7 @@
     <section id="sejarah" class="sejarah-section mt-5">
       <div class="container" data-aos="fade-up">
         <div class="section-title">
-          <h2> profil Informasi Dasar</h2>
+          <h2>Hubungi Kami</h2>
         </div>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce euismod, lacus eu convallis luctus,
@@ -111,7 +111,6 @@
       </div>
     </section>
   </main>
-
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
       class="bi bi-arrow-up-short"></i></a>

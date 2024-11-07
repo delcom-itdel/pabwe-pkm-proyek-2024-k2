@@ -33,9 +33,23 @@ Route::get('/informasiDasar', function () {
 })->name('informasiDasar');
 
 // Route for the Informasi Dasar profil page
-Route::get('/profilinformasiDasar', function () {
+Route::get('/profilInformasiDasar', function () {
     return view('app/profilInformasiDasar');
-})->name('profilinformasiDasar');
+})->name('profilInformasiDasar');
+
+Route::get('/informasiPbdb', function () {
+    return view('app/informasiPbdb');
+})->name('informasiPbdb');
+
+Route::get('/informasiArsip', function () {
+    return view('app/informasiArsip');
+})->name('informasiArsip');
+
+Route::get('/informasiHubungiKami', function () {
+    return view('app/informasiHubungiKami');
+})->name('informasiHubungiKami');
+
+
 
 Route::put('/informasi-dasar', [App\Http\Controllers\AdminController::class, 'updateInformasiDasar'])->name('updateInformasiDasar');
 

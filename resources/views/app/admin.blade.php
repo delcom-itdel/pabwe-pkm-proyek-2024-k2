@@ -64,16 +64,16 @@
               <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
 
-              <li><a href="{{ route('admin') }}">Informasi Dasar</a></li>
+              <li><a href="{{ route('profilInformasiDasar') }}">Informasi Dasar</a></li>
             </ul>
           </li>
           <li class="dropdown"><a href="#services"><span>Informasi</span>
               <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
 
-              <li><a href="{{ route('admin') }}">PPDB</a></li>
-              <li><a href="{{ route('admin') }}">Arsip</a></li>
-              <li><a href="{{ route('admin') }}">Hubungi Kami</a></li>
+              <li><a href="{{ route('informasiPbdb') }}">PPDB</a></li>
+              <li><a href="{{ route('informasiArsip') }}">Arsip</a></li>
+              <li><a href="{{ route('informasiHubungiKami') }}">Hubungi Kami</a></li>
             </ul>
           </li>
           <form action="{{ route('logout') }}" method="POST" class="logout-form">
