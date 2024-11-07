@@ -42,3 +42,6 @@ Route::get('/program', [ProfilController::class, 'program'])->name('program');
 Route::get('/staf', [ProfilController::class, 'staf'])->name('staf');
 Route::get('/prestasi', [ProfilController::class, 'prestasi'])->name('prestasi');
 Route::get('/alumni', [ProfilController::class, 'alumni'])->name('alumni');
+
+// Rute untuk informasi
+Route::get('/ppdb', [ProfilController::class, 'ppdb'])->name('ppdb');

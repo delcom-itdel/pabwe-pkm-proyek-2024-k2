@@ -19,27 +19,32 @@ class ProfilController extends Controller
         return view('app.visi-misi'); // Mengarah ke resources/views/app/visi-misi.blade.php
     }
     public function struktur()
-{
-    return view('app.struktur');
-}
+    {
+        return view('app.struktur');
+    }
 
-public function program()
-{
-    return view('app.program');
-}
+    public function program()
+    {
+        return view('app.program');
+    }
 
-public function staf()
-{
-    return view('app.staf');
-}
+    public function staf()
+    {
+        return view('app.staf');
+    }
 
-public function prestasi()
-{
-    return view('app.prestasi');
-}
+    public function prestasi()
+    {
+        return view('app.prestasi');
+    }
 
-public function alumni()
-{
-    return view('app.alumni');
-}
+    public function alumni()
+    {
+        return view('app.alumni');
+    }
+
+    public function ppdb()
+    {
+        return view('app.ppdb');
+    }
 }

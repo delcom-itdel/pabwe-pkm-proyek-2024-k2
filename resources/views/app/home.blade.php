@@ -68,7 +68,7 @@
           <li class="dropdown"><a href="#services"><span>Informasi</span>
               <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#">PPDB</a></li>
+              <li><a href="{{ route('ppdb') }}">PPDB</a></li>
               <li><a href="#">Berita & Artikel</a></li>
               <li><a href="#">Galeri</a></li>
               <li><a href="#">Arsip</a></li>
