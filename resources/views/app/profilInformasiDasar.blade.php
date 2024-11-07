@@ -52,7 +52,7 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="{{ route('admin') }}" class="active">Dashboard</a></li>
+          <li><a href="{{ route('admin') }}">Dashboard</a></li>
           <li class="dropdown"><a href="#services"><span>Beranda</span>
               <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
@@ -60,7 +60,7 @@
               <li><a href="{{ route('informasiDasar') }}">Informasi Dasar</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="#services"><span>Profil</span>
+          <li class="dropdown"><a href="#services" class="active"><span>Profil</span>
               <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
 

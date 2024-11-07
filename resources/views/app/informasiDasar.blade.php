@@ -52,8 +52,8 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="{{ route('admin') }}" class="active">Dashboard</a></li>
-          <li class="dropdown"><a href="#services"><span>Beranda</span>
+          <li><a href="{{ route('admin') }}">Dashboard</a></li>
+          <li class="dropdown"><a href="#services"class="active"><span>Beranda</span>
               <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
 

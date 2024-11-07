@@ -42,7 +42,7 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="{{ route('home') }}" class="active">Beranda</a></li>
+          <li><a href="{{ route('home') }}">Beranda</a></li>
           <li class="dropdown"><a href="#about"><span>Profil</span> <i
                 class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
@@ -56,12 +56,12 @@
             </ul>
           </li>
           <li><a href="{{ route('saranaPrasarana') }}">Sarana & Prasarana</a></li>
-          <li class="dropdown"><a href="#services"><span>Informasi</span><i
+          <li class="dropdown"><a href="#services"class="active"><span>Informasi</span><i
                 class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="{{ route('ppdb') }}">PPDB</a></li>
               <li><a href="{{ route('beritaArtikel') }}">Berita & Artikel</a></li>
-              <li><a href="{{ route('galeri') }}">Galeri</a></li>
+              <li><a href="{{ route('galeri') }}" class="active">Galeri</a></li>
               <li><a href="{{ route('arsip') }}">Arsip</a></li>
               <li><a href="{{ route('hubungiKami') }}">Hubungi Kami</a></li>
             </ul>
