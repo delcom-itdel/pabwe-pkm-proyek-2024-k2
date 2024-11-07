@@ -50,7 +50,7 @@
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="{{ route('home') }}">Beranda</a></li>
-          <li class="dropdown"><a href="#about" class="active"><span>Profil</span> <i
+          <li class="dropdown"><a href="#about"><span>Profil</span> <i
                 class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
             <li><a href="{{ route('sejarah') }}">Sejarah</a></li>
@@ -62,7 +62,7 @@
             <li><a href="{{ route('alumni') }}">Alumni</a></li>
             </ul>
           </li>
-          <li><a href="{{ route('saranaPrasarana') }}">Sarana & Prasarana</a></li>
+          <li><a href="{{ route('saranaPrasarana') }}" class="active">Sarana & Prasarana</a></li>
 
           <li class="dropdown"><a href="#services"><span>Informasi</span>
               <i class="bi bi-chevron-down toggle-dropdown"></i></a>
@@ -96,20 +96,6 @@
       <div class="container" data-aos="fade-up">
         <div class="section-title">
           <h2>Sarana Prasarana</h2>
-        </div>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce euismod, lacus eu convallis luctus, 
-          felis ex vestibulum odio, in facilisis nulla orci id ligula. Proin ut eros eu odio dignissim 
-          vestibulum vel sit amet ligula. Integer auctor nisl in felis pharetra, nec tincidunt risus bibendum. 
-          Aenean egestas metus non sapien condimentum, ac ultrices arcu pharetra. Integer at nunc sit amet 
-          nisl laoreet facilisis id et neque.
-        </p>
-        <p>
-          Curabitur at mi ut odio consectetur venenatis ut eu odio. Suspendisse sed justo non ligula fermentum 
-          gravida. Nullam eu leo vel ipsum tincidunt fringilla. Duis volutpat justo id libero convallis 
-          ullamcorper. Aenean interdum orci sed ligula tempor, a feugiat turpis eleifend.
-        </p>
-      </div>
     </section>
   </main>
 <!-- Scroll Top -->

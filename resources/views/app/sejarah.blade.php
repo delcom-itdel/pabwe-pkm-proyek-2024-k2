@@ -50,10 +50,10 @@
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="{{ route('home') }}">Beranda</a></li>
-          <li class="dropdown"><a href="#about"><span>Profil</span> <i
+          <li class="dropdown"><a href="#about"><span class="active">Profil</span> <i
                 class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-            <li><a href="{{ route('sejarah') }}"class="active">Sejarah</a></li>
+            <li><a href="{{ route('sejarah') }}">Sejarah</a></li>
             <li><a href="{{ route('visiMisi') }}">Visi & Misi</a></li>
             <li><a href="{{ route('struktur') }}">Struktur Organisasi</a></li>
             <li><a href="{{ route('program') }}">Program Sekolah</a></li>
