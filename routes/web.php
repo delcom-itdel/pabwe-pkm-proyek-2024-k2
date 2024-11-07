@@ -42,32 +42,33 @@ Route::middleware(['auth', 'check.roles:Editor'])->group(function () {
 Route::middleware(['auth', 'check.roles:Admin,Editor'])->group(function () {
     // Route for the Beranda Informasi Dasar page
     Route::get('/informasiDasar', function () {
-        return view('app.informasiDasar');
+        return view('app.editor.informasiDasar');
     })->name('informasiDasar');
 
     Route::put('/informasi-dasar', [AdminController::class, 'updateInformasiDasar'])->name('updateInformasiDasar');
 
     // Route for the Profil Informasi Dasar page
     Route::get('/profilInformasiDasar', function () {
-        return view('app.profilInformasiDasar');
+        return view('app.editor.profilInformasiDasar');
     })->name('profilInformasiDasar');
 
     // Route for PPDB information page
     Route::get('/informasiPbdb', function () {
-        return view('app.informasiPbdb');
+        return view('app.editor.informasiPbdb');
     })->name('informasiPbdb');
 
     // Route for Arsip information page
     Route::get('/informasiArsip', function () {
-        return view('app.informasiArsip');
+        return view('app.editor.informasiArsip');
     })->name('informasiArsip');
 
     // Route for Hubungi Kami information page
     Route::get('/informasiHubungiKami', function () {
-        return view('app/informasiHubungiKami');
+        return view('app.editor.informasiHubungiKami');
     })->name('informasiHubungiKami');
 
 });
+
 
 // Rute untuk halaman Profil
 Route::get('/sejarah', [ProfilController::class, 'sejarah'])->name('sejarah');

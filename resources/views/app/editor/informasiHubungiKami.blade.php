@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Admin Dashboard</title>
+    <title>Editor Dashboard</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
@@ -67,7 +67,7 @@
               <li><a href="{{ route('profilInformasiDasar') }}">Informasi Dasar</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="#services" class="active"><span>Informasi</span>
+          <li class="dropdown"><a href="#services"class="active"><span>Informasi</span>
               <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
 
@@ -94,7 +94,7 @@
     <section id="sejarah" class="sejarah-section mt-5">
       <div class="container" data-aos="fade-up">
         <div class="section-title">
-          <h2>PBDB</h2>
+          <h2>Hubungi Kami</h2>
         </div>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce euismod, lacus eu convallis luctus,
