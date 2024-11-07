@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfilController;
 
 
 
@@ -32,3 +33,12 @@ Route::get('/informasiDasar', function () {
 })->name('informasiDasar');
 
 Route::put('/informasi-dasar', [App\Http\Controllers\AdminController::class, 'updateInformasiDasar'])->name('updateInformasiDasar');
+
+// Rute untuk halaman Sejarah dan Visi Misi
+Route::get('/sejarah', [ProfilController::class, 'sejarah'])->name('sejarah');
+Route::get('/visi-misi', [ProfilController::class, 'visiMisi'])->name('visiMisi');
+Route::get('/struktur', [ProfilController::class, 'struktur'])->name('struktur');
+Route::get('/program', [ProfilController::class, 'program'])->name('program');
+Route::get('/staf', [ProfilController::class, 'staf'])->name('staf');
+Route::get('/prestasi', [ProfilController::class, 'prestasi'])->name('prestasi');
+Route::get('/alumni', [ProfilController::class, 'alumni'])->name('alumni');

@@ -54,13 +54,13 @@
           <li class="dropdown"><a href="#about"><span>Profil</span> <i
                 class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#">Sejarah</a></li>
-              <li><a href="#">Visi & Misi</a></li>
-              <li><a href="#">Struktur Organisasi</a></li>
-              <li><a href="#">Program Sekolah</a></li>
-              <li><a href="#">Staf Guru & Karyawan</a></li>
-              <li><a href="#">Prestasi</a></li>
-              <li><a href="#">Alumni</a></li>
+            <li><a href="{{ route('sejarah') }}">Sejarah</a></li>
+            <li><a href="{{ route('visiMisi') }}">Visi & Misi</a></li>
+            <li><a href="{{ route('struktur') }}">Struktur Organisasi</a></li>
+            <li><a href="{{ route('program') }}">Program Sekolah</a></li>
+            <li><a href="{{ route('staf') }}">Staf Guru & Karyawan</a></li>
+            <li><a href="{{ route('prestasi') }}">Prestasi</a></li>
+            <li><a href="{{ route('alumni') }}">Alumni</a></li>
             </ul>
           </li>
           <li><a href="index.html#features">Sarana & Prasarana</a></li>
