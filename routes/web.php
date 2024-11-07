@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EditorController;
 use App\Http\Controllers\ProfilController;
 
 //awal
@@ -20,38 +21,56 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 // Logout route
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-// Admin page (protected route)
-Route::get('/admin', function () {
-    return view('app/admin');
-})->name('admin')->middleware('auth');
+// Admin page (protected route) - untuk Admin
+Route::middleware(['auth', 'check.roles:Admin'])->group(function () {
+    Route::get('/admin', function () {
+        return view('app.admin.admin');
+    })->name('admin');
 
-// Route for the Informasi Dasar page
-Route::get('/informasiDasar', function () {
-    return view('app/informasiDasar');
-})->name('informasiDasar');
+    // Route untuk mengelola pengguna
+    Route::get('/admin/users', [UserController::class, 'getUsersRoleAdmin'])->name('admin.users');
+});
 
-// Route for the Informasi Dasar profil page
-Route::get('/profilInformasiDasar', function () {
-    return view('app/profilInformasiDasar');
-})->name('profilInformasiDasar');
+// Editor page (protected route) - untuk Editor
+Route::middleware(['auth', 'check.roles:Editor'])->group(function () {
+    Route::get('/editor', function () {
+        return view('app.editor.editor');
+    })->name('editor');
 
-// Route for PPDB information page
-Route::get('/informasiPbdb', function () {
-    return view('app/informasiPbdb');
-})->name('informasiPbdb');
+    // Rute untuk fitur yang spesifik untuk Editor (jika ada)
+    Route::get('/editor/users', [EditorController::class, 'getUsersRoleEditor'])->name('editor.users');
+});
 
-// Route for Arsip information page
-Route::get('/informasiArsip', function () {
-    return view('app/informasiArsip');
-})->name('informasiArsip');
+//accessible by Admin and Editor
+Route::middleware(['auth', 'check.roles:Admin,Editor'])->group(function () {
+    // Route for the Beranda Informasi Dasar page
+    Route::get('/informasiDasar', function () {
+        return view('app.informasiDasar');
+    })->name('informasiDasar');
 
-// Route for Hubungi Kami information page
-Route::get('/informasiHubungiKami', function () {
-    return view('app/informasiHubungiKami');
-})->name('informasiHubungiKami');
+    Route::put('/informasi-dasar', [AdminController::class, 'updateInformasiDasar'])->name('updateInformasiDasar');
 
-// Update Informasi Dasar
-Route::put('/informasi-dasar', [App\Http\Controllers\AdminController::class, 'updateInformasiDasar'])->name('updateInformasiDasar');
+     // Route for the Profil Informasi Dasar page
+     Route::get('/profilInformasiDasar', function () {
+        return view('app.profilInformasiDasar');
+    })->name('profilInformasiDasar');
+
+    // Route for PPDB information page
+    Route::get('/informasiPbdb', function () {
+        return view('app.informasiPbdb');
+    })->name('informasiPbdb');
+
+    // Route for Arsip information page
+    Route::get('/informasiArsip', function () {
+        return view('app.informasiArsip');
+    })->name('informasiArsip');
+
+    // Route for Hubungi Kami information page
+    Route::get('/informasiHubungiKami', function () {
+        return view('app/informasiHubungiKami');
+    })->name('informasiHubungiKami');
+
+});
 
 // Rute untuk halaman Profil
 Route::get('/sejarah', [ProfilController::class, 'sejarah'])->name('sejarah');
