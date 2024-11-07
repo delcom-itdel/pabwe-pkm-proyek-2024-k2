@@ -52,7 +52,7 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="{{ route('home') }}" class="active">Beranda</a></li>
+          <li><a href="{{ route('home') }}">Beranda</a></li>
           <li class="dropdown"><a href="#about"><span>Profil</span> <i
                 class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
@@ -65,10 +65,10 @@
               <li><a href="{{ route('alumni') }}">Alumni</a></li>
             </ul>
           </li>
-          <li><a href="index.html#features">Sarana & Prasarana</a></li>
+          <li><a href="{{ route('saranaPrasarana') }}">Sarana & Prasarana</a></li>
 
-          <<li class="dropdown"><a href="#services"><span>Informasi</span><i
-                class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li class="dropdown"><a href="#services" class="active"><span>Informasi</span>
+              <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="{{ route('ppdb') }}">PPDB</a></li>
               <li><a href="{{ route('beritaArtikel') }}">Berita & Artikel</a></li>
@@ -76,17 +76,17 @@
               <li><a href="#">Arsip</a></li>
               <li><a href="#">Hubungi Kami</a></li>
             </ul>
-            </li>
+          </li>
 
-            <li class="dropdown"><a href="#services"><span>Platform Kami</span>
-                <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
+          <li class="dropdown"><a href="#services"><span>Platform Kami</span>
+              <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
 
-                <li><a href="{{ route('login') }}">SIS</a></li>
+              <li><a href="{{ route('login') }}">SIS</a></li>
 
-              </ul>
-            </li>
-            <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+          </li>
+          <li><a href="index.html#contact">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>

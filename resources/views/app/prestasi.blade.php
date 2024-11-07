@@ -62,14 +62,16 @@
             <li><a href="{{ route('alumni') }}">Alumni</a></li>
             </ul>
           </li>
-          <li><a href="index.html#features">Sarana & Prasarana</a></li>
+          
+          <li><a href="{{ route('saranaPrasarana') }}">Sarana & Prasarana</a></li>
+
 
           <li class="dropdown"><a href="#services"><span>Informasi</span>
               <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#">PPDB</a></li>
-              <li><a href="#">Berita & Artikel</a></li>
-              <li><a href="#">Galeri</a></li>
+              <li><a href="{{ route('ppdb') }}">PPDB</a></li>
+              <li><a href="{{ route('beritaArtikel') }}">Berita & Artikel</a></li>
+              <li><a href="{{ route('galeri') }}">Galeri</a></li>
               <li><a href="#">Arsip</a></li>
               <li><a href="#">Hubungi Kami</a></li>
             </ul>

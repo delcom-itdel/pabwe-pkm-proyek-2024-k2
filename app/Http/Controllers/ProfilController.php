@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -10,14 +11,13 @@ class ProfilController extends Controller
 {
     public function sejarah()
     {
-        return view('app.sejarah');
+        return view('app.sejarah'); // Mengarah ke resources/views/app/sejarah.blade.php
     }
 
     public function visiMisi()
     {
-        return view('app.visi-misi');
+        return view('app.visi-misi'); // Mengarah ke resources/views/app/visi-misi.blade.php
     }
-
     public function struktur()
     {
         return view('app.struktur');
@@ -48,14 +48,16 @@ class ProfilController extends Controller
         return view('app.ppdb');
     }
 
-    // Tambahkan fungsi untuk Berita & Artikel
+    public function saranaPrasarana()
+    {
+        return view('app.saranaPrasarana');
+    }
     public function beritaArtikel()
-{
-    return view('app.beritaArtikel');
-}
-public function galeri()
-{
-    return view('app.galeri'); // Mengarah ke resources/views/app/galeri.blade.php
-}
-
+    {
+        return view('app.beritaArtikel');
+    }
+    public function galeri()
+    {
+        return view('app.galeri');
+    }
 }
