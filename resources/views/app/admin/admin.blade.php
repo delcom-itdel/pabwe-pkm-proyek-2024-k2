@@ -66,7 +66,7 @@
               <li><a href="{{ route('informasi3') }}">Informasi Dasar</a></li>
               <li><a href="{{ route('staff') }}">Staff Guru & Karyawan</a></li>
               <li><a href="{{ route('prestasi') }}">Prestasi</a></li>
-              <li><a href="{{ route('alumni2') }}">Alumni</a></li>
+              <li><a href="{{ route('alumni') }}">Alumni</a></li>
             </ul>
           </li>
           <li><a href="{{ route('sarana') }}">Sarana & Prasarana</a></li>

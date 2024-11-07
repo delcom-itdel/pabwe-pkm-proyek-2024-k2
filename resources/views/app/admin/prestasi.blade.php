@@ -1,150 +1,249 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SMAN 1 Balige - Prestasi</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* Styling Umum */
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      display: flex;
+      min-height: 100vh;
+    }
 
-  <!-- Favicons -->
-  <link href="{{ asset('assets/img/logo.png')}}" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    /* Sidebar Styling */
+    .sidebar {
+      height: 100vh;
+      width: 250px;
+      background-color: #343a40;
+      color: #fff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding-top: 20px;
+      overflow-y: auto;
+    }
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    .sidebar h2 {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    .sidebar ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
 
-  <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
+    .sidebar ul li {
+      padding: 10px 20px;
+      color: #adb5bd;
+    }
+
+    .sidebar ul li.active,
+    .sidebar ul li:hover {
+      background-color: #495057;
+      color: #fff;
+    }
+
+    .sidebar ul li a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .sidebar ul li .dropdown-menu {
+      background-color: #343a40;
+    }
+
+    /* Top Navbar */
+    .top-nav {
+      margin-left: 250px;
+      height: 60px;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+      position: fixed;
+      top: 0;
+      width: calc(100% - 250px);
+      z-index: 1000;
+    }
+
+    .breadcrumb {
+      margin-bottom: 0;
+      background-color: transparent;
+      padding: 0;
+      font-size: 0.9rem;
+    }
+
+    /* Main Content */
+    .content {
+      margin-top: 60px;
+      margin-left: 250px;
+      padding: 20px;
+      width: calc(100% - 250px);
+      overflow-y: auto;
+    }
+
+    .card {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      border: none;
+    }
+
+    .card-header {
+      font-size: 1.25rem;
+      font-weight: bold;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    /* Styling Tabel */
+    .table thead th {
+      background-color: #d6e0f0 !important;
+      color: #007bff !important;
+      font-weight: bold !important;
+      border-bottom: 2px solid #007bff !important;
+    }
+
+    .table tbody td {
+      background-color: #f8f9fa !important;
+    }
+
+    /* Styling Tombol */
+    .btn-primary {
+      background-color: #007bff !important;
+      border-color: #007bff !important;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3 !important;
+      border-color: #004085 !important;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 20px;
+      background-color: #f8f9fa;
+      font-size: 0.9rem;
+      color: #6c757d;
+      border-top: 1px solid #ddd;
+      text-align: center;
+      margin-left: 250px;
+      width: calc(100% - 250px);
+      position: fixed;
+      bottom: 0;
+    }
+
+    /* Penyesuaian Responsif */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+
+      .top-nav,
+      .content,
+      .footer {
+        margin-left: 0;
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 
-<body class="index-page">
-  <!-- Header/Navbar -->
-  <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center">
-      <a href="#" class="logo d-flex align-items-center me-auto">
-        <img src="assets/img/logo.png" alt="">
-        <h1 class="sitename">SMAN 1 BALIGE</h1>
-      </a>
+<body>
 
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="{{ route('admin') }}">Dashboard</a></li>
-          <li class="dropdown"><a href="#services"><span>Beranda</span>
-              <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-
-              <li><a href="{{ route('informasi2') }}">Informasi Dasar</a></li>
-            </ul>
-          </li>
-          <li class="dropdown"><a href="#services" class="active"><span>Profil</span>
-              <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="{{ route('informasi3') }}">Informasi Dasar</a></li>
-              <li><a href="{{ route('staff') }}">Staff Guru & Karyawan</a></li>
-              <li><a href="{{ route('prestasi') }}" >Prestasi</a></li>
-              <li><a href="{{ route('alumni') }}">Alumni</a></li>
-            </ul>
-          </li>
-          <li><a href="{{ route('sarana') }}">Sarana & Prasarana</a></li>
-          <li class="dropdown"><a href="#services"><span>Informasi</span>
-              <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-
-              <li><a href="{{ route('adminppdb') }}">PPDB</a></li>
-              <li><a href="{{ route('berita') }}">Berita & Artikel</a></li>
-              <li><a href="{{ route('galeri') }}">Galeri</a></li>
-              <li><a href="{{ route('arsip') }}">Arsip</a></li>
-              <li><a href="{{ route('hubungi') }}">Hubungi Kami</a></li>
-            </ul>
-          </li>
-          <form action="{{ route('logout') }}" method="POST" class="logout-form">
-            @csrf
-            <button type="submit"
-              style="background-color: #ff4c4c; color: white; border: none; padding: 0.5em 1em; cursor: pointer;">Logout</button>
-          </form>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>SIS</h2>
+    <ul>
+      <li>Dasbor</li>
+      <li class="active">Profil
+        <ul class="dropdown-menu">
+          <li><a href="#">Informasi Dasar</a></li>
+          <li><a href="#">Staf Guru & Karyawan</a></li>
+          <li><a href="#">Prestasi</a></li>
+          <li><a href="#">Alumni</a></li>
         </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </li>
+      <li>Sarana & Prasarana</li>
+      <li>Informasi</li>
+      <li>Platform</li>
+      <li>Admin</li>
+    </ul>
+  </div>
 
-
+  <!-- Navbar Atas -->
+  <div class="top-nav">
+    <div>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Dasbor</a></li>
+          <li class="breadcrumb-item"><a href="#">Profil</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Prestasi</li>
+        </ol>
       </nav>
     </div>
-  </header>
+    <div>
+      <span>User Admin</span>
+    </div>
+  </div>
 
-  <!-- Main Content -->
-  <main class="main pt-5">
-    <section id="prestasi" class="prestasi-section mt-5">
-      <div class="container" data-aos="fade-up">
-        <div class="section-title">
-          <h2>Prestasi</h2>
+  <!-- Konten Utama -->
+  <div class="content">
+    <div class="card">
+      <div class="card-header">
+        Profil: Prestasi
+      </div>
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5>Prestasi</h5>
+          <button class="btn btn-primary" onclick="addData()">Tambah Data</button>
         </div>
-
-        <!-- Table Section -->
-        <div class="card">
-          <div class="card-header">
-            Profil: Prestasi
-          </div>
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <h5>Prestasi</h5>
-              <button class="btn btn-primary">Tambah Data</button>
-            </div>
-            <table class="table table-bordered">
-              <thead class="thead-light">
-                <tr>
-                  <th>No</th>
-                  <th>Cover</th>
-                  <th>Judul</th>
-                  <th>Tindakan</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td colspan="4" class="text-center">No data available in table</td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="form-group mt-3">
-              <label for="search">Search:</label>
-              <input type="text" id="search" class="form-control" placeholder="Search">
-            </div>
-          </div>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Cover</th>
+              <th>Judul</th>
+              <th>Tindakan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="4" class="text-center">No data available in table</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="form-group mt-3">
+          <label for="search">Search:</label>
+          <input type="text" id="search" class="form-control" placeholder="Search">
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </div>
 
-  <!-- Footer and Other Sections -->
+  <!-- Footer -->
+  <div class="footer">
+    <p>Hak Cipta © 2024 <a href="#" style="color: #007bff;">SMAN 1 Balige</a>. Dibuat dengan ❤️</p>
+  </div>
 
-  <footer id="footer" class="footer position-relative light-background">
-    <!-- Add footer content here if needed -->
-  </footer>
+  <script>
+    function addData() {
+      alert("Tombol Tambah Data diklik!");
+      // Tambahkan fungsionalitas untuk menambah data di sini
+    }
+  </script>
 
-  <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Preloader -->
-  <div id="preloader"></div>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
 </body>
 
 </html>
