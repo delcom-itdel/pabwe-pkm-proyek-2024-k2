@@ -76,6 +76,8 @@
               <li><a href="{{ route('informasiHubungiKami') }}">Hubungi Kami</a></li>
             </ul>
           </li>
+          <li class="active"><a href="{{ route('platform') }}"><span>Platform</span></li>
+
           <form action="{{ route('logout') }}" method="POST" class="logout-form">
             @csrf
             <button type="submit"

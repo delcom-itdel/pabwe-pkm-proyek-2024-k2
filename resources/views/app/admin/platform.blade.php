@@ -1,0 +1,1 @@
+<h1>ini page dari menu admin-editor platform ya</h1>

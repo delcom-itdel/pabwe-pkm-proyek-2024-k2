@@ -47,6 +47,12 @@ Route::middleware(['auth', 'check.roles:Admin,Editor'])->group(function () {
 
     Route::put('/informasi-dasar', [AdminController::class, 'updateInformasiDasar'])->name('updateInformasiDasar');
 
+    // Route for Platform
+    Route::get('/platform', function () {
+        return view('app.admin.platform');
+    })->name('platform');
+    
+
     // Route for the Profil Informasi Dasar page
     Route::get('/profilInformasiDasar', function () {
         return view('app.editor.profilInformasiDasar');
