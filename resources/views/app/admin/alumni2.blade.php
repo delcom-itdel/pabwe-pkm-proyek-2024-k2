@@ -219,6 +219,10 @@
         </div>
       </li>
 
+      <li class="nav-item"><a href="{{ route('platform') }}" class="nav-link">Platform</a></li>
+      <li class="nav-item"><a href="{{ route('kelola') }}" class="nav-link">Kelola Pengguna</a></li>
+      <li class="nav-item"><a href="{{ route('log') }}" class="nav-link">Catatan perubahan</a></li>
+
       <form action="{{ route('logout') }}" method="POST" class="logout-form mt-3">
         @csrf
         <button type="submit" class="btn btn-danger btn-block">Logout</button>

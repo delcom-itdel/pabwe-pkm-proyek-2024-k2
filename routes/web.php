@@ -145,6 +145,20 @@ Route::get('/informasi2', function () {
     return view('app/admin/informasi2');
 })->name('informasi2');
 
+Route::get('/platform', function () {
+    return view('app/admin/platform');
+})->name('platform');
+
+Route::get('/kelola', function () {
+    return view('app/admin/kelola');
+})->name('kelola');
+
+Route::get('/log', function () {
+    return view('app/admin/log');
+})->name('log');
+
+
+
 Route::get('/informasi3', function () {
     return view('app/admin/informasi3');
 })->name('informasi3');

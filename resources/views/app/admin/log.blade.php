@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,6 +42,7 @@
     .sidebar ul li {
       padding: 10px 20px;
       color: #adb5bd;
+      cursor: pointer;
     }
 
     .sidebar ul li.active,
@@ -64,8 +64,17 @@
       transition: transform 0.3s;
     }
 
+    .sidebar ul li.show .caret {
+      transform: rotate(0deg);
+    }
+
     .sidebar ul li.collapsed .caret {
       transform: rotate(-90deg);
+    }
+
+    /* Dropdown hover effect */
+    .sidebar ul li .collapse.show {
+      background-color: #495057;
     }
 
     /* Top Navbar */
@@ -231,8 +240,7 @@
     <div>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Informasi</a></li>
-        <li class="breadcrumb-item active" aria-current="page">PPDB</li>
+          <li class="breadcrumb-item"><a href="#">Catatan Perubahan</a></li>
           
         </ol>
       </nav>
@@ -244,7 +252,7 @@
 
   <!-- Konten Utama -->
   <div class="content">
-    <p>page ppdb admin</p>
+    <p>tampilan log</p>
   </div>
 
   <!-- Footer -->
@@ -255,11 +263,12 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    function addData() {
-      alert("Tombol Tambah Data diklik!");
-    }
+    $(document).ready(function () {
+      $('.sidebar ul li a').on('click', function () {
+        $(this).parent().toggleClass('show');
+      });
+    });
   </script>
 
 </body>
-
 </html>

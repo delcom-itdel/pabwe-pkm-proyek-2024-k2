@@ -1,61 +1,301 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
+
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>SMAN 1 Balige - Berita & Artikel</title>
-  <link href="{{ asset('assets/img/logo.png')}}" rel="icon">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/css/main.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMAN 1 Balige - Prestasi</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
+    /* Styling Umum */
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar Styling */
+    .sidebar {
+      height: 100vh;
+      width: 250px;
+      background-color: #343a40;
+      color: #fff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding-top: 20px;
+      overflow-y: auto;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .sidebar ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .sidebar ul li {
+      padding: 10px 20px;
+      color: #adb5bd;
+      cursor: pointer;
+    }
+
+    .sidebar ul li.active,
+    .sidebar ul li:hover {
+      background-color: #495057;
+      color: #fff;
+    }
+
+    .sidebar ul li a {
+      color: inherit;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sidebar ul li .caret {
+      margin-left: 10px;
+      transition: transform 0.3s;
+    }
+
+    .sidebar ul li.show .caret {
+      transform: rotate(0deg);
+    }
+
+    .sidebar ul li.collapsed .caret {
+      transform: rotate(-90deg);
+    }
+
+    /* Dropdown hover effect */
+    .sidebar ul li .collapse.show {
+      background-color: #495057;
+    }
+
+    /* Top Navbar */
+    .top-nav {
+      margin-left: 250px;
+      height: 60px;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+      position: fixed;
+      top: 0;
+      width: calc(100% - 250px);
+      z-index: 1000;
+    }
+
+    .breadcrumb {
+      margin-bottom: 0;
+      background-color: transparent;
+      padding: 0;
+      font-size: 0.9rem;
+    }
+
+    /* Main Content */
+    .content {
+      margin-top: 60px;
+      margin-left: 250px;
+      padding: 20px;
+      width: calc(100% - 250px);
+      overflow-y: auto;
+    }
+
+    .card {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      border: none;
+    }
+
+    .card-header {
+      font-size: 1.25rem;
+      font-weight: bold;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    /* Styling Tabel */
+    .table thead th {
+      background-color: #d6e0f0 !important;
+      color: #007bff !important;
+      font-weight: bold !important;
+      border-bottom: 2px solid #007bff !important;
+    }
+
+    .table tbody td {
+      background-color: #f8f9fa !important;
+    }
+
+    /* Styling Tombol */
+    .btn-primary {
+      background-color: #007bff !important;
+      border-color: #007bff !important;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3 !important;
+      border-color: #004085 !important;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 20px;
+      background-color: #f8f9fa;
+      font-size: 0.9rem;
+      color: #6c757d;
+      border-top: 1px solid #ddd;
+      text-align: center;
+      margin-left: 250px;
+      width: calc(100% - 250px);
+      position: fixed;
+      bottom: 0;
+    }
+
+    /* Penyesuaian Responsif */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+
+      .top-nav,
+      .content,
+      .footer {
+        margin-left: 0;
+        width: 100%;
+      }
+    }
+
     /* Styling untuk mengecilkan kolom tabel */
-    .table th, .table td {
+    .table th,
+    .table td {
       text-align: center;
       vertical-align: middle;
     }
-    .table th:nth-child(1), .table td:nth-child(1) {
-      width: 5%; /* Lebar kolom "No" */
+
+    .table th:nth-child(1),
+    .table td:nth-child(1) {
+      width: 5%;
+      /* Lebar kolom "No" */
     }
-    .table th:nth-child(2), .table td:nth-child(2) {
-      width: 15%; /* Lebar kolom "Cover" */
+
+    .table th:nth-child(2),
+    .table td:nth-child(2) {
+      width: 15%;
+      /* Lebar kolom "Cover" */
     }
-    .table th:nth-child(3), .table td:nth-child(3) {
-      width: 40%; /* Lebar kolom "Judul" */
+
+    .table th:nth-child(3),
+    .table td:nth-child(3) {
+      width: 40%;
+      /* Lebar kolom "Judul" */
     }
-    .table th:nth-child(4), .table td:nth-child(4) {
-      width: 10%; /* Lebar kolom "Tindakan" lebih kecil */
+
+    .table th:nth-child(4),
+    .table td:nth-child(4) {
+      width: 10%;
+      /* Lebar kolom "Tindakan" lebih kecil */
     }
+
     /* Styling untuk kotak pencarian agar lebih kecil */
     #search {
-      width: 150px; /* Ukuran kotak pencarian lebih kecil */
+      width: 150px;
+      /* Ukuran kotak pencarian lebih kecil */
       border-radius: 4px;
       padding: 6px;
     }
   </style>
 </head>
 
-<body class="index-page">
-  <!-- Header/Navbar -->
-  <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center">
-      <a href="#" class="logo d-flex align-items-center me-auto">
-        <img src="assets/img/logo.png" alt="">
-        <h1 class="sitename">SMAN 1 BALIGE</h1>
-      </a>
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="{{ route('admin') }}">Dashboard  /  Informasi  /  Berita & Artikel</a></li>
-          <!-- Tambahkan menu lainnya di sini -->
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2><img src="{{ asset('assets/img/logo.png') }}" alt="School Logo" class="img-fluid mb-3"
+        style="max-width: 30px;">SIS</h2>
+    <ul class="nav flex-column">
+      <li class="nav-item"><a href="{{ route('admin') }}" class="nav-link active">Dashboard</a></li>
+
+      <!-- Collapsible for Beranda -->
+      <li class="nav-item">
+        <a href="#berandaCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false"
+          aria-controls="berandaCollapse">
+          Beranda <span class="caret">&#x25BC;</span>
+        </a>
+        <div id="berandaCollapse" class="collapse pl-3">
+          <a class="nav-link" href="{{ route('informasi2') }}">Informasi Dasar</a>
+        </div>
+      </li>
+
+      <!-- Collapsible for Profil -->
+      <li class="nav-item">
+        <a href="#profilCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false"
+          aria-controls="profilCollapse">
+          Profil <span class="caret">&#x25BC;</span>
+        </a>
+        <div id="profilCollapse" class="collapse pl-3">
+          <a class="nav-link" href="{{ route('informasi3') }}">Informasi Dasar</a>
+          <a class="nav-link" href="{{ route('staff') }}">Staff Guru & Karyawan</a>
+          <a class="nav-link" href="{{ route('prestasi') }}">Prestasi</a>
+          <a class="nav-link" href="{{ route('alumni2') }}">Alumni</a>
+        </div>
+      </li>
+
+      <li class="nav-item"><a href="{{ route('sarana') }}" class="nav-link">Sarana & Prasarana</a></li>
+
+      <!-- Collapsible for Informasi -->
+      <li class="nav-item">
+        <a href="#informasiCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false"
+          aria-controls="informasiCollapse">
+          Informasi <span class="caret">&#x25BC;</span>
+        </a>
+        <div id="informasiCollapse" class="collapse pl-3">
+          <a class="nav-link" href="{{ route('adminppdb') }}">PPDB</a>
+          <a class="nav-link" href="{{ route('berita') }}">Berita & Artikel</a>
+          <a class="nav-link" href="{{ route('galeri') }}">Galeri</a>
+          <a class="nav-link" href="{{ route('arsip') }}">Arsip</a>
+          <a class="nav-link" href="{{ route('hubungi') }}">Hubungi Kami</a>
+        </div>
+      </li>
+
+      <li class="nav-item"><a href="{{ route('platform') }}" class="nav-link">Platform</a></li>
+      <li class="nav-item"><a href="{{ route('kelola') }}" class="nav-link">Kelola Pengguna</a></li>
+      <li class="nav-item"><a href="{{ route('log') }}" class="nav-link">Catatan perubahan</a></li>
+
+      <form action="{{ route('logout') }}" method="POST" class="logout-form mt-3">
+        @csrf
+        <button type="submit" class="btn btn-danger btn-block">Logout</button>
+      </form>
+    </ul>
+  </div>
+
+  <!-- Navbar Atas -->
+  <div class="top-nav">
+    <div>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Berita & Artikel</a></li>
+
+        </ol>
       </nav>
     </div>
-  </header>
+    <div>
+      <span>User Admin</span>
+    </div>
+  </div>
 
-  <!-- Main Content -->
-  <main class="main pt-5">
+  <!-- Konten Utama -->
+  <div class="content">
     <section id="berita" class="berita-section mt-5">
       <div class="container" data-aos="fade-up">
         <div class="section-title">
@@ -64,14 +304,18 @@
 
         <!-- Table Section -->
         <div class="card">
+          <div class="card-header">
+            Berita & Artikel
+          </div>
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
-              <h5>Berita & Artikel</h5>
-              <div class="d-flex align-items-center">
-                <button class="btn btn-primary me-2">Tambah Data</button>
-                <label for="search" class="me-2">Search:</label>
+              <div class="form-group">
+                <label for="search">Search:</label>
                 <input type="text" id="search" class="form-control" placeholder="Search">
               </div>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Tambah Data
+              </button>
             </div>
 
             <!-- Table -->
@@ -109,17 +353,23 @@
         </div>
       </div>
     </section>
-  </main>
+  </div>
 
   <!-- Footer -->
-  <footer id="footer" class="footer">
-    <div class="container text-center">
-      <p></p>
-    </div>
-  </footer>
+  <div class="footer">
+    <p>Hak Cipta © 2024 <a href="#" style="color: #007bff;">SMAN 1 Balige</a>. Dibuat dengan ❤️</p>
+  </div>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/main.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('.sidebar ul li a').on('click', function () {
+        $(this).parent().toggleClass('show');
+      });
+    });
+  </script>
+
 </body>
+
 </html>
