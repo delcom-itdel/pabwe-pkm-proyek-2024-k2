@@ -54,10 +54,18 @@
     .sidebar ul li a {
       color: inherit;
       text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    .sidebar ul li .dropdown-menu {
-      background-color: #343a40;
+    .sidebar ul li .caret {
+      margin-left: 10px;
+      transition: transform 0.3s;
+    }
+
+    .sidebar ul li.collapsed .caret {
+      transform: rotate(-90deg);
     }
 
     /* Top Navbar */
@@ -164,21 +172,53 @@
 
   <!-- Sidebar -->
   <div class="sidebar">
-    <h2>SIS</h2>
-    <ul>
-      <li>Dasbor</li>
-      <li class="active">Profil
-        <ul class="dropdown-menu">
-          <li><a href="#">Informasi Dasar</a></li>
-          <li><a href="#">Staf Guru & Karyawan</a></li>
-          <li><a href="#">Prestasi</a></li>
-          <li><a href="#">Alumni</a></li>
-        </ul>
+    <h2><img src="{{ asset('assets/img/logo.png') }}" alt="School Logo" class="img-fluid mb-3" style="max-width: 30px;">SIS</h2>
+    <ul class="nav flex-column">
+      <li class="nav-item"><a href="{{ route('admin') }}" class="nav-link active">Dashboard</a></li>
+      
+      <!-- Collapsible for Beranda -->
+      <li class="nav-item">
+        <a href="#berandaCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false" aria-controls="berandaCollapse">
+          Beranda <span class="caret">&#x25BC;</span>
+        </a>
+        <div id="berandaCollapse" class="collapse pl-3">
+          <a class="nav-link" href="{{ route('informasi2') }}">Informasi Dasar</a>
+        </div>
       </li>
-      <li>Sarana & Prasarana</li>
-      <li>Informasi</li>
-      <li>Platform</li>
-      <li>Admin</li>
+
+      <!-- Collapsible for Profil -->
+      <li class="nav-item">
+        <a href="#profilCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false" aria-controls="profilCollapse">
+          Profil <span class="caret">&#x25BC;</span>
+        </a>
+        <div id="profilCollapse" class="collapse pl-3">
+          <a class="nav-link" href="{{ route('informasi3') }}">Informasi Dasar</a>
+          <a class="nav-link" href="{{ route('staff') }}">Staff Guru & Karyawan</a>
+          <a class="nav-link" href="{{ route('prestasi') }}">Prestasi</a>
+          <a class="nav-link" href="{{ route('alumni2') }}">Alumni</a>
+        </div>
+      </li>
+
+      <li class="nav-item"><a href="{{ route('sarana') }}" class="nav-link">Sarana & Prasarana</a></li>
+
+      <!-- Collapsible for Informasi -->
+      <li class="nav-item">
+        <a href="#informasiCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false" aria-controls="informasiCollapse">
+          Informasi <span class="caret">&#x25BC;</span>
+        </a>
+        <div id="informasiCollapse" class="collapse pl-3">
+          <a class="nav-link" href="{{ route('adminppdb') }}">PPDB</a>
+          <a class="nav-link" href="{{ route('berita') }}">Berita & Artikel</a>
+          <a class="nav-link" href="{{ route('galeri') }}">Galeri</a>
+          <a class="nav-link" href="{{ route('arsip') }}">Arsip</a>
+          <a class="nav-link" href="{{ route('hubungi') }}">Hubungi Kami</a>
+        </div>
+      </li>
+
+      <form action="{{ route('logout') }}" method="POST" class="logout-form mt-3">
+        @csrf
+        <button type="submit" class="btn btn-danger btn-block">Logout</button>
+      </form>
     </ul>
   </div>
 
@@ -187,7 +227,6 @@
     <div>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Dasbor</a></li>
           <li class="breadcrumb-item"><a href="#">Profil</a></li>
           <li class="breadcrumb-item active" aria-current="page">Prestasi</li>
         </ol>
@@ -237,10 +276,11 @@
     <p>Hak Cipta © 2024 <a href="#" style="color: #007bff;">SMAN 1 Balige</a>. Dibuat dengan ❤️</p>
   </div>
 
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     function addData() {
       alert("Tombol Tambah Data diklik!");
-      // Tambahkan fungsionalitas untuk menambah data di sini
     }
   </script>
 

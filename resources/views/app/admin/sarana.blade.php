@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -94,7 +96,7 @@
     <section id="prestasi" class="prestasi-section mt-5">
       <div class="container" data-aos="fade-up">
         <div class="section-title">
-          <h2>Unit Kesehatan Sekolah</h2>
+          <h2>Sarana & Prasarana</h2>
         </div>
 
         <!-- Table Section -->
@@ -104,7 +106,10 @@
           </div>
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
-              <h5>Unit Kesehatan Sekolah</h5>
+            <div class="form-group">
+              <label for="search">Search:</label>
+              <input type="text" id="search" class="form-control" placeholder="Search">
+            </div>
               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Tambah Data
               </button>
@@ -162,10 +167,7 @@
                 </tr>
               </tbody>
             </table>
-            <div class="form-group mt-3">
-              <label for="search">Search:</label>
-              <input type="text" id="search" class="form-control" placeholder="Search">
-            </div>
+           
           </div>
         </div>
       </div>
