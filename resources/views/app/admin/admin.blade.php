@@ -184,13 +184,15 @@
 
   <!-- Sidebar -->
   <div class="sidebar">
-    <h2><img src="{{ asset('assets/img/logo.png') }}" alt="School Logo" class="img-fluid mb-3" style="max-width: 30px;">SIS</h2>
+    <h2><img src="{{ asset('assets/img/logo.png') }}" alt="School Logo" class="img-fluid mb-3"
+        style="max-width: 30px;">SIS</h2>
     <ul class="nav flex-column">
       <li class="nav-item"><a href="{{ route('admin') }}" class="nav-link active">Dashboard</a></li>
 
       <!-- Collapsible for Beranda -->
       <li class="nav-item">
-        <a href="#berandaCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false" aria-controls="berandaCollapse">
+        <a href="#berandaCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false"
+          aria-controls="berandaCollapse">
           Beranda <span class="caret">&#x25BC;</span>
         </a>
         <div id="berandaCollapse" class="collapse pl-3">
@@ -200,7 +202,8 @@
 
       <!-- Collapsible for Profil -->
       <li class="nav-item">
-        <a href="#profilCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false" aria-controls="profilCollapse">
+        <a href="#profilCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false"
+          aria-controls="profilCollapse">
           Profil <span class="caret">&#x25BC;</span>
         </a>
         <div id="profilCollapse" class="collapse pl-3">
@@ -215,7 +218,8 @@
 
       <!-- Collapsible for Informasi -->
       <li class="nav-item">
-        <a href="#informasiCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false" aria-controls="informasiCollapse">
+        <a href="#informasiCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false"
+          aria-controls="informasiCollapse">
           Informasi <span class="caret">&#x25BC;</span>
         </a>
         <div id="informasiCollapse" class="collapse pl-3">
@@ -226,6 +230,10 @@
           <a class="nav-link" href="{{ route('hubungi') }}">Hubungi Kami</a>
         </div>
       </li>
+
+      <li class="nav-item"><a href="{{ route('platform') }}" class="nav-link">Platform</a></li>
+      <li class="nav-item"><a href="{{ route('kelola') }}" class="nav-link">Kelola Pengguna</a></li>
+      <li class="nav-item"><a href="{{ route('log') }}" class="nav-link">Catatan perubahan</a></li>
 
       <form action="{{ route('logout') }}" method="POST" class="logout-form mt-3">
         @csrf
@@ -296,7 +304,9 @@
               </tr>
               <tr>
                 <td>2</td>
-                <td><a href="https://pkm.sman1balige.delcom.org/web/profil/sejarah">https://pkm.sman1balige.delcom.org/web/profil/sejarah</a></td>
+                <td><a
+                    href="https://pkm.sman1balige.delcom.org/web/profil/sejarah">https://pkm.sman1balige.delcom.org/web/profil/sejarah</a>
+                </td>
                 <td>41</td>
                 <td>35</td>
               </tr>
@@ -317,8 +327,8 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    $(document).ready(function() {
-      $('.sidebar ul li a').on('click', function() {
+    $(document).ready(function () {
+      $('.sidebar ul li a').on('click', function () {
         $(this).parent().toggleClass('show');
       });
     });
