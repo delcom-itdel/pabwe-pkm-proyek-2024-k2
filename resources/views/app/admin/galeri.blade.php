@@ -264,7 +264,7 @@
     <div>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Kelola Pengguna</a></li>
+          <li class="breadcrumb-item"><a href="#">Informasi</a> /Galeri</li>
           
         </ol>
       </nav>
