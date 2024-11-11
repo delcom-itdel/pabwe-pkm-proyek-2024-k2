@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SMAN 1 Balige - Prestasi</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     /* Styling Umum */
     body {
@@ -128,6 +130,7 @@
       color: #007bff !important;
       font-weight: bold !important;
       border-bottom: 2px solid #007bff !important;
+      cursor: pointer;
     }
 
     .table tbody td {
@@ -184,7 +187,7 @@
     <h2><img src="{{ asset('assets/img/logo.png') }}" alt="School Logo" class="img-fluid mb-3" style="max-width: 30px;">SIS</h2>
     <ul class="nav flex-column">
       <li class="nav-item"><a href="{{ route('admin') }}" class="nav-link active">Dashboard</a></li>
-      
+
       <!-- Collapsible for Beranda -->
       <li class="nav-item">
         <a href="#berandaCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false" aria-controls="berandaCollapse">
@@ -224,10 +227,6 @@
         </div>
       </li>
 
-      <li class="nav-item"><a href="{{ route('platform') }}" class="nav-link">Platform</a></li>
-      <li class="nav-item"><a href="{{ route('kelola') }}" class="nav-link">Kelola Pengguna</a></li>
-      <li class="nav-item"><a href="{{ route('log') }}" class="nav-link">Catatan perubahan</a></li>
-
       <form action="{{ route('logout') }}" method="POST" class="logout-form mt-3">
         @csrf
         <button type="submit" class="btn btn-danger btn-block">Logout</button>
@@ -241,7 +240,7 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-          
+
         </ol>
       </nav>
     </div>
@@ -251,8 +250,62 @@
   </div>
 
   <!-- Konten Utama -->
-  <div class="content">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi nam suscipit aliquid ratione dolor voluptate! Accusamus saepe amet, ipsa sequi excepturi necessitatibus eius dolores ducimus natus eum provident molestiae eligendi!</p>
+
+  <div class="content container-fluid">
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Total Pengunjung Hari Ini</h5>
+            <canvas id="dailyVisitorsChart"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Total Pengunjung Bulan Ini</h5>
+            <canvas id="monthlyVisitorsChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">100 Situs yang Sering Dikunjungi</h5>
+        <div class="d-flex justify-content-end mb-3">
+          <input class="form-control w-auto" id="searchInput" type="text" placeholder="Cari situs...">
+        </div>
+        <div class="table-responsive">
+          <table id="visitedSitesTable" class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th onclick="sortTable(0)">No <i class="fas fa-sort"></i></th>
+                <th onclick="sortTable(1)">URL <i class="fas fa-sort"></i></th>
+                <th onclick="sortTable(2)">Total Dikunjungi <i class="fas fa-sort"></i></th>
+                <th onclick="sortTable(3)">Total Visitor <i class="fas fa-sort"></i></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Tambahkan data dari database -->
+              <tr>
+                <td>1</td>
+                <td><a href="https://pkm.sman1balige.delcom.org">https://pkm.sman1balige.delcom.org</a></td>
+                <td>178</td>
+                <td>155</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td><a href="https://pkm.sman1balige.delcom.org/web/profil/sejarah">https://pkm.sman1balige.delcom.org/web/profil/sejarah</a></td>
+                <td>41</td>
+                <td>35</td>
+              </tr>
+              <!-- Tambah data lainnya -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Footer -->
@@ -261,14 +314,74 @@
   </div>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    $(document).ready(function () {
-      $('.sidebar ul li a').on('click', function () {
+    $(document).ready(function() {
+      $('.sidebar ul li a').on('click', function() {
         $(this).parent().toggleClass('show');
       });
     });
   </script>
+  <script>
+    function sortTable(n) {
+      var table = document.getElementById("visitedSitesTable");
+      var rows = table.rows;
+      var switching = true;
+      var dir = "asc";
+      var switchCount = 0;
+
+      while (switching) {
+        switching = false;
+        var rowsArray = Array.from(rows).slice(1);
+        for (var i = 0; i < rowsArray.length - 1; i++) {
+          var x = rowsArray[i].getElementsByTagName("TD")[n];
+          var y = rowsArray[i + 1].getElementsByTagName("TD")[n];
+
+          var shouldSwitch = false;
+          if (dir === "asc") {
+            if (isNaN(x.innerHTML) || isNaN(y.innerHTML)) {
+              if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                shouldSwitch = true;
+                break;
+              }
+            } else {
+              if (Number(x.innerHTML) > Number(y.innerHTML)) {
+                shouldSwitch = true;
+                break;
+              }
+            }
+          } else if (dir === "desc") {
+            if (isNaN(x.innerHTML) || isNaN(y.innerHTML)) {
+              if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                shouldSwitch = true;
+                break;
+              }
+            } else {
+              if (Number(x.innerHTML) < Number(y.innerHTML)) {
+                shouldSwitch = true;
+                break;
+              }
+            }
+          }
+        }
+
+        if (shouldSwitch) {
+          rowsArray[i].parentNode.insertBefore(rowsArray[i + 1], rowsArray[i]);
+          switching = true;
+          switchCount++;
+        } else {
+          if (switchCount === 0 && dir === "asc") {
+            dir = "desc";
+            switching = true;
+          }
+        }
+      }
+    }
+  </script>
+
+
 
 </body>
+
 </html>
