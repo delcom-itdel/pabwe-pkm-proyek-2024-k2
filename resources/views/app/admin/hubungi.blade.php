@@ -1,10 +1,12 @@
+code sekarang
+
 <!DOCTYPE html>
 <html lang="id">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SMAN 1 Balige - Prestasi</title>
+  <title>SMAN 1 Balige - Hubungi Kami</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
@@ -113,18 +115,6 @@
       color: #333;
     }
 
-    /* Styling Tabel */
-    .table thead th {
-      background-color: #d6e0f0 !important;
-      color: #007bff !important;
-      font-weight: bold !important;
-      border-bottom: 2px solid #007bff !important;
-    }
-
-    .table tbody td {
-      background-color: #f8f9fa !important;
-    }
-
     /* Styling Tombol */
     .btn-primary {
       background-color: #007bff !important;
@@ -172,57 +162,10 @@
 
   <!-- Sidebar -->
   <div class="sidebar">
-    <h2><img src="{{ asset('assets/img/logo.png') }}" alt="School Logo" class="img-fluid mb-3" style="max-width: 30px;">SIS</h2>
+    <h2><img src="{{ asset('assets/img/logo.png') }}" alt="School Logo" class="img-fluid mb-3" style="max-width: 30px;"> SIS</h2>
     <ul class="nav flex-column">
       <li class="nav-item"><a href="{{ route('admin') }}" class="nav-link active">Dashboard</a></li>
-      
-      <!-- Collapsible for Beranda -->
-      <li class="nav-item">
-        <a href="#berandaCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false" aria-controls="berandaCollapse">
-          Beranda <span class="caret">&#x25BC;</span>
-        </a>
-        <div id="berandaCollapse" class="collapse pl-3">
-          <a class="nav-link" href="{{ route('informasi2') }}">Informasi Dasar</a>
-        </div>
-      </li>
-
-      <!-- Collapsible for Profil -->
-      <li class="nav-item">
-        <a href="#profilCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false" aria-controls="profilCollapse">
-          Profil <span class="caret">&#x25BC;</span>
-        </a>
-        <div id="profilCollapse" class="collapse pl-3">
-          <a class="nav-link" href="{{ route('informasi3') }}">Informasi Dasar</a>
-          <a class="nav-link" href="{{ route('staff') }}">Staff Guru & Karyawan</a>
-          <a class="nav-link" href="{{ route('prestasi') }}">Prestasi</a>
-          <a class="nav-link" href="{{ route('alumni2') }}">Alumni</a>
-        </div>
-      </li>
-
-      <li class="nav-item"><a href="{{ route('sarana') }}" class="nav-link">Sarana & Prasarana</a></li>
-
-      <!-- Collapsible for Informasi -->
-      <li class="nav-item">
-        <a href="#informasiCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false" aria-controls="informasiCollapse">
-          Informasi <span class="caret">&#x25BC;</span>
-        </a>
-        <div id="informasiCollapse" class="collapse pl-3">
-          <a class="nav-link" href="{{ route('adminppdb') }}">PPDB</a>
-          <a class="nav-link" href="{{ route('berita') }}">Berita & Artikel</a>
-          <a class="nav-link" href="{{ route('galeri') }}">Galeri</a>
-          <a class="nav-link" href="{{ route('arsip') }}">Arsip</a>
-          <a class="nav-link" href="{{ route('hubungi') }}">Hubungi Kami</a>
-        </div>
-      </li>
-
-      <li class="nav-item"><a href="{{ route('platform') }}" class="nav-link">Platform</a></li>
-      <li class="nav-item"><a href="{{ route('kelola') }}" class="nav-link">Kelola Pengguna</a></li>
-      <li class="nav-item"><a href="{{ route('log') }}" class="nav-link">Catatan perubahan</a></li>
-
-      <form action="{{ route('logout') }}" method="POST" class="logout-form mt-3">
-        @csrf
-        <button type="submit" class="btn btn-danger btn-block">Logout</button>
-      </form>
+      <li class="nav-item"><a href="{{ route('hubungi') }}" class="nav-link">Hubungi Kami</a></li>
     </ul>
   </div>
 
@@ -233,7 +176,6 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="#">Informasi</a></li>
           <li class="breadcrumb-item active" aria-current="page">Hubungi Kami</li>
-          
         </ol>
       </nav>
     </div>
@@ -244,7 +186,14 @@
 
   <!-- Konten Utama -->
   <div class="content">
-    <p>Hubungi kami</p>
+    <div class="card">
+      <div class="card-header">Hubungi Kami</div>
+      <div class="card-body">
+        <p>Diperbarui pada: 07 November 2024 13:59</p>
+        <textarea class="form-control" id="message" rows="5" placeholder="Masukkan pesan Anda di sini...">wkwkwk</textarea>
+        <button class="btn btn-primary mt-3" onclick="simpanPesan()">Simpan</button>
+      </div>
+    </div>
   </div>
 
   <!-- Footer -->
@@ -255,8 +204,10 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    function addData() {
-      alert("Tombol Tambah Data diklik!");
+    function simpanPesan() {
+      var pesan = document.getElementById("message").value;
+      alert("Pesan berhasil disimpan: " + pesan);
+      // Di sini Anda bisa menambahkan logika untuk mengirim pesan ke server menggunakan AJAX atau metode lainnya
     }
   </script>
 
