@@ -8,172 +8,234 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     /* Styling Umum */
-    body {
-      font-family: 'Roboto', sans-serif;
-      margin: 0;
-      display: flex;
-      min-height: 100vh;
-    }
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
 
-    /* Sidebar Styling */
-    .sidebar {
-      height: 100vh;
-      width: 250px;
-      background-color: #343a40;
-      color: #fff;
-      position: fixed;
-      top: 0;
-      left: 0;
-      padding-top: 20px;
-      overflow-y: auto;
-    }
+/* Sidebar Styling */
+.sidebar {
+  height: 100vh;
+  width: 250px;
+  background-color: #343a40;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-top: 20px;
+  overflow-y: auto;
+}
 
-    .sidebar h2 {
-      text-align: center;
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-    }
+.sidebar h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
 
-    .sidebar ul {
-      list-style-type: none;
-      padding-left: 0;
-    }
+.sidebar ul {
+  list-style-type: none;
+  padding-left: 0;
+}
 
-    .sidebar ul li {
-      padding: 10px 20px;
-      color: #adb5bd;
-      cursor: pointer;
-    }
+.sidebar ul li {
+  padding: 10px 20px;
+  color: #adb5bd;
+  cursor: pointer;
+}
 
-    .sidebar ul li.active,
-    .sidebar ul li:hover {
-      background-color: #495057;
-      color: #fff;
-    }
+.sidebar ul li.active,
+.sidebar ul li:hover {
+  background-color: #495057;
+  color: #fff;
+}
 
-    .sidebar ul li a {
-      color: inherit;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+.sidebar ul li a {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-    .sidebar ul li .caret {
-      margin-left: 10px;
-      transition: transform 0.3s;
-    }
+.sidebar ul li .caret {
+  margin-left: 10px;
+  transition: transform 0.3s;
+}
 
-    .sidebar ul li.show .caret {
-      transform: rotate(0deg);
-    }
+.sidebar ul li.show .caret {
+  transform: rotate(0deg);
+}
 
-    .sidebar ul li.collapsed .caret {
-      transform: rotate(-90deg);
-    }
+.sidebar ul li.collapsed .caret {
+  transform: rotate(-90deg);
+}
 
-    /* Dropdown hover effect */
-    .sidebar ul li .collapse.show {
-      background-color: #495057;
-    }
+/* Dropdown hover effect */
+.sidebar ul li .collapse.show {
+  background-color: #495057;
+}
 
-    /* Top Navbar */
-    .top-nav {
-      margin-left: 250px;
-      height: 60px;
-      padding: 10px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background-color: #fff;
-      border-bottom: 1px solid #ddd;
-      position: fixed;
-      top: 0;
-      width: calc(100% - 250px);
-      z-index: 1000;
-    }
+/* Top Navbar */
+.top-nav {
+  margin-left: 250px;
+  height: 60px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  position: fixed;
+  top: 0;
+  width: calc(100% - 250px);
+  z-index: 1000;
+}
 
-    .breadcrumb {
-      margin-bottom: 0;
-      background-color: transparent;
-      padding: 0;
-      font-size: 0.9rem;
-    }
+.breadcrumb {
+  margin-bottom: 0;
+  background-color: transparent;
+  padding: 0;
+  font-size: 0.9rem;
+}
 
-    /* Main Content */
-    .content {
-      margin-top: 60px;
-      margin-left: 250px;
-      padding: 20px;
-      width: calc(100% - 250px);
-      overflow-y: auto;
-    }
+/* Main Content */
+.content {
+  margin-top: 60px;
+  margin-left: 250px;
+  padding: 20px;
+  width: calc(100% - 250px);
+  overflow-y: auto;
+}
 
-    .card {
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
-      border: none;
-    }
+.container {
+  margin-top: 50px;
+  max-width: 800px;
+}
 
-    .card-header {
-      font-size: 1.25rem;
-      font-weight: bold;
-      background-color: #f8f9fa;
-      color: #333;
-    }
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  border: none;
+}
 
-    /* Styling Tabel */
-    .table thead th {
-      background-color: #d6e0f0 !important;
-      color: #007bff !important;
-      font-weight: bold !important;
-      border-bottom: 2px solid #007bff !important;
-    }
+.card-header {
+  font-size: 1.25rem;
+  font-weight: bold;
+  background-color: #f8f9fa;
+  color: #333;
+}
 
-    .table tbody td {
-      background-color: #f8f9fa !important;
-    }
+/* Styling Tabel */
+.table thead th {
+  background-color: #d6e0f0 !important;
+  color: #007bff !important;
+  font-weight: bold !important;
+  border-bottom: 2px solid #007bff !important;
+}
 
-    /* Styling Tombol */
-    .btn-primary {
-      background-color: #007bff !important;
-      border-color: #007bff !important;
-    }
+.table tbody td {
+  background-color: #ffffff !important;
+  vertical-align: middle;
+}
 
-    .btn-primary:hover {
-      background-color: #0056b3 !important;
-      border-color: #004085 !important;
-    }
+/* Styling Tombol */
+.btn-primary {
+  background-color: #007bff !important;
+  border-color: #007bff !important;
+  color: #fff;
+  font-weight: bold;
+}
 
-    /* Footer */
-    .footer {
-      padding: 20px;
-      background-color: #f8f9fa;
-      font-size: 0.9rem;
-      color: #6c757d;
-      border-top: 1px solid #ddd;
-      text-align: center;
-      margin-left: 250px;
-      width: calc(100% - 250px);
-      position: fixed;
-      bottom: 0;
-    }
+.btn-primary:hover {
+  background-color: #0056b3 !important;
+  border-color: #004085 !important;
+}
 
-    /* Penyesuaian Responsif */
-    @media (max-width: 768px) {
-      .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-      }
+.btn-warning,
+.btn-danger {
+  color: #fff;
+  font-weight: bold;
+}
 
-      .top-nav,
-      .content,
-      .footer {
-        margin-left: 0;
-        width: 100%;
-      }
-    }
+.btn-warning {
+  background-color: #ffc107;
+  border: none;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border: none;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+/* Search Container */
+.search-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.search-container label {
+  margin-right: 8px;
+  font-weight: bold;
+  color: #555;
+}
+
+.search-container .form-control {
+  max-width: 200px;
+}
+
+/* Profile Picture */
+.profile-pic {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Footer */
+.footer {
+  padding: 20px;
+  background-color: #f8f9fa;
+  font-size: 0.9rem;
+  color: #6c757d;
+  border-top: 1px solid #ddd;
+  text-align: center;
+  margin-left: 250px;
+  width: calc(100% - 250px);
+  position: fixed;
+  bottom: 0;
+}
+
+/* Penyesuaian Responsif */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .top-nav,
+  .content,
+  .footer {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
   </style>
 </head>
 
@@ -252,7 +314,57 @@
 
   <!-- Konten Utama -->
   <div class="content">
-    <p>tampilan kelola Pengguna</p>
+    <div class="container">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span>Kelola Pengguna</span>
+        <button type="button" class="btn btn-primary">Tambah Data</button>
+      </div>
+      <div class="card-body">
+        <div class="search-container">
+          <label for="search">Search:</label>
+          <input type="text" id="search" class="form-control">
+        </div>
+
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Photo</th>
+              <th>Nama</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Tindakan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td><img src="https://via.placeholder.com/50" class="profile-pic" alt="Profile 1"></td>
+              <td>Editor</td>
+              <td>editor@del.ac.id</td>
+              <td>Editor</td>
+              <td>
+                <button class="btn btn-warning btn-sm">Edit</button>
+                <button class="btn btn-danger btn-sm">Hapus</button>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td><img src="https://via.placeholder.com/50" class="profile-pic" alt="Profile 2"></td>
+              <td>User Admin</td>
+              <td>admin@del.ac.id</td>
+              <td>Admin</td>
+              <td>
+                <button class="btn btn-warning btn-sm">Edit</button>
+                <button class="btn btn-danger btn-sm">Hapus</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
   </div>
 
   <!-- Footer -->
