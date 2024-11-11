@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,37 +99,37 @@
       border-radius: 8px;
       border: none;
       margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     /* Table Styling */
     .table thead th {
-      background-color: #e9ecef;
-      color: #343a40;
+      background-color: #d6e0f0;
+      color: #007bff;
       font-weight: bold;
       border-top: none;
-      border-bottom: 2px solid #dee2e6;
+      border-bottom: 2px solid #007bff;
     }
 
     .table tbody td {
-      background-color: #fff;
+      background-color: #f8f9fa;
+      text-align: center;
+      color: #6c757d;
       border-top: none;
     }
 
     /* Footer */
     .footer {
-      padding: 5px 20px;
+      padding: 20px;
       background-color: #f8f9fa;
       font-size: 0.9rem;
       color: #6c757d;
-      text-align: center;
       border-top: 1px solid #ddd;
+      text-align: center;
+      margin-left: 250px;
+      width: calc(100% - 250px);
       position: fixed;
       bottom: 0;
-      width: calc(100% - 250px);
-      margin-left: 250px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
     }
 
     /* Responsive Adjustments */
@@ -145,10 +146,6 @@
         margin-left: 0;
         width: 100%;
       }
-
-      .sidebar h2 {
-        font-size: 1.2rem;
-      }
     }
   </style>
 </head>
@@ -157,43 +154,88 @@
 
   <!-- Sidebar -->
   <div class="sidebar">
-    <h2><img src="assets/img/logo.png" alt="School Logo" class="img-fluid mb-3" style="max-width: 30px;"> SIS</h2>
+    <h2><img src="{{ asset('assets/img/logo.png') }}" alt="School Logo" class="img-fluid mb-3" style="max-width: 30px;"> SIS</h2>
     <ul class="nav flex-column">
-      <li class="nav-item active"><a href="#" class="nav-link"><i class="bi bi-house-door"></i> Dashboard</a></li>
-      <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-file-earmark-text"></i> Beranda</a></li>
-      <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-person-circle"></i> Profil</a></li>
-      <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-building"></i> Sarana & Prasarana</a></li>
-      <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-info-circle"></i> Informasi</a></li>
-      <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-cloud"></i> Platform</a></li>
-      <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-people"></i> Kelola Pengguna</a></li>
-      <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-card-checklist"></i> Catatan Perubahan</a></li>
+      <li class="nav-item"><a href="{{ route('admin') }}" class="nav-link active">Dashboard</a></li>
+      
+      <!-- Collapsible for Beranda -->
+      <li class="nav-item">
+        <a href="#berandaCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false" aria-controls="berandaCollapse">
+          Beranda <span class="caret">&#x25BC;</span>
+        </a>
+        <div id="berandaCollapse" class="collapse pl-3">
+          <a class="nav-link" href="{{ route('informasi2') }}">Informasi Dasar</a>
+        </div>
+      </li>
+
+      <!-- Collapsible for Profil -->
+      <li class="nav-item">
+        <a href="#profilCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false" aria-controls="profilCollapse">
+          Profil <span class="caret">&#x25BC;</span>
+        </a>
+        <div id="profilCollapse" class="collapse pl-3">
+          <a class="nav-link" href="{{ route('informasi3') }}">Informasi Dasar</a>
+          <a class="nav-link" href="{{ route('staff') }}">Staff Guru & Karyawan</a>
+          <a class="nav-link" href="{{ route('prestasi') }}">Prestasi</a>
+          <a class="nav-link" href="{{ route('alumni2') }}">Alumni</a>
+        </div>
+      </li>
+
+      <li class="nav-item"><a href="{{ route('sarana') }}" class="nav-link">Sarana & Prasarana</a></li>
+
+      <!-- Collapsible for Informasi -->
+      <li class="nav-item">
+        <a href="#informasiCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false" aria-controls="informasiCollapse">
+          Informasi <span class="caret">&#x25BC;</span>
+        </a>
+        <div id="informasiCollapse" class="collapse pl-3">
+          <a class="nav-link" href="{{ route('adminppdb') }}">PPDB</a>
+          <a class="nav-link" href="{{ route('berita') }}">Berita & Artikel</a>
+          <a class="nav-link" href="{{ route('galeri') }}">Galeri</a>
+          <a class="nav-link" href="{{ route('arsip') }}">Arsip</a>
+          <a class="nav-link" href="{{ route('hubungi') }}">Hubungi Kami</a>
+        </div>
+      </li>
+
+      <li class="nav-item"><a href="{{ route('platform') }}" class="nav-link">Platform</a></li>
+      <li class="nav-item"><a href="{{ route('kelola') }}" class="nav-link">Kelola Pengguna</a></li>
+      <li class="nav-item"><a href="{{ route('log') }}" class="nav-link">Catatan perubahan</a></li>
+
+      <form action="{{ route('logout') }}" method="POST" class="logout-form mt-3">
+        @csrf
+        <button type="submit" class="btn btn-danger btn-block">Logout</button>
+      </form>
     </ul>
   </div>
 
-  <!-- Top Navbar -->
+  <!-- Navbar Atas -->
   <div class="top-nav">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Logs: Catatan Perubahan</li>
-      </ol>
-    </nav>
+    <div>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Logs: Catatan Perubahan</li>
+        </ol>
+      </nav>
+    </div>
     <div>
       <span>User Admin</span>
     </div>
   </div>
 
-  <!-- Main Content -->
+  <!-- Konten Utama -->
   <div class="content">
-    <h4>Logs: Catatan Perubahan</h4>
     <div class="card mt-3">
+      <div class="card-header">
+        Logs: Catatan Perubahan
+      </div>
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h5>Catatan Perubahan</h5>
           <input type="text" id="search" class="form-control" placeholder="Search" style="width: 200px;">
         </div>
         <table class="table table-bordered">
-          <thead class="thead-light">
+          <thead>
             <tr>
               <th>No</th>
               <th>Pesan</th>
@@ -201,7 +243,6 @@
             </tr>
           </thead>
           <tbody>
-            <!-- Placeholder for dynamic content -->
             <tr><td colspan="3" class="text-center">Tidak ada data untuk ditampilkan</td></tr>
           </tbody>
         </table>
@@ -211,11 +252,11 @@
 
   <!-- Footer -->
   <div class="footer">
-    <p style="margin: 0;">Copyright © 2024 <a href="#" style="color: #007bff; text-decoration: none;">SMAN 1 Balige</a>.</p>
-    <p style="margin: 0;">Build with <span style="color: red;">&#10084;</span></p>
+    <p>Hak Cipta © 2024 <a href="#" style="color: #007bff;">SMAN 1 Balige</a>. Dibuat dengan ❤️</p>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
