@@ -105,7 +105,7 @@ body {
 
 /* Main Content */
 .content {
-  margin-top: 60px;
+  margin-top: -350px;
   margin-left: 250px;
   padding: 20px;
   width: calc(100% - 250px);
@@ -114,7 +114,7 @@ body {
 
 .container {
   margin-top: 50px;
-  max-width: 800px;
+  max-width: 1500px;
 }
 
 .card {
@@ -302,7 +302,8 @@ body {
     <div>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Kelola Pengguna</a></li>
+          <li class="breadcrumb-item"><a href="#">Dashboard</a>&nbsp;&nbsp / &nbsp;&nbsp<a href="#" style="color: #6c757d;"> Kelola Pengguna</a></li>
+
           
         </ol>
       </nav>
