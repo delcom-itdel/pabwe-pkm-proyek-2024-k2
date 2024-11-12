@@ -118,8 +118,9 @@
   h5 {
     font-weight: bold;
     font-size: 1.1rem;
-    margin-top: 1.2rem;
-    margin-bottom: 0.5rem;
+    margin-top: 2rem;
+    /* Jarak antar judul */
+    margin-bottom: 1rem;
     color: #007bff;
     border-bottom: 2px solid #d6e0f0;
     padding-bottom: 5px;
@@ -127,7 +128,8 @@
 
   /* Spacing adjustments for form */
   .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    /* Menambah jarak antar form-group */
   }
 
   /* Mengurangi padding bawah agar tombol tidak terlalu dekat dengan footer */
@@ -137,7 +139,7 @@
     /* Atur padding lebih besar agar ada jarak lebih dari footer */
   }
 
-  /* Styling Tombol Simpan */
+  /* Styling tombol simpan agar tetap di kanan bawah card-body */
   .btn-primary-custom {
     background-color: #007bff !important;
     border-color: #007bff !important;
@@ -353,22 +355,24 @@
           </div>
 
           <!-- Jumlah Data -->
+
           <h5>Jumlah Data</h5>
           <div class="form-group">
             <label for="jumlahPesertaDidik">Jumlah Peserta Didik</label>
             <input type="number" class="form-control" id="jumlahPesertaDidik" name="jumlahPesertaDidik"
-              placeholder="Masukkan jumlah peserta didik">
+              placeholder="Masukkan jumlah peserta didik" min="0">
           </div>
           <div class="form-group">
             <label for="jumlahGuru">Jumlah Guru & Tendik</label>
             <input type="number" class="form-control" id="jumlahGuru" name="jumlahGuru"
-              placeholder="Masukkan jumlah guru & tendik">
+              placeholder="Masukkan jumlah guru & tendik" min="0">
           </div>
           <div class="form-group">
             <label for="jumlahKelas">Jumlah Kelas</label>
             <input type="number" class="form-control" id="jumlahKelas" name="jumlahKelas"
-              placeholder="Masukkan jumlah kelas">
+              placeholder="Masukkan jumlah kelas" min="0">
           </div>
+
 
           <!-- Kepala Sekolah -->
           <h5>Kepala Sekolah</h5>
