@@ -64,10 +64,6 @@
       transition: transform 0.3s;
     }
 
-    .sidebar ul li.collapsed .caret {
-      transform: rotate(-90deg);
-    }
-
     /* Top Navbar */
     .top-nav {
       margin-left: 250px;
@@ -165,6 +161,11 @@
         width: 100%;
       }
     }
+
+    /* Ukuran Search Input */
+    .search-input {
+      width: 200px;
+    }
   </style>
 </head>
 
@@ -175,17 +176,6 @@
     <h2><img src="{{ asset('assets/img/logo.png') }}" alt="School Logo" class="img-fluid mb-3" style="max-width: 30px;">SIS</h2>
     <ul class="nav flex-column">
       <li class="nav-item"><a href="{{ route('admin') }}" class="nav-link active">Dashboard</a></li>
-      
-      <!-- Collapsible for Beranda -->
-      <li class="nav-item">
-        <a href="#berandaCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false" aria-controls="berandaCollapse">
-          Beranda <span class="caret">&#x25BC;</span>
-        </a>
-        <div id="berandaCollapse" class="collapse pl-3">
-          <a class="nav-link" href="{{ route('informasi2') }}">Informasi Dasar</a>
-        </div>
-      </li>
-
       <!-- Collapsible for Profil -->
       <li class="nav-item">
         <a href="#profilCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false" aria-controls="profilCollapse">
@@ -198,9 +188,7 @@
           <a class="nav-link" href="{{ route('alumni2') }}">Alumni</a>
         </div>
       </li>
-
       <li class="nav-item"><a href="{{ route('sarana') }}" class="nav-link">Sarana & Prasarana</a></li>
-
       <!-- Collapsible for Informasi -->
       <li class="nav-item">
         <a href="#informasiCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false" aria-controls="informasiCollapse">
@@ -214,11 +202,9 @@
           <a class="nav-link" href="{{ route('hubungi') }}">Hubungi Kami</a>
         </div>
       </li>
-
       <li class="nav-item"><a href="{{ route('platform') }}" class="nav-link">Platform</a></li>
       <li class="nav-item"><a href="{{ route('kelola') }}" class="nav-link">Kelola Pengguna</a></li>
       <li class="nav-item"><a href="{{ route('log') }}" class="nav-link">Catatan perubahan</a></li>
-
       <form action="{{ route('logout') }}" method="POST" class="logout-form mt-3">
         @csrf
         <button type="submit" class="btn btn-danger btn-block">Logout</button>
@@ -250,7 +236,10 @@
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h5>Prestasi</h5>
-          <button class="btn btn-primary" onclick="addData()">Tambah Data</button>
+          <button class="btn btn-primary" data-toggle="modal" data-target="#addDataModal">Tambah Data</button>
+        </div>
+        <div class="form-group mb-3 d-flex justify-content-end">
+          <input type="text" id="search" class="form-control search-input" placeholder="Search">
         </div>
         <table class="table table-bordered">
           <thead>
@@ -267,9 +256,43 @@
             </tr>
           </tbody>
         </table>
-        <div class="form-group mt-3">
-          <label for="search">Search:</label>
-          <input type="text" id="search" class="form-control" placeholder="Search">
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Tambah Data -->
+  <div class="modal fade" id="addDataModal" tabindex="-1" role="dialog" aria-labelledby="addDataModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addDataModalLabel">Tambah Data Prestasi</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="cover">Cover</label>
+              <input type="file" class="form-control" id="cover" name="cover">
+            </div>
+            <div class="form-group">
+              <label for="judul">Judul</label>
+              <input type="text" class="form-control" id="judul" name="judul" placeholder="Masukkan Judul">
+            </div>
+            <div class="form-group">
+              <label for="tahun">Tahun Perolehan</label>
+              <input type="text" class="form-control" id="tahun" name="tahun" placeholder="Masukkan Tahun Perolehan">
+            </div>
+            <div class="form-group">
+              <label for="deskripsi">Deskripsi</label>
+              <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" placeholder="Masukkan Deskripsi"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-primary">Simpan</button>
         </div>
       </div>
     </div>
@@ -277,17 +300,12 @@
 
   <!-- Footer -->
   <div class="footer">
-    <p>Hak Cipta © 2024 <a href="#" style="color: #007bff;">SMAN 1 Balige</a>. Dibuat dengan ❤️</p>
+    <p>&copy; 2024 SMAN 1 Balige | All Rights Reserved</p>
   </div>
 
+  <!-- Script -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    function addData() {
-      alert("Tombol Tambah Data diklik!");
-    }
-  </script>
-
 </body>
 
 </html>
