@@ -284,7 +284,8 @@
     <div>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Berita & Artikel</a></li>
+        <li class="breadcrumb-item active"><a href="#">Informasi</a></li>
+        <li class="breadcrumb-item" aria-current="page">Berita & Artikel</li>
 
         </ol>
       </nav>
