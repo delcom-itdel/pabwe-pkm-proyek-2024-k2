@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SMAN 1 Balige - Prestasi</title>
+  <title>SMAN 1 Balige - PPDB</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
@@ -172,10 +172,12 @@
 
   <!-- Sidebar -->
   <div class="sidebar">
-    <h2><img src="{{ asset('assets/img/logo.png') }}" alt="School Logo" class="img-fluid mb-3" style="max-width: 30px;">SIS</h2>
+    <h2><img src="{{ asset('assets/img/logo.png') }}" alt="School Logo" class="img-fluid mb-3" style="max-width: 30px;"> SIS</h2>
     <ul class="nav flex-column">
-      <li class="nav-item"><a href="{{ route('admin') }}" class="nav-link active">Dashboard</a></li>
-      
+      <li class="nav-item"><a href="{{ route('admin') }}" class="nav-link">Dashboard</a></li>
+      <li class="nav-item"><a href="{{ route('adminppdb') }}" class="nav-link active">PPDB</a></li>
+      <!-- Other sidebar items -->
+
       <!-- Collapsible for Beranda -->
       <li class="nav-item">
         <a href="#berandaCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false" aria-controls="berandaCollapse">
@@ -231,9 +233,8 @@
     <div>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Informasi</a></li>
-        <li class="breadcrumb-item active" aria-current="page">PPDB</li>
-          
+          <li class="breadcrumb-item"><a href="#">Informasi</a></li>
+          <li class="breadcrumb-item active" aria-current="page">PPDB</li>
         </ol>
       </nav>
     </div>
@@ -244,7 +245,14 @@
 
   <!-- Konten Utama -->
   <div class="content">
-    <p>page ppdb admin</p>
+    <div class="card">
+      <div class="card-header">Informasi PPDB</div>
+      <div class="card-body">
+        <p>Diperbarui pada: 11 November 2024 09:30</p>
+        <textarea class="form-control" id="message" rows="5" placeholder="Masukkan informasi PPDB di sini...">Halo namaku ini</textarea>
+        <button class="btn btn-primary mt-3" onclick="simpanPesan()">Simpan</button>
+      </div>
+    </div>
   </div>
 
   <!-- Footer -->
@@ -255,8 +263,10 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    function addData() {
-      alert("Tombol Tambah Data diklik!");
+    function simpanPesan() {
+      var pesan = document.getElementById("message").value;
+      alert("Informasi PPDB berhasil disimpan: " + pesan);
+      // Di sini Anda bisa menambahkan logika untuk mengirim pesan ke server menggunakan AJAX atau metode lainnya
     }
   </script>
 
