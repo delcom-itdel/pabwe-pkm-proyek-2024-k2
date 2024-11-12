@@ -175,7 +175,7 @@
     <h2><img src="{{ asset('assets/img/logo.png') }}" alt="School Logo" class="img-fluid mb-3" style="max-width: 30px;"> SIS</h2>
     <ul class="nav flex-column">
       <li class="nav-item"><a href="{{ route('admin') }}" class="nav-link">Dashboard</a></li>
-      <li class="nav-item"><a href="{{ route('adminppdb') }}" class="nav-link active">PPDB</a></li>
+
       <!-- Other sidebar items -->
 
       <!-- Collapsible for Beranda -->

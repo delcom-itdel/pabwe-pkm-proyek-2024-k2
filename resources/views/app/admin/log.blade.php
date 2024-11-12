@@ -4,15 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SIS - Catatan Perubahan</title>
+  <title>SMAN 1 Balige - Prestasi</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    /* General Styling */
+    /* Styling Umum */
     body {
       font-family: 'Roboto', sans-serif;
       margin: 0;
-      background-color: #f8f9fa;
+      display: flex;
+      min-height: 100vh;
     }
 
     /* Sidebar Styling */
@@ -30,7 +31,7 @@
 
     .sidebar h2 {
       text-align: center;
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       margin-bottom: 20px;
     }
 
@@ -42,13 +43,6 @@
     .sidebar ul li {
       padding: 10px 20px;
       color: #adb5bd;
-      display: flex;
-      align-items: center;
-      transition: background-color 0.2s ease, color 0.2s ease;
-    }
-
-    .sidebar ul li i {
-      margin-right: 10px;
     }
 
     .sidebar ul li.active,
@@ -61,7 +55,17 @@
       color: inherit;
       text-decoration: none;
       display: flex;
-      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sidebar ul li .caret {
+      margin-left: 10px;
+      transition: transform 0.3s;
+    }
+
+    .sidebar ul li.collapsed .caret {
+      transform: rotate(-90deg);
     }
 
     /* Top Navbar */
@@ -93,29 +97,43 @@
       margin-left: 250px;
       padding: 20px;
       width: calc(100% - 250px);
+      overflow-y: auto;
     }
 
     .card {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       border-radius: 8px;
       border: none;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    /* Table Styling */
-    .table thead th {
-      background-color: #d6e0f0;
-      color: #007bff;
+    .card-header {
+      font-size: 1.25rem;
       font-weight: bold;
-      border-top: none;
-      border-bottom: 2px solid #007bff;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    /* Styling Tabel */
+    .table thead th {
+      background-color: #d6e0f0 !important;
+      color: #007bff !important;
+      font-weight: bold !important;
+      border-bottom: 2px solid #007bff !important;
     }
 
     .table tbody td {
-      background-color: #f8f9fa;
-      text-align: center;
-      color: #6c757d;
-      border-top: none;
+      background-color: #f8f9fa !important;
+    }
+
+    /* Styling Tombol */
+    .btn-primary {
+      background-color: #007bff !important;
+      border-color: #007bff !important;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3 !important;
+      border-color: #004085 !important;
     }
 
     /* Footer */
@@ -132,7 +150,7 @@
       bottom: 0;
     }
 
-    /* Responsive Adjustments */
+    /* Penyesuaian Responsif */
     @media (max-width: 768px) {
       .sidebar {
         width: 100%;
@@ -154,10 +172,10 @@
 
   <!-- Sidebar -->
   <div class="sidebar">
-    <h2><img src="{{ asset('assets/img/logo.png') }}" alt="School Logo" class="img-fluid mb-3" style="max-width: 30px;"> SIS</h2>
+    <h2><img src="{{ asset('assets/img/logo.png') }}" alt="School Logo" class="img-fluid mb-3" style="max-width: 30px;">SIS</h2>
     <ul class="nav flex-column">
       <li class="nav-item"><a href="{{ route('admin') }}" class="nav-link active">Dashboard</a></li>
-      
+
       <!-- Collapsible for Beranda -->
       <li class="nav-item">
         <a href="#berandaCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false" aria-controls="berandaCollapse">
@@ -213,8 +231,8 @@
     <div>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Logs: Catatan Perubahan</li>
+          <li class="breadcrumb-item"><a href="#">Profil</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Prestasi</li>
         </ol>
       </nav>
     </div>
@@ -243,7 +261,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td colspan="3" class="text-center">Tidak ada data untuk ditampilkan</td></tr>
+            <tr>
+              <td colspan="3" class="text-center">Tidak ada data untuk ditampilkan</td>
+            </tr>
           </tbody>
         </table>
       </div>
