@@ -51,7 +51,7 @@ Route::middleware(['auth', 'check.roles:Admin,Editor'])->group(function () {
     Route::get('/platform', function () {
         return view('app.admin.platform');
     })->name('platform');
-    
+
 
     // Route for the Profil Informasi Dasar page
     Route::get('/profilInformasiDasar', function () {
@@ -158,7 +158,12 @@ Route::get('/log', function () {
 })->name('log');
 
 
-
 Route::get('/informasi3', function () {
     return view('app/admin/informasi3');
 })->name('informasi3');
+
+//editor
+
+Route::get('/editor', function () {
+    return view('app/editor/editor');
+})->name('editor');

@@ -1,134 +1,388 @@
-<!-- resources/views/sejarah.blade.php -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMAN 1 Balige - Prestasi</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Styling Umum */
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      display: flex;
+      min-height: 100vh;
+    }
 
-  <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Editor Dashboard</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
+    /* Sidebar Styling */
+    .sidebar {
+      height: 100vh;
+      width: 250px;
+      background-color: #343a40;
+      color: #fff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding-top: 20px;
+      overflow-y: auto;
+    }
 
-    <!-- Favicons -->
-    <link href="{{ asset('assets/img/logo.png')}}" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    .sidebar h2 {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com" rel="preconnect">
-    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet">
+    .sidebar ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
 
-    <!-- Vendor CSS Files -->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    .sidebar ul li {
+      padding: 10px 20px;
+      color: #adb5bd;
+      cursor: pointer;
+    }
 
-    <!-- Main CSS File -->
-    <link href="assets/css/main.css" rel="stylesheet">
+    .sidebar ul li.active,
+    .sidebar ul li:hover {
+      background-color: #495057;
+      color: #fff;
+    }
 
-    <!-- =======================================================
-  * Template Name: QuickStart
-  * Template URL: https://bootstrapmade.com/quickstart-bootstrap-startup-website-template/
-  * Updated: Aug 07 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-  </head>
+    .sidebar ul li a {
+      color: inherit;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-<body class="index-page">
-  <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+    .sidebar ul li .caret {
+      margin-left: 10px;
+      transition: transform 0.3s;
+    }
 
-      <a href="#" class="logo d-flex align-items-center me-auto">
-        <img src="assets/img/logo.png" alt="">
-        <h1 class="sitename">SMAN 1 BALIGE</h1>
-      </a>
+    .sidebar ul li.show .caret {
+      transform: rotate(0deg);
+    }
 
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="{{ route('editor') }}" class="active">Dashboard</a></li>
-          <li class="dropdown"><a href="#services"><span>Beranda</span>
-              <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
+    .sidebar ul li.collapsed .caret {
+      transform: rotate(-90deg);
+    }
 
-              <li><a href="{{ route('informasiDasar') }}">Informasi Dasar</a></li>
-            </ul>
-          </li>
-          <li class="dropdown"><a href="#services"><span>Profil</span>
-              <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
+    /* Dropdown hover effect */
+    .sidebar ul li .collapse.show {
+      background-color: #495057;
+    }
 
-              <li><a href="{{ route('profilInformasiDasar') }}">Informasi Dasar</a></li>
-            </ul>
-          </li>
-          <li class="dropdown"><a href="#services"><span>Informasi</span>
-              <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
+    /* Top Navbar */
+    .top-nav {
+      margin-left: 250px;
+      height: 60px;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+      position: fixed;
+      top: 0;
+      width: calc(100% - 250px);
+      z-index: 1000;
+    }
 
-              <li><a href="{{ route('informasiPbdb') }}">PPDB</a></li>
-              <li><a href="{{ route('informasiArsip') }}">Arsip</a></li>
-              <li><a href="{{ route('informasiHubungiKami') }}">Hubungi Kami</a></li>
-            </ul>
-          </li>
-          <li class="active"><a href="{{ route('platform') }}"><span>Platform</span></li>
+    .breadcrumb {
+      margin-bottom: 0;
+      background-color: transparent;
+      padding: 0;
+      font-size: 0.9rem;
+    }
 
-          <form action="{{ route('logout') }}" method="POST" class="logout-form">
-            @csrf
-            <button type="submit"
-              style="background-color: #ff4c4c; color: white; border: none; padding: 0.5em 1em; cursor: pointer;">Logout</button>
-          </form>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+    /* Main Content */
+    .content {
+      margin-top: 60px;
+      margin-left: 250px;
+      padding: 20px;
+      width: calc(100% - 250px);
+      overflow-y: auto;
+    }
 
+    .card {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      border: none;
+    }
 
-      </nav>
+    .card-header {
+      font-size: 1.25rem;
+      font-weight: bold;
+      background-color: #f8f9fa;
+      color: #333;
+    }
 
-    </div>
-  </header>
-  <!-- Main Content -->
-  <main id="main" class="pt-5">
-    <section id="sejarah" class="sejarah-section mt-5">
-      <div class="container" data-aos="fade-up">
-        <div class="section-title">
-          <h2>DASHBOARD EDITOR</h2>
+    /* Styling Tabel */
+    .table thead th {
+      background-color: #d6e0f0 !important;
+      color: #007bff !important;
+      font-weight: bold !important;
+      border-bottom: 2px solid #007bff !important;
+      cursor: pointer;
+    }
+
+    .table tbody td {
+      background-color: #f8f9fa !important;
+    }
+
+    /* Styling Tombol */
+    .btn-primary {
+      background-color: #007bff !important;
+      border-color: #007bff !important;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3 !important;
+      border-color: #004085 !important;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 20px;
+      background-color: #f8f9fa;
+      font-size: 0.9rem;
+      color: #6c757d;
+      border-top: 1px solid #ddd;
+      text-align: center;
+      margin-left: 250px;
+      width: calc(100% - 250px);
+      position: fixed;
+      bottom: 0;
+    }
+
+    /* Penyesuaian Responsif */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+
+      .top-nav,
+      .content,
+      .footer {
+        margin-left: 0;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2><img src="{{ asset('assets/img/logo.png') }}" alt="School Logo" class="img-fluid mb-3"
+        style="max-width: 30px;">SIS</h2>
+    <ul class="nav flex-column">
+      <li class="nav-item"><a href="{{ route('editor') }}" class="nav-link active">Dashboard</a></li>
+
+      <!-- Collapsible for Beranda -->
+      <li class="nav-item">
+        <a href="#berandaCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false"
+          aria-controls="berandaCollapse">
+          Beranda <span class="caret">&#x25BC;</span>
+        </a>
+        <div id="berandaCollapse" class="collapse pl-3">
+          <a class="nav-link" href="{{ route('informasiDasar') }}">Informasi Dasar</a>
         </div>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce euismod, lacus eu convallis luctus,
-          felis ex vestibulum odio, in facilisis nulla orci id ligula. Proin ut eros eu odio dignissim
-          vestibulum vel sit amet ligula. Integer auctor nisl in felis pharetra, nec tincidunt risus bibendum.
-          Aenean egestas metus non sapien condimentum, ac ultrices arcu pharetra. Integer at nunc sit amet
-          nisl laoreet facilisis id et neque.
-        </p>
-        <p>
-          Curabitur at mi ut odio consectetur venenatis ut eu odio. Suspendisse sed justo non ligula fermentum
-          gravida. Nullam eu leo vel ipsum tincidunt fringilla. Duis volutpat justo id libero convallis
-          ullamcorper. Aenean interdum orci sed ligula tempor, a feugiat turpis eleifend.
-        </p>
+      </li>
+
+      <!-- Collapsible for Profil -->
+      <li class="nav-item">
+        <a href="#profilCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false"
+          aria-controls="profilCollapse">
+          Profil <span class="caret">&#x25BC;</span>
+        </a>
+        <div id="profilCollapse" class="collapse pl-3">
+          <a class="nav-link" href="{{ route('profilInformasiDasar') }}">Informasi Dasar</a>
+        </div>
+      </li>
+
+
+      <!-- Collapsible for Informasi -->
+      <li class="nav-item">
+        <a href="#informasiCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false"
+          aria-controls="informasiCollapse">
+          Informasi <span class="caret">&#x25BC;</span>
+        </a>
+        <div id="informasiCollapse" class="collapse pl-3">
+          <a class="nav-link" href="{{ route('informasiPbdb') }}">PPDB</a>
+          <a class="nav-link" href="{{ route('informasiArsip') }}">Arsip</a>
+          <a class="nav-link" href="{{ route('informasiHubungiKami') }}">Hubungi Kami</a>
+        </div>
+      </li>
+
+
+      <form action="{{ route('logout') }}" method="POST" class="logout-form mt-3">
+        @csrf
+        <button type="submit" class="btn btn-danger btn-block">Logout</button>
+      </form>
+    </ul>
+  </div>
+
+  <!-- Navbar Atas -->
+  <div class="top-nav">
+    <div>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+
+        </ol>
+      </nav>
+    </div>
+    <div>
+      <span>User Editor</span>
+    </div>
+  </div>
+
+  <!-- Konten Utama -->
+
+  <div class="content container-fluid">
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Total Pengunjung Hari Ini</h5>
+            <canvas id="dailyVisitorsChart"></canvas>
+          </div>
+        </div>
       </div>
-    </section>
-  </main>
-  <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
-      class="bi bi-arrow-up-short"></i></a>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Total Pengunjung Bulan Ini</h5>
+            <canvas id="monthlyVisitorsChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">100 Situs yang Sering Dikunjungi</h5>
+        <div class="d-flex justify-content-end mb-3">
+          <input class="form-control w-auto" id="searchInput" type="text" placeholder="Cari situs...">
+        </div>
+        <div class="table-responsive">
+          <table id="visitedSitesTable" class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th onclick="sortTable(0)">No <i class="fas fa-sort"></i></th>
+                <th onclick="sortTable(1)">URL <i class="fas fa-sort"></i></th>
+                <th onclick="sortTable(2)">Total Dikunjungi <i class="fas fa-sort"></i></th>
+                <th onclick="sortTable(3)">Total Visitor <i class="fas fa-sort"></i></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Tambahkan data dari database -->
+              <tr>
+                <td>1</td>
+                <td><a href="https://pkm.sman1balige.delcom.org">https://pkm.sman1balige.delcom.org</a></td>
+                <td>178</td>
+                <td>155</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td><a
+                    href="https://pkm.sman1balige.delcom.org/web/profil/sejarah">https://pkm.sman1balige.delcom.org/web/profil/sejarah</a>
+                </td>
+                <td>41</td>
+                <td>35</td>
+              </tr>
+              <!-- Tambah data lainnya -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <!-- Preloader -->
-  <div id="preloader"></div>
+  <!-- Footer -->
+  <div class="footer">
+    <p>Hak Cipta © 2024 <a href="#" style="color: #007bff;">SMAN 1 Balige</a>. Dibuat dengan ❤️</p>
+  </div>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('.sidebar ul li a').on('click', function () {
+        $(this).parent().toggleClass('show');
+      });
+    });
+  </script>
+  <script>
+    function sortTable(n) {
+      var table = document.getElementById("visitedSitesTable");
+      var rows = table.rows;
+      var switching = true;
+      var dir = "asc";
+      var switchCount = 0;
 
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
+      while (switching) {
+        switching = false;
+        var rowsArray = Array.from(rows).slice(1);
+        for (var i = 0; i < rowsArray.length - 1; i++) {
+          var x = rowsArray[i].getElementsByTagName("TD")[n];
+          var y = rowsArray[i + 1].getElementsByTagName("TD")[n];
+
+          var shouldSwitch = false;
+          if (dir === "asc") {
+            if (isNaN(x.innerHTML) || isNaN(y.innerHTML)) {
+              if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                shouldSwitch = true;
+                break;
+              }
+            } else {
+              if (Number(x.innerHTML) > Number(y.innerHTML)) {
+                shouldSwitch = true;
+                break;
+              }
+            }
+          } else if (dir === "desc") {
+            if (isNaN(x.innerHTML) || isNaN(y.innerHTML)) {
+              if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                shouldSwitch = true;
+                break;
+              }
+            } else {
+              if (Number(x.innerHTML) < Number(y.innerHTML)) {
+                shouldSwitch = true;
+                break;
+              }
+            }
+          }
+        }
+
+        if (shouldSwitch) {
+          rowsArray[i].parentNode.insertBefore(rowsArray[i + 1], rowsArray[i]);
+          switching = true;
+          switchCount++;
+        } else {
+          if (switchCount === 0 && dir === "asc") {
+            dir = "desc";
+            switching = true;
+          }
+        }
+      }
+    }
+  </script>
+
+
+
 </body>
 
 </html>
