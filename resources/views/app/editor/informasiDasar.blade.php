@@ -257,143 +257,186 @@
   </div>
 
   <!-- Konten Utama -->
-  <div class="content">
-    <div class="card">
-      <div class="card-header">
-        Beranda: Informasi Dasar
+
+  <!-- Main Content -->
+  <div style="padding: 2em;">
+    <h1>Informaasi Dasar</h1>
+    <p></p>
+  </div>
+  <div style="padding: 2em;">
+    <h1>Informasi Dasar</h1>
+    <form action="{{ route('updateInformasiDasar') }}" method="POST">
+      @csrf
+      @method('PUT') <!-- Menggunakan PUT method untuk memastikan data diupdate bukan ditambahkan -->
+      <!-- Field Kontak Phone -->
+      <div>
+        <label for="kontak_phone">Kontak Phone:</label>
+        <input type="text" name="kontak_phone" id="kontak_phone"
+          value="{{ session('data.kontak_phone') ?? $data->kontak_phone ?? '' }}" required>
       </div>
-      <div class="card-body">
-        <form action="#" method="post">
-          <!-- Kontak -->
-          <h5>Kontak</h5>
-          <div class="form-group">
-            <label for="kontakPhone">Kontak Phone</label>
-            <input type="text" class="form-control" id="kontakPhone" name="kontakPhone"
-              placeholder="Masukkan nomor telepon">
-          </div>
-          <div class="form-group">
-            <label for="kontakEmail">Kontak Email</label>
-            <input type="email" class="form-control" id="kontakEmail" name="kontakEmail" placeholder="Masukkan email">
-          </div>
 
-          <!-- Lokasi -->
-          <h5>Lokasi</h5>
-          <div class="form-group">
-            <label for="namaLokasi">Nama Lokasi</label>
-            <input type="text" class="form-control" id="namaLokasi" name="namaLokasi"
-              placeholder="Masukkan nama lokasi">
-          </div>
-          <div class="form-group">
-            <label for="alamatLokasi">Alamat Lokasi</label>
-            <textarea class="form-control" id="alamatLokasi" name="alamatLokasi" rows="2"
-              placeholder="Masukkan alamat lokasi"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="petaLokasi">Peta Lokasi</label>
-            <input type="url" class="form-control" id="petaLokasi" name="petaLokasi"
-              placeholder="Masukkan URL peta lokasi">
-          </div>
+      <!-- Field Kontak Email -->
+      <div>
+        <label for="kontak_email">Kontak Email:</label>
+        <input type="email" name="kontak_email" id="kontak_email"
+          value="{{ session('data.kontak_email') ?? $data->kontak_email ?? '' }}" required>
+      </div>
 
-          <!-- Sosial Media -->
-          <h5>Sosial Media</h5>
-          <div class="form-group">
-            <label for="instagram">Sosial Media Instagram</label>
-            <input type="url" class="form-control" id="instagram" name="instagram" placeholder="Masukkan URL Instagram">
-          </div>
-          <div class="form-group">
-            <label for="youtube">Sosial Media Youtube</label>
-            <input type="url" class="form-control" id="youtube" name="youtube" placeholder="Masukkan URL Youtube">
-          </div>
-          <div class="form-group">
-            <label for="tiktok">Sosial Media Tiktok</label>
-            <input type="url" class="form-control" id="tiktok" name="tiktok" placeholder="Masukkan URL Tiktok">
-          </div>
-          <div class="form-group">
-            <label for="facebook">Sosial Media Facebook</label>
-            <input type="url" class="form-control" id="facebook" name="facebook" placeholder="Masukkan URL Facebook">
-          </div>
-          <div class="form-group">
-            <label for="twitter">Sosial Media Twitter / X</label>
-            <input type="url" class="form-control" id="twitter" name="twitter" placeholder="Masukkan URL Twitter">
-          </div>
+      <!-- Field Nama Lokasi -->
+      <div>
+        <label for="nama_lokasi">Nama Lokasi:</label>
+        <input type="text" name="nama_lokasi" id="nama_lokasi"
+          value="{{ session('data.nama_lokasi') ?? $data->nama_lokasi ?? '' }}" required>
+      </div>
 
-          <!-- Informasi -->
-          <h5>Informasi</h5>
-          <div class="form-group">
-            <label for="highlight">Highlight</label>
-            <textarea class="form-control" id="highlight" name="highlight" rows="2"
-              placeholder="Masukkan highlight"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="subHighlight">Sub-Highlight</label>
-            <textarea class="form-control" id="subHighlight" name="subHighlight" rows="2"
-              placeholder="Masukkan sub-highlight"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="cover">Cover</label>
-            <input type="file" class="form-control-file" id="cover" name="cover">
-          </div>
-          <div class="form-group">
-            <label for="judulVideo">Judul Video</label>
-            <input type="text" class="form-control" id="judulVideo" name="judulVideo"
-              placeholder="Masukkan judul video">
-          </div>
-          <div class="form-group">
-            <label for="linkVideo">Link Video</label>
-            <input type="url" class="form-control" id="linkVideo" name="linkVideo" placeholder="Masukkan URL video">
-          </div>
+      <button type="submit">Simpan</button>
+    </form>
 
-          <!-- Jumlah Data -->
-          <h5>Jumlah Data</h5>
-          <div class="form-group">
-            <label for="jumlahPesertaDidik">Jumlah Peserta Didik</label>
-            <input type="number" class="form-control" id="jumlahPesertaDidik" name="jumlahPesertaDidik"
-              placeholder="Masukkan jumlah peserta didik">
-          </div>
-          <div class="form-group">
-            <label for="jumlahGuru">Jumlah Guru & Tendik</label>
-            <input type="number" class="form-control" id="jumlahGuru" name="jumlahGuru"
-              placeholder="Masukkan jumlah guru & tendik">
-          </div>
-          <div class="form-group">
-            <label for="jumlahKelas">Jumlah Kelas</label>
-            <input type="number" class="form-control" id="jumlahKelas" name="jumlahKelas"
-              placeholder="Masukkan jumlah kelas">
-          </div>
+    <!-- Menampilkan Pesan Sukses -->
+    @if(session('success'))
+    <div style="color: green;">
+      {{ session('success') }}
+    </div>
+  @endif
 
-          <!-- Kepala Sekolah -->
-          <h5>Kepala Sekolah</h5>
-          <div class="form-group">
-            <label for="fotoKepalaSekolah">Photo Kepala Sekolah</label>
-            <input type="file" class="form-control-file" id="fotoKepalaSekolah" name="fotoKepalaSekolah">
-          </div>
-          <div class="form-group">
-            <label for="namaKepalaSekolah">Nama Kepala Sekolah</label>
-            <input type="text" class="form-control" id="namaKepalaSekolah" name="namaKepalaSekolah"
-              placeholder="Masukkan nama kepala sekolah">
-          </div>
-          <div class="form-group">
-            <label for="sambutanKepalaSekolah">Sambutan Kepala Sekolah</label>
-            <textarea class="form-control" id="sambutanKepalaSekolah" name="sambutanKepalaSekolah" rows="3"
-              placeholder="Masukkan sambutan kepala sekolah"></textarea>
-          </div>
-        </form>
+    <div class="content">
+      <div class="card">
+        <div class="card-header">
+          Beranda: Informasi Dasar
+        </div>
+        <div class="card-body">
+          <form action="#" method="post">
+            <!-- Kontak -->
+            <h5>Kontak</h5>
+            <div class="form-group">
+              <label for="kontakPhone">Kontak Phone</label>
+              <input type="text" class="form-control" id="kontakPhone" name="kontakPhone"
+                placeholder="Masukkan nomor telepon">
+            </div>
+            <div class="form-group">
+              <label for="kontakEmail">Kontak Email</label>
+              <input type="email" class="form-control" id="kontakEmail" name="kontakEmail" placeholder="Masukkan email">
+            </div>
 
-        <!-- Tombol Simpan di luar form -->
-        <div class="clearfix">
-          <button type="submit" class="btn btn-primary-custom">Simpan</button>
+            <!-- Lokasi -->
+            <h5>Lokasi</h5>
+            <div class="form-group">
+              <label for="namaLokasi">Nama Lokasi</label>
+              <input type="text" class="form-control" id="namaLokasi" name="namaLokasi"
+                placeholder="Masukkan nama lokasi">
+            </div>
+            <div class="form-group">
+              <label for="alamatLokasi">Alamat Lokasi</label>
+              <textarea class="form-control" id="alamatLokasi" name="alamatLokasi" rows="2"
+                placeholder="Masukkan alamat lokasi"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="petaLokasi">Peta Lokasi</label>
+              <input type="url" class="form-control" id="petaLokasi" name="petaLokasi"
+                placeholder="Masukkan URL peta lokasi">
+            </div>
+
+            <!-- Sosial Media -->
+            <h5>Sosial Media</h5>
+            <div class="form-group">
+              <label for="instagram">Sosial Media Instagram</label>
+              <input type="url" class="form-control" id="instagram" name="instagram"
+                placeholder="Masukkan URL Instagram">
+            </div>
+            <div class="form-group">
+              <label for="youtube">Sosial Media Youtube</label>
+              <input type="url" class="form-control" id="youtube" name="youtube" placeholder="Masukkan URL Youtube">
+            </div>
+            <div class="form-group">
+              <label for="tiktok">Sosial Media Tiktok</label>
+              <input type="url" class="form-control" id="tiktok" name="tiktok" placeholder="Masukkan URL Tiktok">
+            </div>
+            <div class="form-group">
+              <label for="facebook">Sosial Media Facebook</label>
+              <input type="url" class="form-control" id="facebook" name="facebook" placeholder="Masukkan URL Facebook">
+            </div>
+            <div class="form-group">
+              <label for="twitter">Sosial Media Twitter / X</label>
+              <input type="url" class="form-control" id="twitter" name="twitter" placeholder="Masukkan URL Twitter">
+            </div>
+
+            <!-- Informasi -->
+            <h5>Informasi</h5>
+            <div class="form-group">
+              <label for="highlight">Highlight</label>
+              <textarea class="form-control" id="highlight" name="highlight" rows="2"
+                placeholder="Masukkan highlight"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="subHighlight">Sub-Highlight</label>
+              <textarea class="form-control" id="subHighlight" name="subHighlight" rows="2"
+                placeholder="Masukkan sub-highlight"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="cover">Cover</label>
+              <input type="file" class="form-control-file" id="cover" name="cover">
+            </div>
+            <div class="form-group">
+              <label for="judulVideo">Judul Video</label>
+              <input type="text" class="form-control" id="judulVideo" name="judulVideo"
+                placeholder="Masukkan judul video">
+            </div>
+            <div class="form-group">
+              <label for="linkVideo">Link Video</label>
+              <input type="url" class="form-control" id="linkVideo" name="linkVideo" placeholder="Masukkan URL video">
+            </div>
+
+            <!-- Jumlah Data -->
+            <h5>Jumlah Data</h5>
+            <div class="form-group">
+              <label for="jumlahPesertaDidik">Jumlah Peserta Didik</label>
+              <input type="number" class="form-control" id="jumlahPesertaDidik" name="jumlahPesertaDidik"
+                placeholder="Masukkan jumlah peserta didik">
+            </div>
+            <div class="form-group">
+              <label for="jumlahGuru">Jumlah Guru & Tendik</label>
+              <input type="number" class="form-control" id="jumlahGuru" name="jumlahGuru"
+                placeholder="Masukkan jumlah guru & tendik">
+            </div>
+            <div class="form-group">
+              <label for="jumlahKelas">Jumlah Kelas</label>
+              <input type="number" class="form-control" id="jumlahKelas" name="jumlahKelas"
+                placeholder="Masukkan jumlah kelas">
+            </div>
+
+            <!-- Kepala Sekolah -->
+            <h5>Kepala Sekolah</h5>
+            <div class="form-group">
+              <label for="fotoKepalaSekolah">Photo Kepala Sekolah</label>
+              <input type="file" class="form-control-file" id="fotoKepalaSekolah" name="fotoKepalaSekolah">
+            </div>
+            <div class="form-group">
+              <label for="namaKepalaSekolah">Nama Kepala Sekolah</label>
+              <input type="text" class="form-control" id="namaKepalaSekolah" name="namaKepalaSekolah"
+                placeholder="Masukkan nama kepala sekolah">
+            </div>
+            <div class="form-group">
+              <label for="sambutanKepalaSekolah">Sambutan Kepala Sekolah</label>
+              <textarea class="form-control" id="sambutanKepalaSekolah" name="sambutanKepalaSekolah" rows="3"
+                placeholder="Masukkan sambutan kepala sekolah"></textarea>
+            </div>
+          </form>
+
+          <!-- Tombol Simpan di luar form -->
+          <div class="clearfix">
+            <button type="submit" class="btn btn-primary-custom">Simpan</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Footer -->
-  <div class="footer">
-    <p>Hak Cipta © 2024 <a href="#" style="color: #007bff;">SMAN 1 Balige</a>. Dibuat dengan ❤️</p>
-  </div>
+    <!-- Footer -->
+    <div class="footer">
+      <p>Hak Cipta © 2024 <a href="#" style="color: #007bff;">SMAN 1 Balige</a>. Dibuat dengan ❤️</p>
+    </div>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
