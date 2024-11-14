@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\InformasiDasarController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\SaranaController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfilInformasiDasarController;
 
@@ -67,7 +68,6 @@ Route::middleware(['auth', 'check.roles:Admin,Editor'])->group(function () {
     Route::get('/informasiHubungiKami', function () {
         return view('app.editor.informasiHubungiKami');
     })->name('informasiHubungiKami');
-
 });
 
 
@@ -112,9 +112,9 @@ Route::get('/alumni2', function () {
     return view('app/admin/alumni2');
 })->name('alumni2');
 
-Route::get('/sarana', function () {
-    return view('app/admin/sarana');
-})->name('sarana');
+Route::get('sarana', [SaranaController::class, 'index'])->name('sarana');
+
+Route::post('sarana', [SaranaController::class, 'store'])->name('addsarana');
 
 Route::get('/adminppdb', function () {
     return view('app/admin/adminppdb');
