@@ -254,33 +254,41 @@
 
     <h3 class="m-3">Profil : Informasi Dasar</h3>
     <div class="card p-2 m-0">
-      <form>
-        <div class="mb-3 col-lg-12 col-sm-12">
-          <label for="exampleFormControlInput1" class="form-label">Sejarah</label>
-          <input type="email" class="form-control" id="exampleFormControlInput1">
+      <form action="{{ route('profilInformasiDasarSave') }}" method="POST">
+        @csrf
+        <div class="mb-3">
+          <label for="sejarah">Sejarah</label>
+          <textarea name="sejarah" class="form-control" id="sejarah">{{ $data->sejarah ?? '' }}</textarea>
         </div>
-        <div class="mb-3 col-lg-12 col-sm-12">
-          <label for="exampleFormControlTextarea1" class="form-label">Visi</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1"></textarea>
+        <div class="mb-3">
+          <label for="visi">Visi</label>
+          <textarea name="visi" class="form-control" id="visi">{{ $data->visi ?? '' }}</textarea>
         </div>
-        <div class="mb-3 col-lg-12 col-sm-12">
-          <label for="exampleFormControlTextarea1" class="form-label">Misi</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1"></textarea>
+        <div class="mb-3">
+          <label for="misi">Misi</label>
+          <textarea name="misi" class="form-control" id="misi">{{ $data->misi ?? '' }}</textarea>
         </div>
-        <div class="mb-3 col-lg-12 col-sm-12">
-          <label for="exampleFormControlTextarea1" class="form-label">Struktur Organisasi</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1"></textarea>
+        <div class="mb-3">
+          <label for="struktur_organisasi">Struktur Organisasi</label>
+          <textarea name="struktur_organisasi" class="form-control"
+            id="struktur_organisasi">{{ $data->struktur_organisasi ?? '' }}</textarea>
         </div>
-        <div class="mb-3 col-lg-12 col-sm-12">
-          <label for="exampleFormControlTextarea1" class="form-label">Program Sekolah</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1"></textarea>
+        <div class="mb-3">
+          <label for="program_sekolah">Program Sekolah</label>
+          <textarea name="program_sekolah" class="form-control"
+            id="program_sekolah">{{ $data->program_sekolah ?? '' }}</textarea>
         </div>
-
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-          <button class="btn btn-primary me-md-2" type="button">Simpan</button>
-        </div>
+        <button type="submit" class="btn btn-primary">Simpan</button>
       </form>
+
     </div>
+
+    @if (session('success'))
+    <div class="alert alert-success mt-3">{{ session('success') }}</div>
+  @endif
+
+
+
   </div>
 
   Footer

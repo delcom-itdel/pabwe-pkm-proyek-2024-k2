@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EditorController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\ProfilInformasiDasarController;
 
 //awal
 Route::get('/', function () {
@@ -167,3 +168,8 @@ Route::get('/informasi3', function () {
 Route::get('/editor', function () {
     return view('app/editor/editor');
 })->name('editor');
+
+
+//route profilinformasidasar
+Route::get('/profil-informasi-dasars', [ProfilInformasiDasarController::class, 'showForm'])->name('profilInformasiDasarsForm');
+Route::post('/profil-informasi-dasars', [ProfilInformasiDasarController::class, 'saveData'])->name('profilInformasiDasarSave');
