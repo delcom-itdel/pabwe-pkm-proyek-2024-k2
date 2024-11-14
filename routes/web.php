@@ -7,6 +7,7 @@ use App\Http\Controllers\InformasiDasarController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\SaranaController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BeritaArtikelController;
 use App\Http\Controllers\ProfilInformasiDasarController;
 
 //awal
@@ -177,3 +178,14 @@ Route::get('/platform', [AdminController::class, 'index'])->name('platform');
 Route::post('/platform/store', [AdminController::class, 'storePlatform'])->name('platforms.store');
 Route::get('/platform/edit/{id}', [AdminController::class, 'edit'])->name('platform.edit');
 Route::delete('/platform/destroy/{id}', [AdminController::class, 'destroy'])->name('platform.destroy');
+
+// Rute untuk halaman Berita & Artikel
+Route::middleware(['auth', 'check.roles:Admin,Editor'])->group(function () {
+    Route::get('/berita', [BeritaArtikelController::class, 'index'])->name('berita');
+    Route::get('/berita/create', [BeritaArtikelController::class, 'create'])->name('berita.create');
+    Route::post('/berita', [BeritaArtikelController::class, 'store'])->name('berita.store');
+    Route::get('/berita/edit/{beritaArtikel}', [BeritaArtikelController::class, 'edit'])->name('berita.edit');
+    Route::put('/berita/{beritaArtikel}', [BeritaArtikelController::class, 'update'])->name('berita.update');
+    Route::delete('/berita/{beritaArtikel}', [BeritaArtikelController::class, 'destroy'])->name('berita.destroy');
+    Route::get('/berita/{beritaArtikel}', [BeritaArtikelController::class, 'show'])->name('berita.show');
+});

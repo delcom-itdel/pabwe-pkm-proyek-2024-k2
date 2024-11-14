@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -184,7 +185,7 @@
     <h2><img src="{{ asset('assets/img/logo.png') }}" alt="School Logo" class="img-fluid mb-3" style="max-width: 30px;">SIS</h2>
     <ul class="nav flex-column">
       <li class="nav-item"><a href="{{ route('admin') }}" class="nav-link active">Dashboard</a></li>
-      
+
       <!-- Collapsible for Beranda -->
       <li class="nav-item">
         <a href="#berandaCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false" aria-controls="berandaCollapse">
@@ -248,82 +249,86 @@
       <span>User Admin</span>
     </div>
   </div>
-
-<!-- Konten Utama -->
-<div class="content">
-  <div class="card">
-    <div class="card-header">
-      Platform
-    </div>
-    <div class="card-body">
-      <div class="mb-3 d-flex justify-content-between align-items-center">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#tambahDataModal">Tambah Data</button>
-        <input type="text" class="form-control w-25" placeholder="Search">
+  <!-- Konten Utama -->
+  <div class="content">
+    <div class="card">
+      <div class="card-header">
+        Berita & Artikel
       </div>
-      <table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>No</th>
-            <th>Nama</th>
-            <th>URL</th>
-            <th>Tindakan</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($platforms as $index => $platform)
+      <div class="card-body">
+        <div class="mb-3 d-flex justify-content-between align-items-center">
+          <!-- Tambah Data Button -->
+          <button class="btn btn-primary" data-toggle="modal" data-target="#tambahDataModal">Tambah Data</button>
+
+          <!-- Search Input -->
+          <input type="text" class="form-control w-25" placeholder="Search">
+        </div>
+
+        <!-- Table -->
+        <table class="table table-bordered table-striped">
+          <thead>
             <tr>
-                <td>{{ $index + 1 }}</td>
-                <td>{{ $platform->name }}</td>
-                <td>{{ $platform->url }}</td>
-                <td>
-                    <!-- Tombol Edit -->
-                    <a class="btn btn-primary btn-sm">Edit</a>
-
-                    <!-- Tombol Hapus -->
-                    <form action="{{ route('platform.destroy', ['id' => $platform->id]) }}" method="PUT" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                    </form>
-                </td>
+              <th>No</th>
+              <th>Cover</th>
+              <th>Judul</th>
+              <th>Tindakan</th>
             </tr>
-        @endforeach
-    </tbody>
-</table>
-    </div>
-  </div>
-</div>
+          </thead>
+          <tbody>
+            @foreach ($beritaArtikel as $index => $artikel)
+            <tr>
+              <td>{{ $index + 1 }}</td>
+              <td><img src="{{ asset('storage/'.$artikel->cover) }}" alt="Cover Image" style="width: 80px;"></td>
+              <td>{{ $artikel->judul }}</td>
+              <td>
+                <!-- Edit Button -->
+                <a class="btn btn-warning btn-sm" href="{{ route('beritaArtikels.edit', $artikel->id) }}">Edit</a>
 
-<!-- Modal Tambah Data -->
-<div class="modal fade" id="tambahDataModal" tabindex="-1" aria-labelledby="tambahDataModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="tambahDataModalLabel">Tambah Data Platform</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+                <!-- Delete Button -->
+                <form action="{{ route('beritaArtikels.destroy', $artikel->id) }}" method="POST" style="display:inline;">
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
       </div>
-      <form action="{{ url('/platform/store') }}" method="POST"> <!-- Update action URL -->
-        @csrf
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="name">Nama:</label>
-            <input type="text" class="form-control" id="name" name="name" required>
-          </div>
-          <div class="form-group">
-            <label for="url">URL:</label>
-            <input type="url" class="form-control" id="url" name="url" required>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-          <button type="submit" class="btn btn-primary">Tambah Data</button>
-        </div>
-      </form>
     </div>
   </div>
-</div>
+
+  <!-- Modal Tambah Data -->
+  <div class="modal fade" id="tambahDataModal" tabindex="-1" aria-labelledby="tambahDataModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="tambahDataModalLabel">Tambah Data Berita & Artikel</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="{{ route('beritaArtikels.store') }}" method="POST" enctype="multipart/form-data">
+          @csrf
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="judul">Judul:</label>
+              <input type="text" class="form-control" id="judul" name="judul" required>
+            </div>
+            <div class="form-group">
+              <label for="cover">Cover:</label>
+              <input type="file" class="form-control" id="cover" name="cover" accept="image/*" required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-primary">Tambah Data</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer -->
   <div class="footer">
@@ -333,13 +338,13 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    $(document).ready(function () {
-      $('.sidebar ul li a').on('click', function () {
+    $(document).ready(function() {
+      $('.sidebar ul li a').on('click', function() {
         $(this).parent().toggleClass('show');
       });
     });
   </script>
 
 </body>
-</html>
 
+</html>

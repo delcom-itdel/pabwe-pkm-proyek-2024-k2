@@ -284,8 +284,8 @@
     <div>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-        <li class="breadcrumb-item active"><a href="#">Informasi</a></li>
-        <li class="breadcrumb-item" aria-current="page">Berita & Artikel</li>
+          <li class="breadcrumb-item active"><a href="#">Informasi</a></li>
+          <li class="breadcrumb-item" aria-current="page">Berita & Artikel</li>
 
         </ol>
       </nav>
@@ -330,30 +330,70 @@
                 </tr>
               </thead>
               <tbody>
+                @foreach ($beritaArtikels as $index => $artikel)
                 <tr>
-                  <td>1</td>
-                  <td><img src="path/to/cover1.jpg" alt="Cover Image" style="width: 80px;"></td>
-                  <td>Kata-kata hari ini</td>
+                  <td>{{ $index + 1 }}</td>
                   <td>
-                    <button class="btn btn-warning btn-sm">Edit</button>
-                    <button class="btn btn-danger btn-sm">Hapus</button>
+                    <img src="{{ asset('path/to/cover/' . $artikel->cover) }}" alt="Cover Image" style="width: 80px;">
+                  </td>
+                  <td>{{ $artikel->judul }}</td>
+                  <td>
+
+                    <!-- Edit Button -->
+                    <a href="{{ route('berita.edit', $artikel->id) }}" class="btn btn-warning btn-sm">Edit</a>
+
+                    <!-- Tombol Hapus -->
+                    <form action="{{ route('berita.destroy', $artikel->id) }}" method="POST" style="display:inline;">
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                    </form>
                   </td>
                 </tr>
-                <tr>
-                  <td>2</td>
-                  <td><img src="path/to/cover2.jpg" alt="Cover Image" style="width: 80px;"></td>
-                  <td>Kata-kata hari ini</td>
-                  <td>
-                    <button class="btn btn-warning btn-sm">Edit</button>
-                    <button class="btn btn-danger btn-sm">Hapus</button>
-                  </td>
-                </tr>
+                @endforeach
               </tbody>
+
+
             </table>
           </div>
         </div>
       </div>
     </section>
+  </div>
+
+  <!-- Modal Tambah Data -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Tambah Data Berita & Artikel</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form id="tambahDataForm" action="{{ route('berita.store') }}" method="POST" enctype="multipart/form-data">
+          @csrf
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="judul">Judul</label>
+              <input type="text" class="form-control" id="judul" name="judul" required>
+            </div>
+            <div class="form-group">
+              <label for="cover">Cover</label>
+              <input type="file" class="form-control" id="cover" name="cover" accept="image/*">
+            </div>
+            <div class="form-group">
+              <label for="tindakan">Tindakan</label>
+              <input type="text" class="form-control" id="tindakan" name="tindakan">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 
   <!-- Footer -->
@@ -364,8 +404,8 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    $(document).ready(function () {
-      $('.sidebar ul li a').on('click', function () {
+    $(document).ready(function() {
+      $('.sidebar ul li a').on('click', function() {
         $(this).parent().toggleClass('show');
       });
     });
