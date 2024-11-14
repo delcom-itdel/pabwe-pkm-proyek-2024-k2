@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\InformasiDasarController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfilInformasiDasarController;
 
 //awal
@@ -171,3 +172,8 @@ Route::post('/profil-informasi-dasars', [ProfilInformasiDasarController::class, 
 
 //route informasidasar
 Route::post('/informasi-dasars', [InformasiDasarController::class, 'updateInformasiDasar'])->name('InformasiDasarSave');
+
+Route::get('/platform', [AdminController::class, 'index'])->name('platform');
+Route::post('/platform/store', [AdminController::class, 'storePlatform'])->name('platforms.store');
+Route::get('/platform/edit/{id}', [AdminController::class, 'edit'])->name('platform.edit');
+Route::delete('/platform/destroy/{id}', [AdminController::class, 'destroy'])->name('platform.destroy');
