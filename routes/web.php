@@ -3,8 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\EditorController;
+use App\Http\Controllers\InformasiDasarController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\ProfilInformasiDasarController;
 
@@ -41,12 +40,6 @@ Route::middleware(['auth', 'check.roles:Editor'])->group(function () {
 
 //accessible by Admin and Editor
 Route::middleware(['auth', 'check.roles:Admin,Editor'])->group(function () {
-    // Route for the Beranda Informasi Dasar page
-    Route::get('/informasiDasar', function () {
-        return view('app.editor.informasiDasar');
-    })->name('informasiDasar');
-
-    Route::put('/informasi-dasar', [AdminController::class, 'updateInformasiDasar'])->name('updateInformasiDasar');
 
     // Route for Platform
     Route::get('/platform', function () {
@@ -164,12 +157,17 @@ Route::get('/informasi3', function () {
 })->name('informasi3');
 
 //editor
-
 Route::get('/editor', function () {
     return view('app/editor/editor');
 })->name('editor');
 
+Route::get('/informasi-dasar', function () {
+    return view('app/editor/informasiDasar');
+})->name('informasiDasar');
 
 //route profilinformasidasar
 Route::get('/profil-informasi-dasars', [ProfilInformasiDasarController::class, 'showForm'])->name('profilInformasiDasarsForm');
 Route::post('/profil-informasi-dasars', [ProfilInformasiDasarController::class, 'saveData'])->name('profilInformasiDasarSave');
+
+//route informasidasar
+Route::post('/informasi-dasars', [InformasiDasarController::class, 'updateInformasiDasar'])->name('InformasiDasarSave');

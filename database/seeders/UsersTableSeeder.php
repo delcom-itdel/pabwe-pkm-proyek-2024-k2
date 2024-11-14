@@ -32,6 +32,6 @@ class UsersTableSeeder extends Seeder
         ]);
 
         // Membuat 4 akun editor secara random menggunakan factory
-        User::factory()->count(4)->create();
+        // User::factory()->count(4)->create();
     }
 }
