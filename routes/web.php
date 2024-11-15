@@ -126,9 +126,10 @@ Route::post('delete-sarana', [SaranaController::class, 'delete'])->name('deletes
 
 
 
-Route::get('prestasi', [PrestasiController::class, 'index'])->name('prestasi'); // Menampilkan semua data prestasi
-
-Route::post('prestasi', [PrestasiController::class, 'store'])->name('addprestasi'); // Menyimpan data prestasi baru
+Route::get('prestasi', [PrestasiController::class, 'index'])->name('prestasi');
+Route::post('prestasi', [PrestasiController::class, 'store'])->name('addprestasi');
+Route::post('edit-prestasi', [PrestasiController::class, 'edit'])->name('editprestasi');
+Route::post('delete-sarana', [PrestasiController::class, 'delete'])->name('deleteprestasi');
 
 Route::get('/adminppdb', function () {
     return view('app/admin/adminppdb');

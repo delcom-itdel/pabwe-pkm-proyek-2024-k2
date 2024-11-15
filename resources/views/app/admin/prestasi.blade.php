@@ -26,8 +26,7 @@
                             <label for="search">Search:</label>
                             <input type="text" id="search" class="form-control" placeholder="Search">
                         </div>
-                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#addPrestasiModal">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPrestasiModal">
                             Tambah Data
                         </button>
                     </div>
@@ -57,8 +56,8 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="tahun_perolehan" class="form-label">Tahun Perolehan</label>
-                                            <input type="number" class="form-control" id="tahun_perolehan"
-                                                name="tahun_perolehan" placeholder="Enter year">
+                                            <input type="number" class="form-control" id="tahun_perolehan" name="tahun_perolehan"
+                                                placeholder="Enter year">
                                         </div>
                                         <div class="mb-3">
                                             <label for="deskripsi" class="form-label">Deskripsi</label>
@@ -67,10 +66,76 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Close</button>
-                                        <button class="btn btn-primary" type="submit" id="submit"
-                                            name="submit">Simpan</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button class="btn btn-primary" type="submit" id="submit" name="submit">Simpan</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Edit Modal -->
+                    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editModalLabel">Edit Prestasi</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form action="{{ route('editprestasi') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="modal-body">
+                                        <input type="hidden" name="prestasi_id" value="">
+                                        <div class="mb-3">
+                                            <label for="cover" class="form-label">Cover (Optional)</label>
+                                            <input type="file" class="form-control" id="cover" name="cover">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="judul" class="form-label">Judul</label>
+                                            <input type="text" class="form-control" id="judul" name="judul"
+                                                placeholder="Enter title">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="tahun_perolehan" class="form-label">Tahun Perolehan</label>
+                                            <input type="number" class="form-control" id="tahun_perolehan" name="tahun_perolehan"
+                                                placeholder="Enter year">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="deskripsi" class="form-label">Deskripsi</label>
+                                            <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3"
+                                                placeholder="Enter description"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button class="btn btn-primary" type="submit" id="submit" name="submit">Simpan</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Delete Modal -->
+                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteModalLabel">Hapus Prestasi</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form action="{{ route('deleteprestasi') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="hidden" name="prestasi_id" value="">
+                                    <div class="modal-body">
+                                        Apakah anda yakin menghapus prestasi ini?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button class="btn btn-danger" type="submit" id="submit" name="submit">Delete</button>
                                     </div>
                                 </form>
                             </div>
@@ -99,8 +164,8 @@
                                     <td>{{ $prestasi['tahun_perolehan'] }}</td>
                                     <td>{{ $prestasi['deskripsi'] }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-warning btn-sm">Edit</button>
-                                        <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editModal" data-id="{{ $prestasi['id'] }}">Edit</button>
+                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-id="{{ $prestasi['id'] }}" data-target="#deleteModal">Delete</button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -111,4 +176,24 @@
         </div>
     </section>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Edit Button
+        document.querySelectorAll('[data-target="#editModal"]').forEach(button => {
+            button.addEventListener('click', function() {
+                const prestasiId = this.getAttribute('data-id');
+                document.querySelector('#editModal input[name="prestasi_id"]').value = prestasiId;
+            });
+        });
+
+        // Delete Button
+        document.querySelectorAll('[data-target="#deleteModal"]').forEach(button => {
+            button.addEventListener('click', function() {
+                const prestasiId = this.getAttribute('data-id');
+                document.querySelector('#deleteModal input[name="prestasi_id"]').value = prestasiId;
+            });
+        });
+    });
+</script>
 @endsection

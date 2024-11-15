@@ -6,6 +6,7 @@ use App\Models\Prestasi;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PrestasiController extends Controller
 {
@@ -52,11 +53,57 @@ class PrestasiController extends Controller
         ]);
 
         // Cek jika data prestasi berhasil disimpan
+        return $prestasi
+            ? redirect()->route('prestasi')->with('success', 'Data prestasi berhasil ditambahkan.')
+            : redirect()->route('prestasi')->with('error', 'Data prestasi tidak berhasil ditambahkan.');
+    }
+
+    /**
+     * Mengedit data prestasi yang ada
+     *
+     * @param  Request $request
+     * @return RedirectResponse
+     */
+    public function edit(Request $request): RedirectResponse
+    {
+        $prestasi = Prestasi::find($request->prestasi_id);
+
         if ($prestasi) {
-            return redirect()->route('prestasi')->with('success', 'Data prestasi berhasil ditambahkan.');
+            // Periksa apakah ada file gambar baru yang diunggah
+            if ($request->hasFile('cover')) {
+                $fileName = time() . '.' . $request->cover->getClientOriginalExtension();
+                $request->file('cover')->move(public_path('prestasi_img'), $fileName);
+                $prestasi->cover = $fileName;
+            }
+
+            // Update field lainnya
+            $prestasi->judul = $request->judul;
+            $prestasi->tahun_perolehan = $request->tahun_perolehan;
+            $prestasi->deskripsi = $request->deskripsi;
+
+            // Simpan perubahan
+            return $prestasi->save()
+                ? redirect()->route('prestasi')->with('success', 'Data berhasil diubah.')
+                : redirect()->route('prestasi')->with('error', 'Gagal mengubah data.');
         }
 
-        // Redirect dengan pesan error jika gagal menambah data
-        return redirect()->route('prestasi')->with('error', 'Data prestasi tidak berhasil ditambahkan.');
+        return redirect()->route('prestasi')->with('error', 'Data tidak ditemukan.');
+    }
+
+    /**
+     * Menghapus data prestasi
+     *
+     * @param  Request $request
+     * @return RedirectResponse
+     */
+    public function delete(Request $request): RedirectResponse
+    {
+        $prestasi = Prestasi::find($request->prestasi_id);
+
+        if ($prestasi && $prestasi->delete()) {
+            return redirect()->route('prestasi')->with('success', 'Data berhasil dihapus.');
+        }
+
+        return redirect()->route('prestasi')->with('error', 'Gagal menghapus data.');
     }
 }
