@@ -6,6 +6,7 @@ use App\Models\Sarana;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SaranaController extends Controller
 {
@@ -58,5 +59,50 @@ class SaranaController extends Controller
 
         // Redirect with error message if creation failed
         return redirect()->route('sarana')->with('error', 'Data tidak berhasil ditambahkan.');
+    }
+    public function edit(Request $request)
+    {
+        $item = DB::table('sarana')->where('id', $request->sarana_id)->first();
+
+        if ($item) {
+            if ($request->hasFile('cover')) {
+                $filename = time() . '.' . $request->cover->getClientOriginalExtension();
+                $request->file('')->move(public_path('sarana_img'), $filename);
+
+                $update = DB::table('sarana')->where('id', $request->sarana_id)->update([
+                    'image' => $filename,
+                    'name' => $request->nama,
+                    'description' => $request->deskripsi
+                ]);
+            } else {
+                $update = DB::table('sarana')->where('id', $request->sarana_id)->update([
+                    'name' => $request->nama,
+                    'description' => $request->deskripsi
+                ]);
+            }
+
+            if ($update) {
+                return redirect(url('sarana'))->with('success', 'Berhasil mengubah data.');
+            }
+
+            return redirect(url('sarana'))->with('error', 'Gagal mengubah data.');
+        }
+    }
+
+    public function delete(Request $request)
+    {
+        
+        $item = DB::table('sarana')->where('id', $request->sarana_id)->first();
+
+        if ($item) {
+            $delete = DB::table('sarana')->where('id',  $request->sarana_id)->delete();
+
+
+            if ($delete) {
+                return redirect(url('sarana'))->with('success', 'Berhasil mengahpus data.');
+            }
+
+            return redirect(url('sarana'))->with('error', 'Gagal menghapus data.');
+        }
     }
 }

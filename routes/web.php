@@ -119,7 +119,12 @@ Route::get('/alumni2', function () {
 
 Route::get('sarana', [SaranaController::class, 'index'])->name('sarana');
 
-Route::post('sarana', [SaranaController::class, 'store'])->name('addsarana');
+Route::post('add-sarana', [SaranaController::class, 'store'])->name('addsarana');
+
+Route::post('edit-sarana', [SaranaController::class, 'edit'])->name('editsarana');
+Route::post('delete-sarana', [SaranaController::class, 'delete'])->name('deletesarana');
+
+
 
 Route::get('prestasi', [PrestasiController::class, 'index'])->name('prestasi'); // Menampilkan semua data prestasi
 
