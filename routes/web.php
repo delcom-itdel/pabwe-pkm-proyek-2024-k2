@@ -118,14 +118,12 @@ Route::get('/alumni2', function () {
 })->name('alumni2');
 
 Route::get('sarana', [SaranaController::class, 'index'])->name('sarana');
-
 Route::post('add-sarana', [SaranaController::class, 'store'])->name('addsarana');
-
 Route::post('edit-sarana', [SaranaController::class, 'edit'])->name('editsarana');
-Route::post('delete-sarana', [SaranaController::class, 'delete'])->name('deletesarana');
+Route::delete('delete-sarana', [SaranaController::class, 'delete'])->name('deletesarana');
 
 
-
+//Prestasi
 Route::get('prestasi', [PrestasiController::class, 'index'])->name('prestasi');
 Route::post('prestasi', [PrestasiController::class, 'store'])->name('addprestasi');
 Route::post('edit-prestasi', [PrestasiController::class, 'edit'])->name('editprestasi');
