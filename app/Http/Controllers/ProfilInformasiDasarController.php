@@ -2,35 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProfilInformasiDasar;
+use App\Models\ProfilInformasiDasar; // Model yang berhubungan dengan data profil dasar
 use Illuminate\Http\Request;
 
 class ProfilInformasiDasarController extends Controller
 {
-    public function showForm()
+    public function edit()
     {
-        // Ambil data pertama dari tabel profil_informasi_dasars, jika tidak ada, buat objek kosong
-        $data = ProfilInformasiDasar::firstOrNew(['id' => 1]);
+        $data = ProfilInformasiDasar::first(); // Mengambil data pertama
 
-        // Kirim data ke view form
-        return view('profil_informasi_dasar_form', compact('data'));
+        return view('app.admin.informasi3', compact('data')); // Kirim data ke view
     }
 
-    public function saveData(Request $request)
+    public function save(Request $request)
     {
-        // Validasi data dari request
-        $validated = $request->validate([
-            'sejarah' => 'nullable|string',
-            'visi' => 'nullable|string',
-            'misi' => 'nullable|string',
-            'struktur_organisasi' => 'nullable|string',
-            'program_sekolah' => 'nullable|string',
+        $validatedData = $request->validate([
+            'sejarah' => 'required|string',
+            'visi' => 'required|string',
+            'misi' => 'required|string',
+            'struktur_organisasi' => 'required|string',
+            'program_sekolah' => 'required|string',
         ]);
 
-        // Simpan data, update jika sudah ada atau buat baru jika belum
-        ProfilInformasiDasar::updateOrCreate(['id' => 1], $validated);
+        // Simpan atau update data
+        ProfilInformasiDasar::updateOrCreate([], $validatedData);
 
-        // Kembali ke form dengan pesan sukses
-        return redirect()->back()->with('success', 'Data berhasil disimpan.');
+        return redirect()->route('profilInformasiDasar.edit')->with('success', 'Informasi profil berhasil disimpan.');
     }
 }

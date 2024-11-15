@@ -168,8 +168,9 @@ Route::get('/informasi-dasar', function () {
 })->name('informasiDasar');
 
 //route profilinformasidasar
-Route::get('/profil-informasi-dasars', [ProfilInformasiDasarController::class, 'showForm'])->name('profilInformasiDasarsForm');
-Route::post('/profil-informasi-dasars', [ProfilInformasiDasarController::class, 'saveData'])->name('profilInformasiDasarSave');
+
+Route::get('/admin/profil-informasi-dasar', [ProfilInformasiDasarController::class, 'edit'])->name('profilInformasiDasar.edit');
+Route::post('/admin/profil-informasi-dasar', [ProfilInformasiDasarController::class, 'save'])->name('profilInformasiDasarSave');
 
 //route informasidasar
 Route::post('/informasi-dasars', [InformasiDasarController::class, 'updateInformasiDasar'])->name('InformasiDasarSave');

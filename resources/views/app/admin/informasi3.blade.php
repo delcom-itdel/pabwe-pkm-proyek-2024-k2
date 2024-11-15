@@ -189,7 +189,6 @@
         style="max-width: 30px;">SIS</h2>
     <ul class="nav flex-column">
       <li class="nav-item"><a href="{{ route('admin') }}" class="nav-link active">Dashboard</a></li>
-      <li class="nav-header">WEB SEKOLAH</li>
 
       <!-- Collapsible for Beranda -->
       <li class="nav-item">
@@ -216,7 +215,7 @@
         </div>
       </li>
 
-      <li class="nav-item"><a href="{{ url('sarana') }}" class="nav-link">Sarana & Prasarana</a></li>
+      <li class="nav-item"><a href="{{ route('sarana') }}" class="nav-link">Sarana & Prasarana</a></li>
 
       <!-- Collapsible for Informasi -->
       <li class="nav-item">
@@ -234,9 +233,7 @@
       </li>
 
       <li class="nav-item"><a href="{{ route('platform') }}" class="nav-link">Platform</a></li>
-      <li class="nav-header">ADMIN</li>
       <li class="nav-item"><a href="{{ route('kelola') }}" class="nav-link">Kelola Pengguna</a></li>
-      <li class="nav-header">LOGS</li>
       <li class="nav-item"><a href="{{ route('log') }}" class="nav-link">Catatan perubahan</a></li>
 
       <form action="{{ route('logout') }}" method="POST" class="logout-form mt-3">
@@ -262,42 +259,46 @@
   </div>
 
   <!-- Konten Utama -->
-  <div class="content container-fluid">
+  @extends('layouts.app')
 
+@section('content')
+<!-- Konten Utama -->
+<div class="content container-fluid">
     <h3 class="m-3">Profil : Informasi Dasar</h3>
     <div class="card p-2 m-0">
-      <form action="{{ route('profilInformasiDasarSave') }}" method="POST">
-        @csrf
-        <div class="mb-3">
-          <label for="sejarah">Sejarah</label>
-          <textarea name="sejarah" class="form-control" id="sejarah">{{ $data->sejarah ?? '' }}</textarea>
-        </div>
-        <div class="mb-3">
-          <label for="visi">Visi</label>
-          <textarea name="visi" class="form-control" id="visi">{{ $data->visi ?? '' }}</textarea>
-        </div>
-        <div class="mb-3">
-          <label for="misi">Misi</label>
-          <textarea name="misi" class="form-control" id="misi">{{ $data->misi ?? '' }}</textarea>
-        </div>
-        <div class="mb-3">
-          <label for="struktur_organisasi">Struktur Organisasi</label>
-          <textarea name="struktur_organisasi" class="form-control"
-            id="struktur_organisasi">{{ $data->struktur_organisasi ?? '' }}</textarea>
-        </div>
-        <div class="mb-3">
-          <label for="program_sekolah">Program Sekolah</label>
-          <textarea name="program_sekolah" class="form-control"
-            id="program_sekolah">{{ $data->program_sekolah ?? '' }}</textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Simpan</button>
-      </form>
-
+        <form action="{{ route('profilInformasiDasarSave') }}" method="POST">
+            @csrf
+            <div class="mb-3">
+                <label for="sejarah">Sejarah</label>
+                <textarea name="sejarah" class="form-control" id="sejarah">{{ $data->sejarah ?? '' }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="visi">Visi</label>
+                <textarea name="visi" class="form-control" id="visi">{{ $data->visi ?? '' }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="misi">Misi</label>
+                <textarea name="misi" class="form-control" id="misi">{{ $data->misi ?? '' }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="struktur_organisasi">Struktur Organisasi</label>
+                <textarea name="struktur_organisasi" class="form-control"
+                    id="struktur_organisasi">{{ $data->struktur_organisasi ?? '' }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="program_sekolah">Program Sekolah</label>
+                <textarea name="program_sekolah" class="form-control"
+                    id="program_sekolah">{{ $data->program_sekolah ?? '' }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+        </form>
     </div>
 
     @if (session('success'))
     <div class="alert alert-success mt-3">{{ session('success') }}</div>
-  @endif
+    @endif
+</div>
+@endsection
 
 
 
