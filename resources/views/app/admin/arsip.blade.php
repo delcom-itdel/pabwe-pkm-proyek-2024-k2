@@ -176,7 +176,6 @@
         style="max-width: 30px;">SIS</h2>
     <ul class="nav flex-column">
       <li class="nav-item"><a href="{{ route('admin') }}" class="nav-link active">Dashboard</a></li>
-      <li class="nav-header">WEB SEKOLAH</li>
 
       <!-- Collapsible for Beranda -->
       <li class="nav-item">
@@ -203,7 +202,7 @@
         </div>
       </li>
 
-      <li class="nav-item"><a href="{{ url('sarana') }}" class="nav-link">Sarana & Prasarana</a></li>
+      <li class="nav-item"><a href="{{ route('sarana') }}" class="nav-link">Sarana & Prasarana</a></li>
 
       <!-- Collapsible for Informasi -->
       <li class="nav-item">
@@ -221,9 +220,7 @@
       </li>
 
       <li class="nav-item"><a href="{{ route('platform') }}" class="nav-link">Platform</a></li>
-      <li class="nav-header">ADMIN</li>
       <li class="nav-item"><a href="{{ route('kelola') }}" class="nav-link">Kelola Pengguna</a></li>
-      <li class="nav-header">LOGS</li>
       <li class="nav-item"><a href="{{ route('log') }}" class="nav-link">Catatan perubahan</a></li>
 
       <form action="{{ route('logout') }}" method="POST" class="logout-form mt-3">

@@ -173,27 +173,12 @@
 
   <!-- Sidebar -->
   <div class="sidebar">
-    <h2><img src="{{ asset('assets/img/logo.png') }}" alt="School Logo" class="img-fluid mb-3"
-        style="max-width: 30px;">SIS</h2>
+    <h2><img src="{{ asset('assets/img/logo.png') }}" alt="School Logo" class="img-fluid mb-3" style="max-width: 30px;">SIS</h2>
     <ul class="nav flex-column">
       <li class="nav-item"><a href="{{ route('admin') }}" class="nav-link active">Dashboard</a></li>
-      <li class="nav-header">WEB SEKOLAH</li>
-
-      <!-- Collapsible for Beranda -->
-      <li class="nav-item">
-        <a href="#berandaCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false"
-          aria-controls="berandaCollapse">
-          Beranda <span class="caret">&#x25BC;</span>
-        </a>
-        <div id="berandaCollapse" class="collapse pl-3">
-          <a class="nav-link" href="{{ route('informasi2') }}">Informasi Dasar</a>
-        </div>
-      </li>
-
       <!-- Collapsible for Profil -->
       <li class="nav-item">
-        <a href="#profilCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false"
-          aria-controls="profilCollapse">
+        <a href="#profilCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false" aria-controls="profilCollapse">
           Profil <span class="caret">&#x25BC;</span>
         </a>
         <div id="profilCollapse" class="collapse pl-3">
@@ -203,13 +188,10 @@
           <a class="nav-link" href="{{ route('alumni2') }}">Alumni</a>
         </div>
       </li>
-
-      <li class="nav-item"><a href="{{ url('sarana') }}" class="nav-link">Sarana & Prasarana</a></li>
-
+      <li class="nav-item"><a href="{{ route('sarana') }}" class="nav-link">Sarana & Prasarana</a></li>
       <!-- Collapsible for Informasi -->
       <li class="nav-item">
-        <a href="#informasiCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false"
-          aria-controls="informasiCollapse">
+        <a href="#informasiCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false" aria-controls="informasiCollapse">
           Informasi <span class="caret">&#x25BC;</span>
         </a>
         <div id="informasiCollapse" class="collapse pl-3">
@@ -220,13 +202,9 @@
           <a class="nav-link" href="{{ route('hubungi') }}">Hubungi Kami</a>
         </div>
       </li>
-
       <li class="nav-item"><a href="{{ route('platform') }}" class="nav-link">Platform</a></li>
-      <li class="nav-header">ADMIN</li>
       <li class="nav-item"><a href="{{ route('kelola') }}" class="nav-link">Kelola Pengguna</a></li>
-      <li class="nav-header">LOGS</li>
       <li class="nav-item"><a href="{{ route('log') }}" class="nav-link">Catatan perubahan</a></li>
-      
       <form action="{{ route('logout') }}" method="POST" class="logout-form mt-3">
         @csrf
         <button type="submit" class="btn btn-danger btn-block">Logout</button>
