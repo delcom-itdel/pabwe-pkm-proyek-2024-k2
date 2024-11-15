@@ -3,8 +3,8 @@
 @section('title', 'Kelola Pengguna - SMAN 1 Balige')
 
 @section('content')
-  <div class="content">
-    <div class="container">
+<div class="content">
+  <div class="container">
     <div class="card">
       <div class="card-header d-flex justify-content-between align-items-center">
         <span>Kelola Pengguna</span>
@@ -55,5 +55,5 @@
       </div>
     </div>
   </div>
-  </div>
+</div>
 @endsection

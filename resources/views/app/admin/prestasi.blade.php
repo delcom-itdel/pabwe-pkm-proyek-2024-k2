@@ -26,7 +26,8 @@
                             <label for="search">Search:</label>
                             <input type="text" id="search" class="form-control" placeholder="Search">
                         </div>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPrestasiModal">
+                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#addPrestasiModal">
                             Tambah Data
                         </button>
                     </div>
@@ -56,8 +57,8 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="tahun_perolehan" class="form-label">Tahun Perolehan</label>
-                                            <input type="number" class="form-control" id="tahun_perolehan" name="tahun_perolehan"
-                                                placeholder="Enter year">
+                                            <input type="number" class="form-control" id="tahun_perolehan"
+                                                name="tahun_perolehan" placeholder="Enter year">
                                         </div>
                                         <div class="mb-3">
                                             <label for="deskripsi" class="form-label">Deskripsi</label>
@@ -66,8 +67,10 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button class="btn btn-primary" type="submit" id="submit" name="submit">Simpan</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                        <button class="btn btn-primary" type="submit" id="submit"
+                                            name="submit">Simpan</button>
                                     </div>
                                 </form>
                             </div>

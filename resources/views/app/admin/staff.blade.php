@@ -59,7 +59,7 @@
 }
 </style>
 
-<div class="container-fluid">
+<div class="content container-fluid">
   <h3 class="my-3">Profil: Staf Guru & Karyawan</h3>
 
   <div class="card w-100">

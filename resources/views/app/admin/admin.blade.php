@@ -3,6 +3,7 @@
 @section('title', 'Admin Dashboard - SMAN 1 Balige')
 
 @section('content')
+<div class="content container-fluid">
   <div class="row mb-4">
     <div class="col-md-6">
       <div class="card">
@@ -52,4 +53,5 @@
       </div>
     </div>
   </div>
+</div>
 @endsection

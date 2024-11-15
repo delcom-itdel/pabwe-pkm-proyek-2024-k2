@@ -16,14 +16,14 @@
                     Sarana & Prasarana
                 </div>
                 @if (session()->has('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
                 @endif
                 @if (session()->has('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
                 @endif
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -37,8 +37,8 @@
                     </div>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="addModal" tabindex="-1" role="dialog"
-                        aria-labelledby="addModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel"
+                        aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -77,8 +77,8 @@
                     </div>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="editModal" tabindex="-1" role="dialog"
-                        aria-labelledby="editModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+                        aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -160,23 +160,21 @@
                         <tbody id="prestasiTable">
                             <?php $i = 1 ?>
                             @foreach ($data['sarana'] as $sarana)
-                            <tr>
-                                <td>{{ $i++ }}</td>
-                                <td> <img src="{{ asset('sarana_img/' . $sarana['image']) }}" height="120rem"></td>
-                                <td>{{ $sarana['name'] }}</td>
-                                <td>{{ $sarana['description'] }}</td>
-                                <td>
-                                    <!-- Tombol Edit -->
-                                    <button type="button"
-                                        class="btn btn-warning btn-sm"
-                                        data-toggle="modal"
-                                        data-target="#editModal"
-                                        data-id="{{ $sarana['id'] }}">
-                                        Edit
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-id="{{ $sarana['id'] }}" data-target="#deleteModal">Delete</button>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>{{ $i++ }}</td>
+                                    <td> <img src="{{ asset('sarana_img/' . $sarana['image']) }}" height="120rem"></td>
+                                    <td>{{ $sarana['name'] }}</td>
+                                    <td>{{ $sarana['description'] }}</td>
+                                    <td>
+                                        <!-- Tombol Edit -->
+                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
+                                            data-target="#editModal" data-id="{{ $sarana['id'] }}">
+                                            Edit
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                            data-id="{{ $sarana['id'] }}" data-target="#deleteModal">Delete</button>
+                                    </td>
+                                </tr>
                             @endforeach
 
                         </tbody>
@@ -191,7 +189,7 @@
     document.addEventListener('DOMContentLoaded', () => {
         // Tombol Edit
         document.querySelectorAll('[data-target="#editModal"]').forEach(button => {
-            button.addEventListener('click', function() {
+            button.addEventListener('click', function () {
                 const saranaId = this.getAttribute('data-id');
 
                 // Masukkan ID ke dalam modal (contoh untuk input hidden)
@@ -201,7 +199,7 @@
 
         // Tombol Delete
         document.querySelectorAll('[data-target="#deleteModal"]').forEach(button => {
-            button.addEventListener('click', function() {
+            button.addEventListener('click', function () {
                 const saranaId = this.getAttribute('data-id');
 
                 // Masukkan ID ke dalam modal (contoh untuk konfirmasi)

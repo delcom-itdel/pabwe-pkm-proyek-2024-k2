@@ -245,10 +245,7 @@
     </div>
   </div>
 
-  <!-- Konten Utama -->
-  <div class="content container-fluid">
-    @yield('content')
-  </div>
+  @yield('content')
 
   <!-- Footer -->
   <div class="footer">
@@ -259,8 +256,8 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    $(document).ready(function() {
-      $('.sidebar ul li a').on('click', function() {
+    $(document).ready(function () {
+      $('.sidebar ul li a').on('click', function () {
         $(this).parent().toggleClass('show');
       });
     });
