@@ -188,7 +188,6 @@
         style="max-width: 30px;">SIS</h2>
     <ul class="nav flex-column">
       <li class="nav-item"><a href="{{ route('editor') }}" class="nav-link active">Dashboard</a></li>
-      <li class="nav-header">WEB SEKOLAH</li>
 
       <!-- Collapsible for Beranda -->
       <li class="nav-item">
@@ -201,17 +200,6 @@
         </div>
       </li>
 
-      <!-- Collapsible for Beranda -->
-      <li class="nav-item">
-        <a href="#berandaCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false"
-          aria-controls="berandaCollapse">
-          Beranda <span class="caret">&#x25BC;</span>
-        </a>
-        <div id="berandaCollapse" class="collapse pl-3">
-          <a class="nav-link" href="{{ route('informasi2') }}">Informasi Dasar</a>
-        </div>
-      </li>
-
       <!-- Collapsible for Profil -->
       <li class="nav-item">
         <a href="#profilCollapse" class="nav-link" data-toggle="collapse" aria-expanded="false"
@@ -219,14 +207,10 @@
           Profil <span class="caret">&#x25BC;</span>
         </a>
         <div id="profilCollapse" class="collapse pl-3">
-          <a class="nav-link" href="{{ route('informasi3') }}">Informasi Dasar</a>
-          <a class="nav-link" href="{{ route('staff') }}">Staff Guru & Karyawan</a>
-          <a class="nav-link" href="{{ route('prestasi') }}">Prestasi</a>
-          <a class="nav-link" href="{{ route('alumni2') }}">Alumni</a>
+          <a class="nav-link" href="{{ route('profilInformasiDasar') }}">Informasi Dasar</a>
         </div>
       </li>
 
-      <li class="nav-item"><a href="{{ url('sarana') }}" class="nav-link">Sarana & Prasarana</a></li>
 
       <!-- Collapsible for Informasi -->
       <li class="nav-item">
@@ -235,18 +219,11 @@
           Informasi <span class="caret">&#x25BC;</span>
         </a>
         <div id="informasiCollapse" class="collapse pl-3">
-          <a class="nav-link" href="{{ route('adminppdb') }}">PPDB</a>
-          <a class="nav-link" href="{{ route('berita') }}">Berita & Artikel</a>
-          <a class="nav-link" href="{{ route('galeri') }}">Galeri</a>
-          <a class="nav-link" href="{{ route('arsip') }}">Arsip</a>
-          <a class="nav-link" href="{{ route('hubungi') }}">Hubungi Kami</a>
+          <a class="nav-link" href="{{ route('informasiPbdb') }}">PPDB</a>
+          <a class="nav-link" href="{{ route('informasiArsip') }}">Arsip</a>
+          <a class="nav-link" href="{{ route('informasiHubungiKami') }}">Hubungi Kami</a>
         </div>
       </li>
-
-      <li class="nav-item"><a href="{{ route('platform') }}" class="nav-link">Platform</a></li>
-
-      <li class="nav-header">LOGS</li>
-      <li class="nav-item"><a href="{{ route('log') }}" class="nav-link">Catatan perubahan</a></li>
 
 
       <form action="{{ route('logout') }}" method="POST" class="logout-form mt-3">
