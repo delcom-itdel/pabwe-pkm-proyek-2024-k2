@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\InformasiDasarController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\SaranaController;
+use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BeritaArtikelController;
 use App\Http\Controllers\ProfilInformasiDasarController;
@@ -87,6 +88,9 @@ Route::get('/ppdb', [ProfilController::class, 'ppdb'])->name('ppdb');
 // Rute untuk Sarana Prasarana
 Route::get('/saranaPrasarana', [ProfilController::class, 'saranaPrasarana'])->name('saranaPrasarana');
 
+// Rute untuk Prestasi
+Route::get('/prestasi', [ProfilController::class, 'prestasi'])->name('prestasi');
+
 // Rute untuk Berita & Artikel
 Route::get('/berita-artikel', [ProfilController::class, 'beritaArtikel'])->name('beritaArtikel');
 
@@ -116,6 +120,10 @@ Route::get('/alumni2', function () {
 Route::get('sarana', [SaranaController::class, 'index'])->name('sarana');
 
 Route::post('sarana', [SaranaController::class, 'store'])->name('addsarana');
+
+Route::get('prestasi', [PrestasiController::class, 'index'])->name('prestasi'); // Menampilkan semua data prestasi
+
+Route::post('prestasi', [PrestasiController::class, 'store'])->name('addprestasi'); // Menyimpan data prestasi baru
 
 Route::get('/adminppdb', function () {
     return view('app/admin/adminppdb');
