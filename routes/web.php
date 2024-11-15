@@ -10,6 +10,7 @@ use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BeritaArtikelController;
 use App\Http\Controllers\ProfilInformasiDasarController;
+use App\Http\Controllers\GaleriController;
 
 //awal
 Route::get('/', function () {
@@ -208,4 +209,20 @@ Route::middleware(['auth', 'check.roles:Admin,Editor'])->group(function () {
     Route::put('/berita/{beritaArtikel}', [BeritaArtikelController::class, 'update'])->name('berita.update');
     Route::delete('/berita/{beritaArtikel}', [BeritaArtikelController::class, 'destroy'])->name('berita.destroy');
     Route::get('/berita/{beritaArtikel}', [BeritaArtikelController::class, 'show'])->name('berita.show');
+});
+
+
+//rute untuk halaman galeri 
+Route::prefix('galeri')->group(function () {
+    // Route untuk menampilkan halaman galeri
+    Route::get('/', [GaleriController::class, 'index'])->name('galeri');
+
+    // Route untuk menambahkan data galeri
+    Route::post('/store', [GaleriController::class, 'store'])->name('addgaleri');
+
+    // Route untuk mengedit data galeri
+    Route::post('/edit', [GaleriController::class, 'edit'])->name('editgaleri');
+
+    // Route untuk menghapus data galeri
+    Route::delete('/delete', [GaleriController::class, 'delete'])->name('deletegaleri');
 });
