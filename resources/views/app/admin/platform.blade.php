@@ -249,43 +249,39 @@
       <span>User Admin</span>
     </div>
   </div>
+
   <!-- Konten Utama -->
   <div class="content">
     <div class="card">
       <div class="card-header">
-        Berita & Artikel
+        Platform
       </div>
       <div class="card-body">
         <div class="mb-3 d-flex justify-content-between align-items-center">
-          <!-- Tambah Data Button -->
           <button class="btn btn-primary" data-toggle="modal" data-target="#tambahDataModal">Tambah Data</button>
-
-          <!-- Search Input -->
           <input type="text" class="form-control w-25" placeholder="Search">
         </div>
-
-        <!-- Table -->
         <table class="table table-bordered table-striped">
           <thead>
             <tr>
               <th>No</th>
-              <th>Cover</th>
-              <th>Judul</th>
+              <th>Nama</th>
+              <th>URL</th>
               <th>Tindakan</th>
             </tr>
           </thead>
           <tbody>
-            @foreach ($beritaArtikel as $index => $artikel)
+            @foreach ($platforms as $index => $platform)
             <tr>
               <td>{{ $index + 1 }}</td>
-              <td><img src="{{ asset('storage/'.$artikel->cover) }}" alt="Cover Image" style="width: 80px;"></td>
-              <td>{{ $artikel->judul }}</td>
+              <td>{{ $platform->name }}</td>
+              <td>{{ $platform->url }}</td>
               <td>
-                <!-- Edit Button -->
-                <a class="btn btn-warning btn-sm" href="{{ route('beritaArtikels.edit', $artikel->id) }}">Edit</a>
+                <!-- Tombol Edit -->
+                <a class="btn btn-primary btn-sm">Edit</a>
 
-                <!-- Delete Button -->
-                <form action="{{ route('beritaArtikels.destroy', $artikel->id) }}" method="POST" style="display:inline;">
+                <!-- Tombol Hapus -->
+                <form action="{{ route('platform.destroy', ['id' => $platform->id]) }}" method="PUT" style="display:inline;">
                   @csrf
                   @method('DELETE')
                   <button type="submit" class="btn btn-danger btn-sm">Delete</button>
@@ -304,21 +300,21 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="tambahDataModalLabel">Tambah Data Berita & Artikel</h5>
+          <h5 class="modal-title" id="tambahDataModalLabel">Tambah Data Platform</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="{{ route('beritaArtikels.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ url('/platform/store') }}" method="POST"> <!-- Update action URL -->
           @csrf
           <div class="modal-body">
             <div class="form-group">
-              <label for="judul">Judul:</label>
-              <input type="text" class="form-control" id="judul" name="judul" required>
+              <label for="name">Nama:</label>
+              <input type="text" class="form-control" id="name" name="name" required>
             </div>
             <div class="form-group">
-              <label for="cover">Cover:</label>
-              <input type="file" class="form-control" id="cover" name="cover" accept="image/*" required>
+              <label for="url">URL:</label>
+              <input type="url" class="form-control" id="url" name="url" required>
             </div>
           </div>
           <div class="modal-footer">
