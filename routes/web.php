@@ -186,10 +186,11 @@ Route::post('/editor/profil-informasi-dasar', [ProfilInformasiDasarController::c
 //route informasidasar
 Route::post('/informasi-dasars', [InformasiDasarController::class, 'updateInformasiDasar'])->name('InformasiDasarSave');
 
+//route platform
 Route::get('/platform', [AdminController::class, 'index'])->name('platform');
 Route::post('/platform/store', [AdminController::class, 'storePlatform'])->name('platforms.store');
-Route::get('/platform/edit/{id}', [AdminController::class, 'edit'])->name('platform.edit');
 Route::delete('/platform/destroy/{id}', [AdminController::class, 'destroy'])->name('platform.destroy');
+Route::put('/platform/update/{id}', [AdminController::class, 'update'])->name('platform.update');
 
 // Rute untuk halaman Berita & Artikel
 Route::middleware(['auth', 'check.roles:Admin,Editor'])->group(function () {
