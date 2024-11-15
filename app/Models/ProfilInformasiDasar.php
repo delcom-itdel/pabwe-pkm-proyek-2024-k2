@@ -8,7 +8,7 @@ class ProfilInformasiDasar extends Model
 {
   use HasFactory;
 
-  protected $table = 'profil_informasi_dasar';
+  protected $table = 'profil_informasi_dasars';
 
   protected $fillable = [
     'sejarah',
