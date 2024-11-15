@@ -3,7 +3,6 @@
 @section('title', 'Profil Informasi - SMAN 1 Balige')
 
 @section('content')
-<!-- Konten Utama -->
 <div class="content container-fluid">
   <h3 class="m-3">Profil : Informasi Dasar</h3>
   <div class="card p-2 m-0">
@@ -23,13 +22,11 @@
       </div>
       <div class="mb-3">
         <label for="struktur_organisasi">Struktur Organisasi</label>
-        <textarea name="struktur_organisasi" class="form-control"
-          id="struktur_organisasi">{{ $data->struktur_organisasi ?? '' }}</textarea>
+        <textarea name="struktur_organisasi" class="form-control" id="struktur_organisasi">{{ $data->struktur_organisasi ?? '' }}</textarea>
       </div>
       <div class="mb-3">
         <label for="program_sekolah">Program Sekolah</label>
-        <textarea name="program_sekolah" class="form-control"
-          id="program_sekolah">{{ $data->program_sekolah ?? '' }}</textarea>
+        <textarea name="program_sekolah" class="form-control" id="program_sekolah">{{ $data->program_sekolah ?? '' }}</textarea>
       </div>
       <button type="submit" class="btn btn-primary">Simpan</button>
     </form>
