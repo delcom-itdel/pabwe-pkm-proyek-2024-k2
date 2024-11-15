@@ -29,4 +29,26 @@ class ProfilInformasiDasarController extends Controller
 
         return redirect()->route('profilInformasiDasar.edit')->with('success', 'Informasi profil berhasil disimpan.');
     }
+
+
+    public function edit1()
+    {
+        $data = ProfilInformasiDasar::first();
+        return view('app.editor.profilInformasiDasar', compact('data'));
+    }
+
+    public function save1(Request $request)
+    {
+        $validatedData = $request->validate([
+            'sejarah' => 'required|string',
+            'visi' => 'required|string',
+            'misi' => 'required|string',
+            'struktur_organisasi' => 'required|string',
+            'program_sekolah' => 'required|string',
+        ]);
+
+        ProfilInformasiDasar::updateOrCreate([], $validatedData);
+
+        return redirect()->route('editor.profilInformasiDasar.edit')->with('success', 'Informasi profil berhasil disimpan.');
+    }
 }

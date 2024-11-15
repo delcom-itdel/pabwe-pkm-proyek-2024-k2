@@ -171,6 +171,9 @@ Route::get('/informasi-dasar', function () {
 
 Route::get('/admin/profil-informasi-dasar', [ProfilInformasiDasarController::class, 'edit'])->name('profilInformasiDasar.edit');
 Route::post('/admin/profil-informasi-dasar', [ProfilInformasiDasarController::class, 'save'])->name('profilInformasiDasarSave');
+Route::get('/editor/profil-informasi-dasar', [ProfilInformasiDasarController::class, 'edit'])->name('editor.profilInformasiDasar.edit');
+Route::post('/editor/profil-informasi-dasar', [ProfilInformasiDasarController::class, 'save'])->name('profilInformasiDasarSave1');
+
 
 //route informasidasar
 Route::post('/informasi-dasars', [InformasiDasarController::class, 'updateInformasiDasar'])->name('InformasiDasarSave');
