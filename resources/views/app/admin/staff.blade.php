@@ -3,149 +3,212 @@
 @section('title', 'Staff - SMAN 1 Balige')
 
 @section('content')
-<!-- Link ke Bootstrap CSS dan DataTables CSS dari CDN -->
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
-
-<style>
-/* Mengubah warna latar belakang header dan batas tabel */
-.table-custom thead th {
-  background-color: #f0f4ff;
-  color: #000;
-}
-
-/* Menambahkan border putih untuk setiap sel */
-.table-custom th,
-.table-custom td {
-  border: 2px solid #fff !important;
-}
-
-.table-custom tbody td {
-  background-color: #f0f4ff;
-}
-
-/* Styling tambahan untuk modal */
-.modal-content {
-  padding: 20px;
-}
-
-.modal-header {
-  border-bottom: 1px solid #dee2e6;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.modal-footer {
-  border-top: 1px solid #dee2e6;
-}
-
-.modal-title {
-  font-size: 1.25rem;
-  font-weight: 500;
-}
-
-.form-label {
-  font-weight: 500;
-}
-
-/* Mengatur gaya close button dengan ukuran lebih besar */
-.btn-close-custom {
-  font-size: 2rem;
-  color: inherit;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-</style>
-
 <div class="content container-fluid">
-  <h3 class="my-3">Profil: Staf Guru & Karyawan</h3>
+    <section id="staff" class="staff-section mt-5">
+        <div class="container" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Profil Staf Guru & Karyawan</h2>
+            </div>
 
-  <div class="card w-100">
-    <div class="card-body">
-      <div class="d-flex justify-content-between mb-3">
-        <h5 class="card-title mb-0">Staf Guru & Karyawan</h5>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahDataModal">Tambah
-          Data</button>
+            <!-- Alert Messages -->
+            @if (session()->has('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+            @if (session()->has('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            <!-- Table Section -->
+            <div class="card">
+                <div class="card-header">
+                    Staf Guru & Karyawan
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div class="form-group">
+                      <label for="search">Search:</label>
+                      <input type="text" id="search" class="form-control" placeholder="Search">
+                  </div>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">
+                      Tambah Data
+                  </button>
+              </div>
+    <!-- Modal Tambah Data -->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="addModalLabel">Tambah Data Staf</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <!-- Form Tambah Data -->
+              <form action="{{ route('addstaff') }}" method="POST" enctype="multipart/form-data">
+                  @csrf
+                  <div class="mb-3">
+                      <label for="photo" class="form-label">Photo</label>
+                      <input type="file" class="form-control" id="photo" name="photo" required>
+                  </div>
+                  <div class="mb-3">
+                      <label for="name" class="form-label">Nama</label>
+                      <input type="text" class="form-control" id="name" name="name" required>
+                  </div>
+                  <div class="mb-3">
+                      <label for="group" class="form-label">Kelompok</label>
+                      <select class="form-select" id="group" name="group" required>
+                          <option value="Staff Guru">Staff Guru</option>
+                          <option value="Staff Karyawan">Staff Karyawan</option>
+                      </select>
+                  </div>
+                  <div class="mb-3">
+                      <label for="position" class="form-label">Jabatan</label>
+                      <input type="text" class="form-control" id="position" name="position" required>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Simpan</button>
+                  </div>
+              </form>
+          </div>
       </div>
-
-      <div class="d-flex justify-content-end mb-3">
-        <input type="text" class="form-control w-25" placeholder="Search:" aria-label="Search">
-      </div>
-
-      <table class="table table-bordered table-hover table-custom" id="staffTable">
-        <thead>
-          <tr>
-            <th style="width: 5%;">No</th>
-            <th style="width: 15%;">Photo</th>
-            <th style="width: 25%;">Nama</th>
-            <th style="width: 20%;">Kelompok</th>
-            <th style="width: 20%;">Jabatan</th>
-            <th style="width: 15%;">Tindakan</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td colspan="6" class="text-center text-muted">No data available in table</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
   </div>
 </div>
 
-<!-- Modal Tambah Data -->
-<div class="modal fade" id="tambahDataModal" tabindex="-1" aria-labelledby="tambahDataModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-md">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="tambahDataModalLabel">Tambah Data Staff</h5>
-        <button type="button" class="btn-close-custom" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+<!-- Modal Edit -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="editModalLabel">Edit Data Staf</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <form action="{{ route('editstaff') }}" method="POST" enctype="multipart/form-data">
+              @csrf
+              <input type="hidden" name="staff_id" id="edit_staff_id" value="">
+              <div class="modal-body">
+                  <div class="mb-3">
+                      <label for="edit_photo" class="form-label">Photo</label>
+                      <input type="file" class="form-control" id="edit_photo" name="photo">
+                  </div>
+                  <div class="mb-3">
+                      <label for="edit_name" class="form-label">Nama</label>
+                      <input type="text" class="form-control" id="edit_name" name="name" placeholder="Enter name" required>
+                  </div>
+                  <div class="mb-3">
+                      <label for="edit_group" class="form-label">Kelompok</label>
+                      <select class="form-select" id="edit_group" name="group" required>
+                          <option value="Staff Guru">Staff Guru</option>
+                          <option value="Staff Karyawan">Staff Karyawan</option>
+                      </select>
+                  </div>
+                  <div class="mb-3">
+                      <label for="edit_position" class="form-label">Jabatan</label>
+                      <input type="text" class="form-control" id="edit_position" name="position" placeholder="Enter position" required>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button class="btn btn-primary" type="submit">Simpan</button>
+              </div>
+          </form>
       </div>
-      <div class="modal-body">
-        <form>
-          <div class="mb-3">
-            <label for="photo" class="form-label">Photo</label>
-            <input type="file" class="form-control" id="photo">
-          </div>
-          <div class="mb-3">
-            <label for="name" class="form-label">Nama</label>
-            <input type="text" class="form-control" id="name" required>
-          </div>
-          <div class="mb-3">
-            <label for="kelompok" class="form-label">Kelompok</label>
-            <select class="form-select" id="kelompok">
-              <option selected>Staff Guru</option>
-              <option>Staff Karyawan</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="jabatan" class="form-label">Jabatan</label>
-            <input type="text" class="form-control" id="jabatan" required>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-        <button type="button" class="btn btn-primary">Simpan</button>
-      </div>
-    </div>
   </div>
 </div>
 
-<!-- Link ke jQuery, DataTables, dan Bootstrap Bundle JS dari CDN -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+<!-- Modal Hapus -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="deleteModalLabel">Hapus Data Staf</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <form action="{{ route('deletestaff') }}" method="POST">
+              @csrf
+              @method('DELETE')
+              <input type="hidden" name="staff_id" id="delete_staff_id" value="">
+              <div class="modal-body">
+                  Apakah Anda yakin ingin menghapus data staf ini?
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button class="btn btn-danger" type="submit">Hapus</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+
+
+
+
+
+                    
+<table class="table table-striped" id="staffTable">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Photo</th>
+            <th>Nama</th>
+            <th>Kelompok</th>
+            <th>Jabatan</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @forelse($staff as $index => $staffItem)
+            <tr>
+                <td>{{ $index + 1 }}</td>
+                <td><img src="{{ asset('staff_img/' . $staffItem->photo) }}" alt="Photo" width="50"></td>
+                <td>{{ $staffItem->name }}</td>
+                <td>{{ $staffItem->group }}</td>
+                <td>{{ $staffItem->position }}</td>
+                <td>
+                    <button type="button" class="btn btn-warning btn-sm">Edit</button>
+                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                </td>
+            </tr>
+        @empty
+            <tr>
+                <td colspan="6" class="text-center">No data available</td>
+            </tr>
+        @endforelse
+    </tbody>
+</table>
 
 <script>
-$(document).ready(function() {
-  $('#staffTable').DataTable({
-    paging: false,
-    info: false
-  });
-});
+    document.addEventListener('DOMContentLoaded', () => {
+        const table = document.querySelector('#staffTable');
+        // Additional features can be added here
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Set ID untuk Edit
+        document.querySelectorAll('[data-target="#editModal"]').forEach(button => {
+            button.addEventListener('click', function () {
+                const staffId = this.getAttribute('data-id');
+                document.querySelector('#editModal input[name="staff_id"]').value = staffId;
+            });
+        });
+
+        // Set ID untuk Delete
+        document.querySelectorAll('[data-target="#deleteModal"]').forEach(button => {
+            button.addEventListener('click', function () {
+                const saranaId = this.getAttribute('data-id');
+                document.querySelector('#deleteModal input[name="sarana_id"]').value = saranaId;
+            });
+        });
+    });
+
+    
 </script>
+
 
 @endsection

@@ -19,17 +19,17 @@ class SaranaController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'cover'      => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'nama'       => 'required|string|max:255',
-            'deskripsi'  => 'required|string'
+            'cover' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'nama' => 'required|string|max:255',
+            'deskripsi' => 'required|string'
         ]);
 
         $fileName = time() . '.' . $request->cover->getClientOriginalExtension();
         $request->cover->move(public_path('sarana_img'), $fileName);
 
         $sarana = Sarana::create([
-            'image'       => $fileName,
-            'name'        => $request->nama,
+            'image' => $fileName,
+            'name' => $request->nama,
             'description' => $request->deskripsi
         ]);
 

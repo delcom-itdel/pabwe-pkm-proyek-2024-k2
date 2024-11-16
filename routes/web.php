@@ -11,6 +11,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BeritaArtikelController;
 use App\Http\Controllers\ProfilInformasiDasarController;
 use App\Http\Controllers\GaleriController;
+use App\Http\Controllers\StaffController;
 
 //awal
 Route::get('/', function () {
@@ -132,7 +133,7 @@ Route::post('delete-sarana', [PrestasiController::class, 'delete'])->name('delet
 
 Route::get('/adminppdb', function () {
     return view('app/admin/adminppdb');
-})->name('adminppdb');
+})->name(name: 'adminppdb');
 
 Route::get('/berita', function () {
     return view('app/admin/berita');
@@ -226,3 +227,11 @@ Route::prefix('galeri')->group(function () {
     // Route untuk menghapus data galeri
     Route::delete('/delete', [GaleriController::class, 'delete'])->name('deletegaleri');
 });
+
+
+
+
+Route::get('staff', [StaffController::class, 'index'])->name('staff');
+Route::post('add-staff', [StaffController::class, 'store'])->name('addstaff');
+Route::post('edit-staff', [StaffController::class, 'edit'])->name('editstaff');
+Route::delete('delete-staff', [StaffController::class, 'delete'])->name('deletestaff');
