@@ -9,14 +9,14 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('berita_artikel', function (Blueprint $table) {
-            $table->id(); // Menambahkan kolom ID (primary key)
-            $table->string('cover')->nullable(); // Kolom untuk cover artikel
-            $table->string('judul'); // Kolom untuk judul artikel
-            $table->string('tindakan')->nullable(); // Kolom untuk tindakan artikel
-            $table->timestamps(); // Kolom created_at dan updated_at
+            $table->id();
+            $table->string('cover')->nullable();
+            $table->string('judul');
+            $table->string('tindakan')->nullable();
+            $table->timestamps();
         });
     }
 

@@ -205,15 +205,11 @@ Route::put('/platform/update/{id}', [AdminController::class, 'update'])->name('p
 Route::get('/', [AdminController::class, 'showHomePage'])->name('home');
 
 // Rute untuk halaman Berita & Artikel
-Route::middleware(['auth', 'check.roles:Admin,Editor'])->group(function () {
-    Route::get('/berita', [BeritaArtikelController::class, 'index'])->name('berita');
-    Route::get('/berita/create', [BeritaArtikelController::class, 'create'])->name('berita.create');
-    Route::post('/berita', [BeritaArtikelController::class, 'store'])->name('berita.store');
-    Route::get('/berita/edit/{beritaArtikel}', [BeritaArtikelController::class, 'edit'])->name('berita.edit');
-    Route::put('/berita/{beritaArtikel}', [BeritaArtikelController::class, 'update'])->name('berita.update');
-    Route::delete('/berita/{beritaArtikel}', [BeritaArtikelController::class, 'destroy'])->name('berita.destroy');
-    Route::get('/berita/{beritaArtikel}', [BeritaArtikelController::class, 'show'])->name('berita.show');
-});
+
+Route::get('berita', [BeritaArtikelController::class, 'index'])->name('berita');
+Route::post('add-berita', [BeritaArtikelController::class, 'store'])->name('addberita');
+Route::post('edit-berita', [BeritaArtikelController::class, 'edit'])->name('editberita');
+Route::delete('delete-berita', [BeritaArtikelController::class, 'delete'])->name('deleteberita');
 
 
 //rute untuk halaman galeri 

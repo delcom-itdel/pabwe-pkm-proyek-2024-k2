@@ -3,100 +3,81 @@
 namespace App\Http\Controllers;
 
 use App\Models\BeritaArtikel;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class BeritaArtikelController extends Controller
 {
-    // Menampilkan daftar berita/artikel
-    public function index()
+    public function index(): View
     {
-        $beritaArtikels = BeritaArtikel::all();
-        return view('app.admin.berita', compact('beritaArtikels'));
+        $data['berita'] = BeritaArtikel::all();
+        return view('app.admin.berita', ['data' => $data]);
     }
 
-    // Menampilkan form untuk membuat berita/artikel baru
-    public function create()
+    public function store(Request $request): RedirectResponse
     {
-        return view('berita.create');
-    }
-
-    // Menyimpan berita/artikel baru
-    public function store(Request $request)
-    {
-        // Validasi input form
         $request->validate([
+            'cover' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'judul' => 'required|string|max:255',
-            'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'tindakan' => 'nullable|string|max:255',
+            'tindakan' => 'nullable|string|max:255'
         ]);
 
-        // Menyimpan cover jika ada
-        $path = $request->hasFile('cover') ? $request->file('cover')->store('cover_images', 'public') : null;
+        $fileName = time() . '.' . $request->cover->getClientOriginalExtension();
+        $request->cover->move(public_path('berita_img'), $fileName);
 
-        // Menyimpan berita/artikel baru ke database
-        BeritaArtikel::create([
+        $berita = BeritaArtikel::create([
+            'cover' => $fileName,
             'judul' => $request->judul,
-            'cover' => $path,
             'tindakan' => $request->tindakan,
         ]);
 
-        // Redirect dengan pesan sukses
-        return redirect()->back()->with('success', 'Berita/Artikel berhasil dibuat.');
+        return $berita
+            ? redirect()->route('berita')->with('success', 'Data berhasil ditambahkan.')
+            : redirect()->route('berita')->with('error', 'Data tidak berhasil ditambahkan.');
     }
 
-    // Menampilkan detail berita/artikel
-    public function show(BeritaArtikel $beritaArtikel)
+    public function edit(Request $request): RedirectResponse
     {
-        return view('berita.show', compact('beritaArtikel'));
-    }
+        $berita = BeritaArtikel::find($request->berita_id);
 
-    // Menampilkan form untuk mengedit berita/artikel
-    public function edit(BeritaArtikel $beritaArtikel)
-    {
-        return view('berita.edit', compact('beritaArtikel'));
-    }
+        if ($berita) {
+            if ($request->hasFile('cover')) {
+                if (File::exists(public_path('berita_img/' . $berita->cover))) {
+                    File::delete(public_path('berita_img/' . $berita->cover));
+                }
 
-    // Memperbarui berita/artikel
-    public function update(Request $request, BeritaArtikel $beritaArtikel)
-    {
-        // Validasi input dari form
-        $validatedData = $request->validate([
-            'judul' => 'required|string|max:255',
-            'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'tindakan' => 'nullable|string|max:255',
-        ]);
-
-        // Menyimpan cover baru jika ada, dan menghapus cover lama
-        if ($request->hasFile('cover')) {
-            // Hapus cover lama jika ada
-            if ($beritaArtikel->cover && Storage::disk('public')->exists($beritaArtikel->cover)) {
-                Storage::disk('public')->delete($beritaArtikel->cover);
+                $fileName = time() . '.' . $request->cover->getClientOriginalExtension();
+                $request->cover->move(public_path('berita_img'), $fileName);
+                $berita->cover = $fileName;
             }
 
-            // Simpan cover baru
-            $validatedData['cover'] = $request->file('cover')->store('cover_images', 'public');
+            $berita->judul = $request->judul;
+            $berita->tindakan = $request->tindakan;
+
+            return $berita->save()
+                ? redirect()->route('berita')->with('success', 'Data berhasil diubah.')
+                : redirect()->route('berita')->with('error', 'Gagal mengubah data.');
         }
 
-        // Update data berita/artikel di database
-        $beritaArtikel->update($validatedData);
-
-        // Redirect dengan pesan sukses
-        return redirect()->route('berita.index')->with('success', 'Berita/Artikel berhasil diperbarui.');
+        return redirect()->route('berita')->with('error', 'Data tidak ditemukan.');
     }
 
-    // Menghapus berita/artikel
-    public function destroy(BeritaArtikel $beritaArtikel)
+    public function delete(Request $request): RedirectResponse
     {
-        // Hapus file cover jika ada
-        if ($beritaArtikel->cover && Storage::disk('public')->exists($beritaArtikel->cover)) {
-            Storage::disk('public')->delete($beritaArtikel->cover);
+        $berita = BeritaArtikel::find($request->berita_id);
+
+        if ($berita) {
+            if (File::exists(public_path('berita_img/' . $berita->cover))) {
+                File::delete(public_path('berita_img/' . $berita->cover));
+            }
+
+            return $berita->delete()
+                ? redirect()->route('berita')->with('success', 'Data berhasil dihapus.')
+                : redirect()->route('berita')->with('error', 'Gagal menghapus data.');
         }
 
-        // Hapus data berita/artikel dari database
-        $beritaArtikel->delete();
-
-        // Redirect dengan pesan sukses
-        return redirect()->route('berita.index')->with('success', 'Berita/Artikel berhasil dihapus.');
+        return redirect()->route('berita')->with('error', 'Data tidak ditemukan.');
     }
 }
