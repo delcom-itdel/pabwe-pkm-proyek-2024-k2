@@ -197,7 +197,11 @@ Route::prefix('editor')->group(function () {
     Route::post('/profil-informasi-dasar', [ProfilInformasiDasarController::class, 'save1'])->name('editor.profilInformasiDasar.save');
 });
 //route informasidasar
-Route::post('/informasi-dasars', [InformasiDasarController::class, 'updateInformasiDasar'])->name('InformasiDasarSave');
+//admin
+Route::prefix('admin')->group(function () {
+    Route::get('/informasi-dasars', [InformasiDasarController::class, 'indexInformasiDasar'])->name('admin.profilInformasiDasar.index');
+    Route::post('/informasi-dasars', [InformasiDasarController::class, 'updateInformasiDasar'])->name('admin.profilInformasiDasar.update');
+});
 
 //route platform
 Route::get('/platform', [AdminController::class, 'index'])->name('platform');
