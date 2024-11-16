@@ -76,14 +76,23 @@
             </ul>
           </li>
 
-          <li class="dropdown"><a href="#services"><span>Platform Kami</span>
-              <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
+          <li class="dropdown">
+  <a href="#services">
+    <span>Platform Kami</span>
+    <i class="bi bi-chevron-down toggle-dropdown"></i>
+  </a>
+  <ul>
+    <!-- Item SIS tetap statis -->
+    <li><a href="{{ route('login') }}">SIS</a></li>
+    
+    <!-- Item lainnya ditambahkan secara dinamis -->
+    @foreach ($platforms as $platform)
+      <li><a href="{{ $platform->url }}" target="_blank">{{ $platform->name }}</a></li>
+    @endforeach
+  </ul>
+</li>
 
-              <li><a href="{{ route('login') }}">SIS</a></li>
 
-            </ul>
-          </li>
           <li><a href="index.html#contact">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>

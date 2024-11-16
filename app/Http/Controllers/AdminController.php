@@ -52,4 +52,11 @@ class AdminController extends Controller
         return redirect()->route('platform')->with('success', 'Platform berhasil dihapus.');
     }
 
+    public function showHomePage()
+    {
+        $platforms = Platform::all();
+        return view('app.home', compact('platforms'));
+    }
+
+
 }

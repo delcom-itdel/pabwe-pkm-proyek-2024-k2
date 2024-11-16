@@ -28,6 +28,7 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 // Logout route
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+
 // Admin page (protected route) - untuk Admin
 Route::middleware(['auth', 'check.roles:Admin'])->group(function () {
     Route::get('/admin', function () {
@@ -201,6 +202,7 @@ Route::get('/platform', [AdminController::class, 'index'])->name('platform');
 Route::post('/platform/store', [AdminController::class, 'storePlatform'])->name('platforms.store');
 Route::delete('/platform/destroy/{id}', [AdminController::class, 'destroy'])->name('platform.destroy');
 Route::put('/platform/update/{id}', [AdminController::class, 'update'])->name('platform.update');
+Route::get('/', [AdminController::class, 'showHomePage'])->name('home');
 
 // Rute untuk halaman Berita & Artikel
 Route::middleware(['auth', 'check.roles:Admin,Editor'])->group(function () {
