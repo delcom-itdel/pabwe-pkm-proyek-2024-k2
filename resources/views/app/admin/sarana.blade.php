@@ -4,8 +4,7 @@
 
 @section('content')
 <div class="content">
-    <section id="prestasi" class="prestasi-section mt-5">
-        <div class="container" data-aos="fade-up">
+    <section id="prestasi" class="prestasi-section mt-5" data-aos="fade-up">
             <div class="section-title">
                 <h2>Sarana & Prasarana</h2>
             </div>
@@ -162,7 +161,6 @@
                     </table>
                 </div>
             </div>
-        </div>
     </section>
 </div>
 
