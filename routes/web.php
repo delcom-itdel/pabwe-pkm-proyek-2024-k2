@@ -186,14 +186,16 @@ Route::get('/informasi-dasar', function () {
 //route profilinformasidasar
 
 // Route untuk Admin
-Route::get('/admin/profil-informasi-dasar', [ProfilInformasiDasarController::class, 'edit'])->name('profilInformasiDasar.edit');
-Route::post('/admin/profil-informasi-dasar', [ProfilInformasiDasarController::class, 'save'])->name('profilInformasiDasarSave');
+Route::prefix('admin')->group(function () {
+    Route::get('/profil-informasi-dasar', [ProfilInformasiDasarController::class, 'edit'])->name('admin.profilInformasiDasar.edit');
+    Route::post('/profil-informasi-dasar', [ProfilInformasiDasarController::class, 'save'])->name('admin.profilInformasiDasar.save');
+});
 
 // Route untuk Editor
-Route::get('/editor/profil-informasi-dasar', [ProfilInformasiDasarController::class, 'edit1'])->name('editor.profilInformasiDasar.edit');
-Route::post('/editor/profil-informasi-dasar', [ProfilInformasiDasarController::class, 'save1'])->name('profilInformasiDasarSave1');
-
-
+Route::prefix('editor')->group(function () {
+    Route::get('/profil-informasi-dasar', [ProfilInformasiDasarController::class, 'edit1'])->name('editor.profilInformasiDasar.edit');
+    Route::post('/profil-informasi-dasar', [ProfilInformasiDasarController::class, 'save1'])->name('editor.profilInformasiDasar.save');
+});
 //route informasidasar
 Route::post('/informasi-dasars', [InformasiDasarController::class, 'updateInformasiDasar'])->name('InformasiDasarSave');
 
