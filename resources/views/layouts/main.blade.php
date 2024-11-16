@@ -70,8 +70,8 @@
             <ul>
               <li><a href="{{ route('ppdb') }}">PPDB</a></li>
               <li><a href="{{ route('beritaArtikel') }}">Berita & Artikel</a></li>
-              <li><a href="{{ route('galeri') }}">Galeri</a></li>
-              <li><a href="{{ route('arsip') }}">Arsip</a></li>
+              <li><a href="{{ route('galeri1') }}">Galeri</a></li>
+              <li><a href="{{ route('arsip1') }}">Arsip</a></li>
               <li><a href="{{ route('hubungiKami') }}">Hubungi Kami</a></li>
             </ul>
           </li>

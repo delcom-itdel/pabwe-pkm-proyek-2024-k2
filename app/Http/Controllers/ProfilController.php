@@ -33,7 +33,7 @@ class ProfilController extends Controller
         return view('app.staf');
     }
 
-    public function prestasi()
+    public function prestasi1()
     {
         return view('app.prestasi');
     }
@@ -57,12 +57,12 @@ class ProfilController extends Controller
     {
         return view('app.beritaArtikel');
     }
-    public function galeri()
+    public function galeri1()
     {
         return view('app.galeri');
     }
 
-    public function arsip()
+    public function arsip1()
     {
         return view('app.arsip'); // Mengarah ke resources/views/app/arsip.blade.php
     }
@@ -70,4 +70,6 @@ class ProfilController extends Controller
     {
         return view('app.hubungiKami'); // Mengarah ke resources/views/app/hubungiKami.blade.php
     }
+
+
 }

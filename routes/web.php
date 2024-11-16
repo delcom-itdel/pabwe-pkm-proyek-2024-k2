@@ -83,7 +83,7 @@ Route::get('/visi-misi', [ProfilController::class, 'visiMisi'])->name('visiMisi'
 Route::get('/struktur', [ProfilController::class, 'struktur'])->name('struktur');
 Route::get('/program', [ProfilController::class, 'program'])->name('program');
 Route::get('/staf', [ProfilController::class, 'staf'])->name('staf');
-Route::get('/prestasi', [ProfilController::class, 'prestasi'])->name('prestasi');
+Route::get('/prestasi1', [ProfilController::class, 'prestasi1'])->name('prestasi1');
 Route::get('/alumni', [ProfilController::class, 'alumni'])->name('alumni');
 
 // Rute untuk Informasi
@@ -93,16 +93,16 @@ Route::get('/ppdb', [ProfilController::class, 'ppdb'])->name('ppdb');
 Route::get('/saranaPrasarana', [ProfilController::class, 'saranaPrasarana'])->name('saranaPrasarana');
 
 // Rute untuk Prestasi
-Route::get('/prestasi', [ProfilController::class, 'prestasi'])->name('prestasi');
+
 
 // Rute untuk Berita & Artikel
 Route::get('/berita-artikel', [ProfilController::class, 'beritaArtikel'])->name('beritaArtikel');
 
 // Rute untuk Galeri
-Route::get('/galeri', [ProfilController::class, 'galeri'])->name('galeri');
+Route::get('/galeri1', [ProfilController::class, 'galeri1'])->name('galeri1');
 
 // Rute untuk Arsip
-Route::get('/arsip', [ProfilController::class, 'arsip'])->name('arsip');
+Route::get('/arsip1', [ProfilController::class, 'arsip1'])->name('arsip1');
 
 // Rute untuk Hubungi Kami
 Route::get('/hubungi-kami', [ProfilController::class, 'hubungiKami'])->name('hubungiKami');
@@ -144,6 +144,8 @@ Route::get('/berita', function () {
 Route::get('/galeri', function () {
     return view('app/admin/galeri');
 })->name('galeri');
+
+
 
 Route::get('/arsip', function () {
     return view('app/admin/arsip');
@@ -275,3 +277,6 @@ Route::get('/visi-misi', [ProfilInformasiDasarController::class, 'showVisiMisi']
 Route::get('/struktur-organisasi', [ProfilInformasiDasarController::class, 'showStruktur'])->name('struktur');
 
 Route::get('/program-sekolah', [ProfilInformasiDasarController::class, 'showProgram'])->name('program');
+
+//menambah galeri
+Route::get('/galeri2', [GaleriController::class, 'showGallery'])->name('galeri2');
