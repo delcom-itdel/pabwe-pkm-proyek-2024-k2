@@ -7,12 +7,13 @@ use App\Models\InformasiDasar;
 
 class InformasiDasarController extends Controller
 {
-    /**
-     * Fungsi untuk memperbarui atau menambahkan informasi dasar.
-     */
+    public function indexInformasiDasar(){
+        $informasi = InformasiDasar::first();
+        session(['informasiDasar' => $informasi]);
+        return view('app.admin.informasi2', compact('informasi'));
+    }
     public function updateInformasiDasar(Request $request)
     {
-        // Validasi data form
         $validated = $request->validate([
             'kontak_phone' => 'nullable|string|max:15',
             'kontak_email' => 'nullable|email|max:255',
@@ -37,20 +38,8 @@ class InformasiDasarController extends Controller
             'sambutan_kepala_sekolah' => 'nullable|string|max:1000',
         ]);
 
-        InformasiDasar::updateOrCreate(['id' => 1], $validated);
-
-        // Menyimpan file jika ada dan mendapatkan path-nya
-        //$coverPath = null;
-        //if ($request->hasFile('cover')) {
-        //$coverPath = $request->file('cover')->store('covers', 'public');
-        //}
-
-        //$fotoKepalaSekolahPath = null;
-        //if ($request->hasFile('foto_kepala_sekolah')) {
-        //$fotoKepalaSekolahPath = $request->file('foto_kepala_sekolah')->store('foto_kepala_sekolah', 'public');
-        //}
-
-        // Redirect kembali ke halaman informasiDasar dengan pesan sukses
-        return redirect()->back()->with('success', 'Data berhasil disimpan.');
+        InformasiDasar::updateOrCreate([], $validated);
+        session(['informasiDasar' => $validated]);
+        return redirect()->route('admin.profilInformasiDasar.index')->with('success', 'Informasi Dasar berhasil disimpan.');
     }
 }
