@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\Sarana;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -50,7 +50,8 @@ class ProfilController extends Controller
 
     public function saranaPrasarana()
     {
-        return view('app.saranaPrasarana');
+        $data['sarana'] = Sarana::all();
+        return view('app.saranaPrasarana', compact('data'));
     }
     public function beritaArtikel()
     {
@@ -62,12 +63,11 @@ class ProfilController extends Controller
     }
 
     public function arsip()
-{
-    return view('app.arsip'); // Mengarah ke resources/views/app/arsip.blade.php
-}
-public function hubungiKami()
-{
-    return view('app.hubungiKami'); // Mengarah ke resources/views/app/hubungiKami.blade.php
-}
-
+    {
+        return view('app.arsip'); // Mengarah ke resources/views/app/arsip.blade.php
+    }
+    public function hubungiKami()
+    {
+        return view('app.hubungiKami'); // Mengarah ke resources/views/app/hubungiKami.blade.php
+    }
 }

@@ -32,13 +32,6 @@
     <!-- Main CSS File -->
     <link href="assets/css/main.css" rel="stylesheet">
 
-    <!-- =======================================================
-  * Template Name: QuickStart
-  * Template URL: https://bootstrapmade.com/quickstart-bootstrap-startup-website-template/
-  * Updated: Aug 07 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
   </head>
 
 <body class="index-page">
@@ -99,6 +92,15 @@
       <div class="container" data-aos="fade-up">
         <div class="section-title">
           <h2>Sarana Prasarana</h2>
+          <div class="row">
+
+            @foreach ($data['sarana'] as $sarana )
+            <div class="card col-lg-4 col-sm-4">
+              <div class="card-title">{{$sarana->name}}</div>
+              <div class="card-body">{{$sarana->description}}</div>
+            </div>
+            @endforeach
+          </div>
     </section>
   </main>
   <!-- Scroll Top -->
