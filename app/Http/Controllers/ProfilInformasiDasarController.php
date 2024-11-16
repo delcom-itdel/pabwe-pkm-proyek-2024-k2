@@ -93,14 +93,27 @@ class ProfilInformasiDasarController extends Controller
         ]);
     }
 
-    public function showStrukturOrganisasi()
+    public function showStruktur()
     {
         // Ambil data dari tabel
         $data = ProfilInformasiDasar::first();
 
         // Kirim data ke view
         return view('app.struktur', [
-            'struktur' => $data->struktur_organisasi ?? 'Belum ada data struktur organisasi.',
+            'struktur_organisasi' => $data->struktur_organisasi ?? 'Belum ada data struktur organisasi.',
         ]);
     }
+
+    public function showProgram()
+    {
+        // Ambil data dari tabel
+        $data = ProfilInformasiDasar::first();
+
+        // Kirim data ke view
+        return view('app.program', [
+            'program_sekolah' => $data->program_sekolah ?? 'Belum ada data program sekolah.',
+        ]);
+    }
+
+
 }

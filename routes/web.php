@@ -260,4 +260,6 @@ Route::get('/sejarah', [ProfilInformasiDasarController::class, 'showSejarah'])->
 Route::get('/visi-misi', [ProfilInformasiDasarController::class, 'showVisiMisi'])->name('visiMisi');
 
 //mengambil struktur organisasi
-Route::get('/struktur-organisasi', [ProfilInformasiDasarController::class, 'showStrukturOrganisasi'])->name('struktur');
+Route::get('/struktur-organisasi', [ProfilInformasiDasarController::class, 'showStruktur'])->name('struktur');
+
+Route::get('/program-sekolah', [ProfilInformasiDasarController::class, 'showProgram'])->name('program');
