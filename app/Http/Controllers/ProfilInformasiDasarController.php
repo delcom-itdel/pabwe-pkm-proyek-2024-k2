@@ -71,4 +71,36 @@ class ProfilInformasiDasarController extends Controller
 
         return redirect()->route('editor.profilInformasiDasar.edit')->with('success', 'Informasi berhasil disimpan.');
     }
+
+    public function showSejarah()
+    {
+        // Ambil data dari database
+        $data = ProfilInformasiDasar::first();
+
+        // Kirim data ke view sejarah.blade.php
+        return view('app.sejarah', ['sejarah' => $data->sejarah ?? 'Data belum tersedia.']);
+    }
+
+    public function showVisiMisi()
+    {
+        // Ambil data dari tabel
+        $data = ProfilInformasiDasar::first();
+
+        // Kirim data ke view
+        return view('app.visi-misi', [
+            'visi' => $data->visi ?? 'Belum ada data visi.',
+            'misi' => $data->misi ?? 'Belum ada data misi.',
+        ]);
+    }
+
+    public function showStrukturOrganisasi()
+    {
+        // Ambil data dari tabel
+        $data = ProfilInformasiDasar::first();
+
+        // Kirim data ke view
+        return view('app.struktur', [
+            'struktur_organisasi' => $data->struktur_organisasi ?? 'Belum ada data struktur organisasi.',
+        ]);
+    }
 }

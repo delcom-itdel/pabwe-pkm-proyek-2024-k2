@@ -247,3 +247,13 @@ Route::post('/admin/informasi-ppdb', [InforrmasiPpdbController::class, 'save'])-
 // Route untuk Editor
 Route::get('/editor/informasi-ppdb', [InforrmasiPpdbController::class, 'edit1'])->name('editor.informasiPpdb.edit');
 Route::post('/editor/informasi-ppdb', [InforrmasiPpdbController::class, 'save1'])->name('informasiPpdbSave1');
+
+
+//mengambil data sejarah
+Route::get('/sejarah', [ProfilInformasiDasarController::class, 'showSejarah'])->name('sejarah');
+
+//mengambil data visimisi
+Route::get('/visi-misi', [ProfilInformasiDasarController::class, 'showVisiMisi'])->name('visiMisi');
+
+//mengambil struktur organisasi
+Route::get('/struktur-organisasi', [ProfilInformasiDasarController::class, 'showStrukturOrganisasi'])->name('struktur');
