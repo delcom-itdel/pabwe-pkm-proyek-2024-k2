@@ -13,6 +13,8 @@ use App\Http\Controllers\ProfilInformasiDasarController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\InforrmasiPpdbController;
+use App\Http\Controllers\HubungiKamiController;
+
 
 //awal
 Route::get('/', function () {
@@ -263,3 +265,14 @@ Route::get('/visi-misi', [ProfilInformasiDasarController::class, 'showVisiMisi']
 Route::get('/struktur-organisasi', [ProfilInformasiDasarController::class, 'showStruktur'])->name('struktur');
 
 Route::get('/program-sekolah', [ProfilInformasiDasarController::class, 'showProgram'])->name('program');
+
+
+// routes for "Hubungi Kami"
+Route::prefix('hubungi')->group(function () {
+    Route::get('/', [HubungiKamiController::class, 'index'])->name('hubungi.index'); // Menampilkan data
+    Route::get('/create', [HubungiKamiController::class, 'create'])->name('hubungi.create'); // Form tambah data
+    Route::post('/', [HubungiKamiController::class, 'store'])->name('hubungi.store'); // Menyimpan data
+    Route::get('/{id}/edit', [HubungiKamiController::class, 'edit'])->name('hubungi.edit'); // Form edit data
+    Route::put('/{id}', [HubungiKamiController::class, 'update'])->name('hubungi.update'); // Update data
+    Route::delete('/{id}', [HubungiKamiController::class, 'destroy'])->name('hubungi.destroy'); // Hapus data
+});
