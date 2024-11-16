@@ -12,6 +12,7 @@ use App\Http\Controllers\BeritaArtikelController;
 use App\Http\Controllers\ProfilInformasiDasarController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\InforrmasiPpdbController;
 
 //awal
 Route::get('/', function () {
@@ -235,3 +236,14 @@ Route::get('staff', [StaffController::class, 'index'])->name('staff');
 Route::post('add-staff', [StaffController::class, 'store'])->name('addstaff');
 Route::post('edit-staff', [StaffController::class, 'edit'])->name('editstaff');
 Route::delete('delete-staff', [StaffController::class, 'delete'])->name('deletestaff');
+
+
+//route informasippdb
+
+// Route untuk Admin
+Route::get('/admin/informasi-ppdb', [InforrmasiPpdbController::class, 'edit'])->name('informasiPpdb.edit');
+Route::post('/admin/informasi-ppdb', [InforrmasiPpdbController::class, 'save'])->name('informasiPpdbSave');
+
+// Route untuk Editor
+Route::get('/editor/informasi-ppdb', [InforrmasiPpdbController::class, 'edit1'])->name('editor.informasiPpdb.edit');
+Route::post('/editor/informasi-ppdb', [InforrmasiPpdbController::class, 'save1'])->name('informasiPpdbSave1');
