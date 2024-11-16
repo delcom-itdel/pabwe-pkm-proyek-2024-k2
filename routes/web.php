@@ -13,8 +13,6 @@ use App\Http\Controllers\ProfilInformasiDasarController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\InforrmasiPpdbController;
-use App\Http\Controllers\HubungiKamiController;
-
 
 //awal
 Route::get('/', function () {
@@ -245,15 +243,21 @@ Route::delete('delete-staff', [StaffController::class, 'delete'])->name('deletes
 
 
 //route informasippdb
-
 // Route untuk Admin
-Route::get('/admin/informasi-ppdb', [InforrmasiPpdbController::class, 'edit'])->name('informasiPpdb.edit');
-Route::post('/admin/informasi-ppdb', [InforrmasiPpdbController::class, 'save'])->name('informasiPpdbSave');
+Route::prefix('admin')->group(function () {
+    Route::get('/admin/informasi-ppdb', [InforrmasiPpdbController::class, 'edit'])->name('admin.informasiPpdb.edit');
+    Route::post('/admin/informasi-ppdb', [InforrmasiPpdbController::class, 'save'])->name('admin.informasiPpdb.save');
+});
+
 
 // Route untuk Editor
-Route::get('/editor/informasi-ppdb', [InforrmasiPpdbController::class, 'edit1'])->name('editor.informasiPpdb.edit');
-Route::post('/editor/informasi-ppdb', [InforrmasiPpdbController::class, 'save1'])->name('informasiPpdbSave1');
+Route::prefix('editor')->group(function () {
+    Route::get('/editor/informasi-ppdb', [InforrmasiPpdbController::class, 'edit1'])->name('editor.informasiPpdb.edit');
+    Route::post('/editor/informasi-ppdb', [InforrmasiPpdbController::class, 'save1'])->name('editor.informasiPpdb.save');
+});
 
+//mengambil data ppdb
+Route::get('/ppdb', [InforrmasiPpdbController::class, 'showInfoPpdb'])->name('ppdb');
 
 //mengambil data sejarah
 Route::get('/sejarah', [ProfilInformasiDasarController::class, 'showSejarah'])->name('sejarah');
@@ -265,14 +269,3 @@ Route::get('/visi-misi', [ProfilInformasiDasarController::class, 'showVisiMisi']
 Route::get('/struktur-organisasi', [ProfilInformasiDasarController::class, 'showStruktur'])->name('struktur');
 
 Route::get('/program-sekolah', [ProfilInformasiDasarController::class, 'showProgram'])->name('program');
-
-
-// routes for "Hubungi Kami"
-Route::prefix('hubungi')->group(function () {
-    Route::get('/', [HubungiKamiController::class, 'index'])->name('hubungi.index'); // Menampilkan data
-    Route::get('/create', [HubungiKamiController::class, 'create'])->name('hubungi.create'); // Form tambah data
-    Route::post('/', [HubungiKamiController::class, 'store'])->name('hubungi.store'); // Menyimpan data
-    Route::get('/{id}/edit', [HubungiKamiController::class, 'edit'])->name('hubungi.edit'); // Form edit data
-    Route::put('/{id}', [HubungiKamiController::class, 'update'])->name('hubungi.update'); // Update data
-    Route::delete('/{id}', [HubungiKamiController::class, 'destroy'])->name('hubungi.destroy'); // Hapus data
-});
