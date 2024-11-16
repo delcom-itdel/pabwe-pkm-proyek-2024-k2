@@ -105,21 +105,13 @@ class GaleriController extends Controller
 
         return redirect()->route('galeri')->with('error', 'Data galeri tidak ditemukan.');
     }
-    public function showGallery()
+    public function showgalery()
     {
-        // Ambil data dari tabel
-        $data = Gallery::first();
-
-        // Debug data untuk memastikan tidak null
-        if (!$data) {
-            dd('Tidak ada data dalam tabel galeri.');
-        }
+        // Ambil semua data dari tabel galeri
+        $gallery = Gallery::all();
 
         // Kirim data ke view
-        return view('app.galeri', [
-            'photo' => $data->photo ?? 'Belum ada data photo.',
-            'description' => $data->description ?? 'Belum ada data description.',
-        ]);
+        return view('app.galeri', compact('gallery'));
     }
 
 

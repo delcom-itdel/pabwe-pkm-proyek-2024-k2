@@ -1,23 +1,28 @@
 @extends('layouts.main')
 
-@section('title', 'galeri - SMAN 1 Balige')
+@section('title', 'Galeri - SMAN 1 Balige')
 
 @section('content')
 <main id="main" class="pt-5">
     <section id="galeri" class="galeri-section mt-5">
         <div class="container" data-aos="fade-up">
             <div class="section-title">
-                <h2>galeri</h2>
+                <h2>Galeri</h2>
             </div>
-            <p>
-                {{ $photo }}
-            </p>
-            <div class="section-title">
-                <h2>description</h2>
+            <div class="row">
+                @forelse ($gallery as $item)
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="{{ asset('storage/' . $item->photo) }}" class="card-img-top" alt="Gambar galeri">
+                            <div class="card-body">
+                                <p class="card-text">{{ $item->description ?? 'Deskripsi tidak tersedia.' }}</p>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <p>Galeri masih kosong.</p>
+                @endforelse
             </div>
-            <p>
-                {{ $description }}
-            </p>
         </div>
     </section>
 </main>
