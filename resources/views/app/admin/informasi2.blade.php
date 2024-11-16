@@ -11,6 +11,10 @@
       </div>
       <div class="card-body pb-5">
 
+        @if(session('success'))
+      <div class="alert alert-success mt-3">{{ session('success') }}</div>
+    @endif
+
         <form action="{{ route('admin.profilInformasiDasar.update') }}" method="POST" enctype="multipart/form-data">
           @csrf
 
@@ -19,13 +23,14 @@
           <div class="form-group mb-3">
             <label for="kontakPhone">Kontak Phone</label>
             <input type="text" class="form-control" id="kontakPhone" name="kontak_phone"
-              value="{{ session('data.kontakPhone') ?? $informasi->kontak_phone ?? '' }}"
+              value="{{ session('informasiDasar.kontak_phone') ?? $informasi->kontak_phone ?? '' }}"
               placeholder="Masukkan nomor telepon">
           </div>
           <div class="form-group mb-3">
             <label for="kontakEmail">Kontak Email</label>
             <input type="email" class="form-control" id="kontakEmail" name="kontak_email"
-              value="{{ session('data.kontakEmail') ?? $informasi->kontak_email ?? '' }}" placeholder="Masukkan email">
+              value="{{ session('informasiDasar.kontak_email') ?? $informasi->kontak_email ?? '' }}"
+              placeholder="Masukkan email">
           </div>
 
           <!-- Lokasi -->
@@ -33,17 +38,18 @@
           <div class="form-group mb-3">
             <label for="namaLokasi">Nama Lokasi</label>
             <input type="text" class="form-control" id="namaLokasi" name="nama_lokasi"
-              value="{{ session('data.namaLokasi') ?? $informasi->nama_lokasi ?? '' }}" placeholder="Masukkan nama lokasi">
+              value="{{ session('informasiDasar.nama_lokasi') ?? $informasi->nama_lokasi ?? '' }}"
+              placeholder="Masukkan nama lokasi">
           </div>
           <div class="form-group mb-3">
             <label for="alamatLokasi">Alamat Lokasi</label>
             <textarea class="form-control" id="alamatLokasi" name="alamat_lokasi" rows="2"
-              placeholder="Masukkan alamat lokasi">{{ session('data.alamatLokasi') ?? $informasi->alamat_lokasi ?? '' }}</textarea>
+              placeholder="Masukkan alamat lokasi">{{ session('informasiDasar.alamatLokasi') ?? $informasi->alamat_lokasi ?? '' }}</textarea>
           </div>
           <div class="form-group mb-3">
             <label for="petaLokasi">Peta Lokasi</label>
             <input type="url" class="form-control" id="petaLokasi" name="peta_lokasi"
-              value="{{ session('data.petaLokasi') ?? $informasi->peta_lokasi ?? '' }}"
+              value="{{ session('informasiDasar.petaLokasi') ?? $informasi->peta_lokasi ?? '' }}"
               placeholder="Masukkan URL peta lokasi">
           </div>
 
@@ -52,27 +58,32 @@
           <div class="form-group mb-3">
             <label for="instagram">Sosial Media Instagram</label>
             <input type="url" class="form-control" id="instagram" name="instagram"
-              value="{{ session('data.instagram') ?? $informasi->instagram ?? '' }}" placeholder="Masukkan URL Instagram">
+              value="{{ session('informasiDasar.instagram') ?? $informasi->instagram ?? '' }}"
+              placeholder="Masukkan URL Instagram">
           </div>
           <div class="form-group mb-3">
             <label for="youtube">Sosial Media Youtube</label>
             <input type="url" class="form-control" id="youtube" name="youtube"
-              value="{{ session('data.youtube') ?? $informasi->youtube ?? '' }}" placeholder="Masukkan URL Youtube">
+              value="{{ session('informasiDasar.youtube') ?? $informasi->youtube ?? '' }}"
+              placeholder="Masukkan URL Youtube">
           </div>
           <div class="form-group mb-3">
             <label for="tiktok">Sosial Media Tiktok</label>
             <input type="url" class="form-control" id="tiktok" name="tiktok"
-              value="{{ session('data.tiktok') ?? $informasi->tiktok ?? '' }}" placeholder="Masukkan URL Tiktok">
+              value="{{ session('informasiDasar.tiktok') ?? $informasi->tiktok ?? '' }}"
+              placeholder="Masukkan URL Tiktok">
           </div>
           <div class="form-group mb-3">
             <label for="facebook">Sosial Media Facebook</label>
             <input type="url" class="form-control" id="facebook" name="facebook"
-              value="{{ session('data.facebook') ?? $informasi->facebook ?? '' }}" placeholder="Masukkan URL Facebook">
+              value="{{ session('informasiDasar.facebook') ?? $informasi->facebook ?? '' }}"
+              placeholder="Masukkan URL Facebook">
           </div>
           <div class="form-group mb-3">
             <label for="twitter">Sosial Media Twitter / X</label>
             <input type="url" class="form-control" id="twitter" name="twitter"
-              value="{{ session('data.twitter') ?? $informasi->twitter ?? '' }}" placeholder="Masukkan URL Twitter">
+              value="{{ session('informasiDasar.twitter') ?? $informasi->twitter ?? '' }}"
+              placeholder="Masukkan URL Twitter">
           </div>
 
           <!-- Informasi -->
@@ -80,12 +91,12 @@
           <div class="form-group mb-3">
             <label for="highlight">Highlight</label>
             <textarea class="form-control" id="highlight" name="highlight" rows="2"
-              placeholder="Masukkan highlight">{{ session('data.highlight') ?? $informasi->highlight ?? '' }}</textarea>
+              placeholder="Masukkan highlight">{{ session('informasiDasar.highlight') ?? $informasi->highlight ?? '' }}</textarea>
           </div>
           <div class="form-group mb-3">
             <label for="subHighlight">Sub-Highlight</label>
             <textarea class="form-control" id="subHighlight" name="sub_highlight" rows="2"
-              placeholder="Masukkan sub-highlight">{{ session('data.subHighlight') ?? $informasi->sub_highlight ?? '' }}</textarea>
+              placeholder="Masukkan sub-highlight">{{ session('informasiDasar.subHighlight') ?? $informasi->sub_highlight ?? '' }}</textarea>
           </div>
           <div class="form-group mb-3">
             <label for="cover">Cover</label>
@@ -94,12 +105,14 @@
           <div class="form-group mb-3">
             <label for="judulVideo">Judul Video</label>
             <input type="text" class="form-control" id="judulVideo" name="judul_video"
-              value="{{ session('data.judulVideo') ?? $informasi->judul_video ?? '' }}" placeholder="Masukkan judul video">
+              value="{{ session('informasiDasar.judulVideo') ?? $informasi->judul_video ?? '' }}"
+              placeholder="Masukkan judul video">
           </div>
           <div class="form-group mb-3">
             <label for="linkVideo">Link Video</label>
             <input type="url" class="form-control" id="linkVideo" name="link_video"
-              value="{{ session('data.linkVideo') ?? $informasi->link_video ?? '' }}" placeholder="Masukkan URL video">
+              value="{{ session('informasiDasar.linkVideo') ?? $informasi->link_video ?? '' }}"
+              placeholder="Masukkan URL video">
           </div>
 
           <!-- Jumlah Data -->
@@ -107,20 +120,20 @@
           <div class="form-group mb-3">
             <label for="jumlahPesertaDidik">Jumlah Peserta Didik</label>
             <input type="number" class="form-control" id="jumlahPesertaDidik" name="jumlah_peserta_didik"
-              value="{{ session('data.jumlahPesertaDidik') ?? $informasi->jumlah_peserta_didik ?? '' }}"
+              value="{{ session('informasiDasar.jumlahPesertaDidik') ?? $informasi->jumlah_peserta_didik ?? '' }}"
               placeholder="Masukkan jumlah peserta didik" min="0">
           </div>
           <div class="form-group mb-3">
             <label for="jumlahGuru">Jumlah Guru & Tendik</label>
             <input type="number" class="form-control" id="jumlahGuru" name="jumlah_guru"
-              value="{{ session('data.jumlahGuru') ?? $informasi->jumlah_guru ?? '' }}"
+              value="{{ session('informasiDasar.jumlahGuru') ?? $informasi->jumlah_guru ?? '' }}"
               placeholder="Masukkan jumlah guru & tendik" min="0">
           </div>
           <div class="form-group mb-3">
             <label for="jumlahKelas">Jumlah Kelas</label>
             <input type="number" class="form-control" id="jumlahKelas" name="jumlah_kelas"
-              value="{{ session('data.jumlahKelas') ?? $informasi->jumlah_kelas ?? '' }}" placeholder="Masukkan jumlah kelas"
-              min="0">
+              value="{{ session('informasiDasar.jumlahKelas') ?? $informasi->jumlah_kelas ?? '' }}"
+              placeholder="Masukkan jumlah kelas" min="0">
           </div>
 
           <!-- Kepala Sekolah -->
@@ -132,24 +145,18 @@
           <div class="form-group mb-3">
             <label for="namaKepalaSekolah">Nama Kepala Sekolah</label>
             <input type="text" class="form-control" id="namaKepalaSekolah" name="nama_kepala_sekolah"
-              value="{{ session('data.namaKepalaSekolah') ?? $informasi->nama_kepala_sekolah ?? '' }}"
+              value="{{ session('informasiDasar.namaKepalaSekolah') ?? $informasi->nama_kepala_sekolah ?? '' }}"
               placeholder="Masukkan nama kepala sekolah">
           </div>
           <div class="form-group mb-3">
             <label for="sambutanKepalaSekolah">Sambutan Kepala Sekolah</label>
             <textarea class="form-control" id="sambutanKepalaSekolah" name="sambutan_kepala_sekolah" rows="3"
-              placeholder="Masukkan sambutan kepala sekolah">{{ session('data.sambutanKepalaSekolah') ?? $informasi->sambutan_kepala_sekolah ?? '' }}</textarea>
+              placeholder="Masukkan sambutan kepala sekolah">{{ session('informasiDasar.sambutanKepalaSekolah') ?? $informasi->sambutan_kepala_sekolah ?? '' }}</textarea>
           </div>
-
           <div class="d-flex justify-content-end mt-4">
             <button type="submit" class="btn btn-primary ms-auto" style="display: block !important;">Simpan</button>
           </div>
-
         </form>
-
-        @if(session('success'))
-      <div class="alert alert-success mt-3">{{ session('success') }}</div>
-    @endif
       </div>
     </div>
   </div>
