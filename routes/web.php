@@ -196,11 +196,17 @@ Route::prefix('editor')->group(function () {
     Route::get('/profil-informasi-dasar', [ProfilInformasiDasarController::class, 'edit1'])->name('editor.profilInformasiDasar.edit');
     Route::post('/profil-informasi-dasar', [ProfilInformasiDasarController::class, 'save1'])->name('editor.profilInformasiDasar.save');
 });
+
 //route informasidasar
 //admin
 Route::prefix('admin')->group(function () {
-    Route::get('/informasi-dasars', [InformasiDasarController::class, 'indexInformasiDasar'])->name('admin.profilInformasiDasar.index');
-    Route::post('/informasi-dasars', [InformasiDasarController::class, 'updateInformasiDasar'])->name('admin.profilInformasiDasar.update');
+    Route::get('/informasi-dasars', [InformasiDasarController::class, 'indexInformasiDasar'])->name('admin.informasiDasar.index');
+    Route::post('/informasi-dasars', [InformasiDasarController::class, 'updateInformasiDasar'])->name('admin.informasiDasar.update');
+});
+//editor
+Route::prefix('editor')->group(function () {
+    Route::get('/informasi-dasars', [InformasiDasarController::class, 'indexInformasiDasar1'])->name('editor.informasiDasar.index');
+    Route::post('/informasi-dasars', [InformasiDasarController::class, 'updateInformasiDasar1'])->name('editor.informasiDasar.update');
 });
 
 //route platform

@@ -15,7 +15,7 @@
       <div class="alert alert-success mt-3">{{ session('success') }}</div>
     @endif
 
-        <form action="{{ route('admin.profilInformasiDasar.update') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.informasiDasar.update') }}" method="POST" enctype="multipart/form-data">
           @csrf
 
           <!-- Kontak -->
@@ -44,12 +44,12 @@
           <div class="form-group mb-3">
             <label for="alamatLokasi">Alamat Lokasi</label>
             <textarea class="form-control" id="alamatLokasi" name="alamat_lokasi" rows="2"
-              placeholder="Masukkan alamat lokasi">{{ session('informasiDasar.alamatLokasi') ?? $informasi->alamat_lokasi ?? '' }}</textarea>
+              placeholder="Masukkan alamat lokasi">{{ session('informasiDasar.alamat_lokasi') ?? $informasi->alamat_lokasi ?? '' }}</textarea>
           </div>
           <div class="form-group mb-3">
             <label for="petaLokasi">Peta Lokasi</label>
             <input type="url" class="form-control" id="petaLokasi" name="peta_lokasi"
-              value="{{ session('informasiDasar.petaLokasi') ?? $informasi->peta_lokasi ?? '' }}"
+              value="{{ session('informasiDasar.peta_lokasi') ?? $informasi->peta_lokasi ?? '' }}"
               placeholder="Masukkan URL peta lokasi">
           </div>
 
@@ -96,8 +96,10 @@
           <div class="form-group mb-3">
             <label for="subHighlight">Sub-Highlight</label>
             <textarea class="form-control" id="subHighlight" name="sub_highlight" rows="2"
-              placeholder="Masukkan sub-highlight">{{ session('informasiDasar.subHighlight') ?? $informasi->sub_highlight ?? '' }}</textarea>
+              placeholder="Masukkan sub-highlight">{{ session('informasiDasar.sub_highlight') ?? $informasi->sub_highlight ?? '' }}</textarea>
           </div>
+
+          <!-- Video -->
           <div class="form-group mb-3">
             <label for="cover">Cover</label>
             <input type="file" class="form-control-file" id="cover" name="cover">
@@ -105,13 +107,13 @@
           <div class="form-group mb-3">
             <label for="judulVideo">Judul Video</label>
             <input type="text" class="form-control" id="judulVideo" name="judul_video"
-              value="{{ session('informasiDasar.judulVideo') ?? $informasi->judul_video ?? '' }}"
+              value="{{ session('informasiDasar.judul_video') ?? $informasi->judul_video ?? '' }}"
               placeholder="Masukkan judul video">
           </div>
           <div class="form-group mb-3">
             <label for="linkVideo">Link Video</label>
             <input type="url" class="form-control" id="linkVideo" name="link_video"
-              value="{{ session('informasiDasar.linkVideo') ?? $informasi->link_video ?? '' }}"
+              value="{{ session('informasiDasar.link_video') ?? $informasi->link_video ?? '' }}"
               placeholder="Masukkan URL video">
           </div>
 
@@ -120,19 +122,19 @@
           <div class="form-group mb-3">
             <label for="jumlahPesertaDidik">Jumlah Peserta Didik</label>
             <input type="number" class="form-control" id="jumlahPesertaDidik" name="jumlah_peserta_didik"
-              value="{{ session('informasiDasar.jumlahPesertaDidik') ?? $informasi->jumlah_peserta_didik ?? '' }}"
+              value="{{ session('informasiDasar.jumlah_peserta_didik') ?? $informasi->jumlah_peserta_didik ?? '' }}"
               placeholder="Masukkan jumlah peserta didik" min="0">
           </div>
           <div class="form-group mb-3">
             <label for="jumlahGuru">Jumlah Guru & Tendik</label>
             <input type="number" class="form-control" id="jumlahGuru" name="jumlah_guru"
-              value="{{ session('informasiDasar.jumlahGuru') ?? $informasi->jumlah_guru ?? '' }}"
+              value="{{ session('informasiDasar.jumlah_guru') ?? $informasi->jumlah_guru ?? '' }}"
               placeholder="Masukkan jumlah guru & tendik" min="0">
           </div>
           <div class="form-group mb-3">
             <label for="jumlahKelas">Jumlah Kelas</label>
             <input type="number" class="form-control" id="jumlahKelas" name="jumlah_kelas"
-              value="{{ session('informasiDasar.jumlahKelas') ?? $informasi->jumlah_kelas ?? '' }}"
+              value="{{ session('informasiDasar.jumlah_kelas') ?? $informasi->jumlah_kelas ?? '' }}"
               placeholder="Masukkan jumlah kelas" min="0">
           </div>
 
@@ -145,13 +147,13 @@
           <div class="form-group mb-3">
             <label for="namaKepalaSekolah">Nama Kepala Sekolah</label>
             <input type="text" class="form-control" id="namaKepalaSekolah" name="nama_kepala_sekolah"
-              value="{{ session('informasiDasar.namaKepalaSekolah') ?? $informasi->nama_kepala_sekolah ?? '' }}"
+              value="{{ session('informasiDasar.nama_kepala_sekolah') ?? $informasi->nama_kepala_sekolah ?? '' }}"
               placeholder="Masukkan nama kepala sekolah">
           </div>
           <div class="form-group mb-3">
             <label for="sambutanKepalaSekolah">Sambutan Kepala Sekolah</label>
             <textarea class="form-control" id="sambutanKepalaSekolah" name="sambutan_kepala_sekolah" rows="3"
-              placeholder="Masukkan sambutan kepala sekolah">{{ session('informasiDasar.sambutanKepalaSekolah') ?? $informasi->sambutan_kepala_sekolah ?? '' }}</textarea>
+              placeholder="Masukkan sambutan kepala sekolah">{{ session('informasiDasar.sambutan_kepala_sekolah') ?? $informasi->sambutan_kepala_sekolah ?? '' }}</textarea>
           </div>
           <div class="d-flex justify-content-end mt-4">
             <button type="submit" class="btn btn-primary ms-auto" style="display: block !important;">Simpan</button>

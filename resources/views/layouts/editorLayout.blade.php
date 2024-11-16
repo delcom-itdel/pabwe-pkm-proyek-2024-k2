@@ -249,11 +249,7 @@
     </div>
   </div>
 
-
-    <!-- Konten Utama -->
-    <div class="content container-fluid">
       @yield('content')
-    </div>
     
   <!-- Footer -->
   <div class="footer">
