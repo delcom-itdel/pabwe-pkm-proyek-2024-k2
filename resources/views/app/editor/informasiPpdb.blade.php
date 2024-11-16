@@ -1,4 +1,4 @@
-@extends('layouts.adminLayout')
+@extends('layouts.editorLayout')
 
 @section('title', 'Informasi PPDB - SMAN 1 Balige')
 

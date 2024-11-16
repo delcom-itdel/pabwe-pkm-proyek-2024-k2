@@ -207,7 +207,7 @@
           Informasi <span class="caret">&#x25BC;</span>
         </a>
         <div id="informasiCollapse" class="collapse pl-3">
-          <a class="nav-link" href="{{ route('informasiPbdb') }}">PPDB</a>
+          <a class="nav-link" href="{{ route('informasiPpdb') }}">PPDB</a>
           <a class="nav-link" href="{{ route('informasiArsip') }}">Arsip</a>
           <a class="nav-link" href="{{ route('informasiHubungiKami') }}">Hubungi Kami</a>
         </div>

@@ -61,9 +61,9 @@ Route::middleware(['auth', 'check.roles:Admin,Editor'])->group(function () {
     })->name('profilInformasiDasar');
 
     // Route for PPDB information page
-    Route::get('/informasiPbdb', function () {
-        return view('app.editor.informasiPbdb');
-    })->name('informasiPbdb');
+    Route::get('/informasiPpdb', function () {
+        return view('app.editor.informasiPpdb');
+    })->name('informasiPpdb');
 
     // Route for Arsip information page
     Route::get('/informasiArsip', function () {
@@ -248,7 +248,7 @@ Route::post('edit-staff', [StaffController::class, 'edit'])->name('editstaff');
 Route::delete('delete-staff', [StaffController::class, 'delete'])->name('deletestaff');
 
 
-//route informasippdb
+//route informasi ppdb
 // Route untuk Admin
 Route::prefix('admin')->group(function () {
     Route::get('/admin/informasi-ppdb', [InforrmasiPpdbController::class, 'edit'])->name('admin.informasiPpdb.edit');
