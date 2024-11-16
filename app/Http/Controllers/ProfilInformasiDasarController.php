@@ -100,7 +100,7 @@ class ProfilInformasiDasarController extends Controller
 
         // Kirim data ke view
         return view('app.struktur', [
-            'struktur_organisasi' => $data->struktur_organisasi ?? 'Belum ada data struktur organisasi.',
+            'struktur' => $data->struktur_organisasi ?? 'Belum ada data struktur organisasi.',
         ]);
     }
 }
