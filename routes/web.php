@@ -278,5 +278,4 @@ Route::get('/struktur-organisasi', [ProfilInformasiDasarController::class, 'show
 
 Route::get('/program-sekolah', [ProfilInformasiDasarController::class, 'showProgram'])->name('program');
 
-//menambah galeri
-Route::get('/galeri', [GaleriController::class, 'showgalery'])->name('galeri.index');
+Route::get('/showGallery', [GaleriController::class, 'showGallery'])->name('showGallery');

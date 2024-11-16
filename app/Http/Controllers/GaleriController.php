@@ -7,6 +7,8 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
+
 
 class GaleriController extends Controller
 {
@@ -105,14 +107,9 @@ class GaleriController extends Controller
 
         return redirect()->route('galeri')->with('error', 'Data galeri tidak ditemukan.');
     }
-    public function showgalery()
+    public function showGallery()
     {
-        // Ambil semua data dari tabel galeri
-        $gallery = Gallery::all();
-
-        // Kirim data ke view
-        return view('app.galeri', compact('gallery'));
+        $galleries = DB::table('galeri')->get(); // Ambil semua data dari tabel galeri
+        return view('app.galeri', compact('galleries'));
     }
-
-
 }

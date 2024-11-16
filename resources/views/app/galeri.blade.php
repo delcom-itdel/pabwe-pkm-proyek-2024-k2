@@ -4,25 +4,28 @@
 
 @section('content')
 <main id="main" class="pt-5">
-    <section id="galeri" class="galeri-section mt-5">
+    <section id="shoGallery" class="showGallery-section mt-5">
         <div class="container" data-aos="fade-up">
-            <div class="section-title">
-                <h2>Galeri</h2>
-            </div>
-            <div class="row">
-                @forelse ($gallery as $item)
-                    <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <img src="{{ asset('storage/' . $item->photo) }}" class="card-img-top" alt="Gambar galeri">
-                            <div class="card-body">
-                                <p class="card-text">{{ $item->description ?? 'Deskripsi tidak tersedia.' }}</p>
-                            </div>
-                        </div>
-                    </div>
-                @empty
-                    <p>Galeri masih kosong.</p>
-                @endforelse
-            </div>
+            <h1>Galeri</h1>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Foto</th>
+                        <th>Deskripsi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($galleries as $gallery)
+                    <tr>
+                        <td>
+                            <img src="{{ asset('uploads/galeri/' . $gallery->photo) }}" alt="Foto" width="150">
+                        </td>
+                        <td>{{ $gallery->description }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </section>
 </main>
