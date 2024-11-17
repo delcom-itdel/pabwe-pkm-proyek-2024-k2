@@ -1,16 +1,18 @@
 @extends('layouts.main')
 
-@section('title', 'Alumni - SMAN 1 Balige')
+@section('title', 'Hubungi Kami - SMAN 1 Balige')
 
 @section('content')
-<section id="hubungi" class="hubungi-section mt-5">
-    <div class="container" data-aos="fade-up">
-        <div class="section-title">
-            <h2>Hubungi</h2>
-        </div>
-        <p>
-          
-        </p>
+
+<!-- Main Content -->
+ 
+<section id="hubungiKami" class="hubungiKami-section mt-5">
+  <div class="container" data-aos="fade-up">
+    <div class="section-title">
+      <h2>Informasi Hubungi Kami</h2>
     </div>
+    <p> {{ $info_hubungikami }} </p>
+  </div>
 </section>
-@endsection
+
+ @endsection

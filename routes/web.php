@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfilInformasiDasarController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\InforrmasiPpdbController;
+use App\Http\Controllers\HubungiKamiController;
 
 //awal
 Route::get('/', function () {
@@ -282,3 +283,13 @@ Route::get('/struktur-organisasi', [ProfilInformasiDasarController::class, 'show
 Route::get('/program-sekolah', [ProfilInformasiDasarController::class, 'showProgram'])->name('program');
 
 Route::get('/showGallery', [GaleriController::class, 'showGallery'])->name('showGallery');
+
+// hubungi kami
+Route::get('/admin/hubungi/edit', [HubungiKamiController::class, 'edit'])->name('admin.hubungi.edit');
+Route::post('/admin/hubungi/save', [HubungiKamiController::class, 'save'])->name('admin.hubungi.save');
+
+Route::get('/editor/hubungiKami/edit', [HubungiKamiController::class, 'edit1'])->name('editor.hubungiKami.edit');
+Route::post('/editor/hubungiKami/save', [HubungiKamiController::class, 'save1'])->name('editor.hubungiKami.save');
+
+Route::get('/hubungiKami', [HubungiKamiController::class, 'showContactInfo'])->name('hubungiKami.show');
+Route::get('/updated-at', [HubungiKamiController::class, 'showTime'])->name('updated_at.show');
