@@ -28,18 +28,9 @@
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: QuickStart
-  * Template URL: https://bootstrapmade.com/quickstart-bootstrap-startup-website-template/
-  * Updated: Aug 07 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body class="index-page">
-
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
@@ -59,7 +50,7 @@
               <li><a href="{{ route('struktur') }}">Struktur Organisasi</a></li>
               <li><a href="{{ route('program') }}">Program Sekolah</a></li>
               <li><a href="{{ route('staf') }}">Staf Guru & Karyawan</a></li>
-              <li><a href="{{ route('prestasi') }}">Prestasi</a></li>
+              <li><a href="{{ route('prestasi1') }}">Prestasi</a></li>
               <li><a href="{{ route('alumni') }}">Alumni</a></li>
             </ul>
           </li>
@@ -75,7 +66,6 @@
               <li><a href="{{ route('hubungiKami') }}">Hubungi Kami</a></li>
             </ul>
           </li>
-
           <li class="dropdown">
             <a href="#services">
               <span>Platform Kami</span>
@@ -84,47 +74,39 @@
             <ul>
               <!-- Item SIS tetap statis -->
               <li><a href="{{ route('login') }}">SIS</a></li>
-              
+
               <!-- Item lainnya ditambahkan secara dinamis -->
               @foreach ($platforms as $platform)
-                <li><a href="{{ $platform->url }}" target="_blank">{{ $platform->name }}</a></li>
-              @endforeach
+          <li><a href="{{ $platform->url }}" target="_blank">{{ $platform->name }}</a></li>
+        @endforeach
             </ul>
           </li>
-          
-
-
-          <li><a href="index.html#contact">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-
-
-
     </div>
+
   </header>
+  <main id="main" class="pt-5">
+    @yield('content')
+  </main>
 
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
-    <main id="main" class="pt-5">
-        @yield('content')
-    </main>
+  <!-- Preloader -->
+  <div id="preloader"></div>
 
-    <!-- Scroll Top -->
-    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+  <!-- Vendor JS Files -->
+  <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
+  <script src="{{ asset('assets/vendor/aos/aos.js') }}"></script>
+  <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
+  <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
 
-    <!-- Preloader -->
-    <div id="preloader"></div>
-
-    <!-- Vendor JS Files -->
-    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
-    <script src="{{ asset('assets/vendor/aos/aos.js') }}"></script>
-    <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
-
-    <!-- Main JS File -->
-    <script src="{{ asset('assets/js/main.js') }}"></script>
+  <!-- Main JS File -->
+  <script src="{{ asset('assets/js/main.js') }}"></script>
 </body>
 
 </html>
