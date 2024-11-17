@@ -210,6 +210,9 @@ Route::prefix('editor')->group(function () {
     Route::get('/informasi-dasars', [InformasiDasarController::class, 'indexInformasiDasar1'])->name('editor.informasiDasar.index');
     Route::post('/informasi-dasars', [InformasiDasarController::class, 'updateInformasiDasar1'])->name('editor.informasiDasar.update');
 });
+//mengambil data peta lokasi
+Route::get('/lokasi', [InformasiDasarController::class, 'showPetaLokasi'])->name('peta_lokasi');
+Route::get('/', [InformasiDasarController::class, 'showHighlight'])->name('highlight');
 
 //route platform
 Route::get('/platform', [AdminController::class, 'index'])->name('platform');

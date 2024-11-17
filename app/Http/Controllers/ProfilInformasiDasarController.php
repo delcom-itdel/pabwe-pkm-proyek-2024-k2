@@ -115,5 +115,4 @@ class ProfilInformasiDasarController extends Controller
         ]);
     }
 
-
 }

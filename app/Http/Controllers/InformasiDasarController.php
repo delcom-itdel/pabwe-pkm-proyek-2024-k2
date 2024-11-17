@@ -78,4 +78,21 @@ class InformasiDasarController extends Controller
         session(['informasiDasar' => $validated]);
         return redirect()->route('editor.informasiDasar.index')->with('success', 'Informasi Dasar berhasil disimpan.');
     }
+
+    public function showHighlight(){
+        $informasi = InformasiDasar::first();
+
+        return view('app.home', [
+            'highlight'=> $informasi->highlight ?? '',
+            'sub_highlight'=> $informasi->sub_highlight ??'',
+        ]);
+    }
+
+    public function showPetaLokasi(){
+        $informasi = InformasiDasar::first();
+        
+        return view('app.home', [
+            'urlloc' => $informasi->peta_lokasi ?? '',
+        ]);
+    }
 }
