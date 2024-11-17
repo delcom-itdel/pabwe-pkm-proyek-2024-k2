@@ -24,7 +24,7 @@ class HubungiKamiController extends Controller
     public function save(Request $request)
     {
         $validatedData = $request->validate([
-            'hubungikami' => 'required|string',
+            'info_hubungikami' => 'required|string',
             'updated_at',
         ]);
 
@@ -46,14 +46,14 @@ class HubungiKamiController extends Controller
         session(['dataHubungiKami' => $data]);
 
         // Kirim data ke view editor
-        return view('app.editor.hubungiKami', compact('data'));
+        return view('app.editor.informasiHubungiKami', compact('data'));
     }
 
     // Metode untuk menyimpan data dari halaman Editor
     public function save1(Request $request)
     {
         $validatedData = $request->validate([
-            'info_ppdb' => 'required|string',
+            'info_hubungikami' => 'required|string',
             'updated_at',
         ]);
 
@@ -73,8 +73,8 @@ class HubungiKamiController extends Controller
         $data = HubungiKami::first();
 
         // Kirim data ke view
-        return view('app.hubungiKami', [
-            'hubungiKami' => $data->hubungiKami ?? 'Data belum tersedia.']);
+        return view('app.hubungikami', [
+            'info_hubungikami' => $data->info_hubungikami ?? 'Data belum tersedia.']);
     }
 
     public function showTime()

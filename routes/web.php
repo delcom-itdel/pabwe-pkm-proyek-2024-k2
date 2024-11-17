@@ -271,6 +271,23 @@ Route::prefix('editor')->group(function () {
 //mengambil data ppdb
 Route::get('/ppdb', [InforrmasiPpdbController::class, 'showInfoPpdb'])->name('ppdb');
 
+//route hubungi kami
+// Route untuk Admin
+Route::prefix('admin')->group(function () {
+    Route::get('/admin/hubungikami', [HubungiKamiController::class, 'edit'])->name('admin.hubungiKami.edit');
+    Route::post('/admin/hubungikami', [HubungiKamiController::class, 'save'])->name('admin.hubungi.save');
+});
+
+
+// Route untuk Editor
+Route::prefix('editor')->group(function () {
+    Route::get('/editor/hubungikami', [HubungiKamiController::class, 'edit1'])->name('editor.hubungiKami.edit');
+    Route::post('/editor/hubungikami', [HubungiKamiController::class, 'save1'])->name('editor.hubungi.save');
+});
+
+//mengambil data hubungi kami
+Route::get('/hubungiKami', [HubungiKamiController::class, 'showInfoHubungiKami'])->name('hubungiKami');
+
 //mengambil data sejarah
 Route::get('/sejarah', [ProfilInformasiDasarController::class, 'showSejarah'])->name('sejarah');
 
@@ -283,13 +300,3 @@ Route::get('/struktur-organisasi', [ProfilInformasiDasarController::class, 'show
 Route::get('/program-sekolah', [ProfilInformasiDasarController::class, 'showProgram'])->name('program');
 
 Route::get('/showGallery', [GaleriController::class, 'showGallery'])->name('showGallery');
-
-// hubungi kami
-Route::get('/admin/hubungi/edit', [HubungiKamiController::class, 'edit'])->name('admin.hubungi.edit');
-Route::post('/admin/hubungi/save', [HubungiKamiController::class, 'save'])->name('admin.hubungi.save');
-
-Route::get('/editor/hubungiKami/edit', [HubungiKamiController::class, 'edit1'])->name('editor.hubungiKami.edit');
-Route::post('/editor/hubungiKami/save', [HubungiKamiController::class, 'save1'])->name('editor.hubungiKami.save');
-
-Route::get('/hubungiKami', [HubungiKamiController::class, 'showContactInfo'])->name('hubungiKami.show');
-Route::get('/updated-at', [HubungiKamiController::class, 'showTime'])->name('updated_at.show');

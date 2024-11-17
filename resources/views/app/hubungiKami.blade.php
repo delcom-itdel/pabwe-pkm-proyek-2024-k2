@@ -6,7 +6,7 @@
 
 <!-- Main Content -->
  
-<section id="hubungiKami" class="hubungiKami-section mt-5">
+<section id="info_hubungikami" class="info_hubungikami-section mt-5">
   <div class="container" data-aos="fade-up">
     <div class="section-title">
       <h2>Informasi Hubungi Kami</h2>
