@@ -16,15 +16,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($galleries as $gallery)
-                    <tr>
-                        <td>
-                            <img src="{{ asset('uploads/galeri/' . $gallery->photo) }}" alt="Foto" width="150">
-                        </td>
-                        <td>{{ $gallery->description }}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
+    @foreach($galleries as $gallery)
+    <tr>
+        <td>
+            <img src="{{ asset('galeri_img/' . $gallery->photo) }}" alt="Foto" width="150">
+        </td>
+        <td>{{ $gallery->description }}</td>
+    </tr>
+    @endforeach
+</tbody>
+
             </table>
         </div>
     </section>
