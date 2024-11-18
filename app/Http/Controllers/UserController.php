@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -51,6 +52,12 @@ class UserController extends Controller
             'photo' => $fileName,
         ]);
 
+        // Catat log aktivitas penambahan pengguna
+        DB::table('log')->insert([
+            'pesan' => "'" . Auth::user()->name . "' menambahkan pengguna baru dengan nama '" . $request->name . "'.",
+            'created_at' => now(),
+        ]);
+
         return redirect()->route('kelola')->with('success', 'Pengguna berhasil ditambahkan.');
     }
 
@@ -86,6 +93,12 @@ class UserController extends Controller
         $user->role = $request->role;
         $user->save();
 
+        // Catat log aktivitas pembaruan pengguna
+        DB::table('log')->insert([
+            'pesan' => "'" . Auth::user()->name . "' memperbarui data pengguna dengan nama '" . $request->name . "'.",
+            'created_at' => now(),
+        ]);
+
         return redirect()->route('kelola')->with('success', 'Pengguna berhasil diubah.');
     }
 
@@ -101,7 +114,14 @@ class UserController extends Controller
             unlink(public_path('user_photos/' . $user->photo));
         }
 
+        $userName = $user->name;
         $user->delete();
+
+        // Catat log aktivitas penghapusan pengguna
+        DB::table('log')->insert([
+            'pesan' => "'" . Auth::user()->name . "' menghapus pengguna dengan nama '" . $userName . "'.",
+            'created_at' => now(),
+        ]);
 
         return redirect()->route('kelola')->with('success', 'Pengguna berhasil dihapus.');
     }
