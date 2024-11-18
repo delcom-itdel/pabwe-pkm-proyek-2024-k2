@@ -128,16 +128,12 @@ Route::get('/alumni2', function () {
 
 // Rute untuk Alumni
 Route::get('/alumni2', [AlumniController::class, 'index'])->name('alumni2');
+Route::post('/alumni2', [AlumniController::class, 'store'])->name('addalumni');
+Route::put('/alumni2', [AlumniController::class, 'edit'])->name('editalumni');
+Route::delete('/alumni2', [AlumniController::class, 'delete'])->name('deletealumni');
 
-Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
-    Route::get('/alumni2', [AlumniController::class, 'index'])->name('alumni.index');
-    Route::post('/alumni2', [AlumniController::class, 'store'])->name('alumni.store');  // Definisikan route store
-    Route::put('/alumni2', [AlumniController::class, 'update'])->name('alumni.update');// routes/web.php
-    // Route::put('/alumni2/{id}', [AlumniController::class, 'update'])->name('alumni.update');
-    Route::delete('/alumni2', [AlumniController::class, 'destroy'])->name('alumni.destroy');
-});
 
-Route::get('/alumni', [AlumniController::class, 'indexForUser'])->name('alumni');
+
 
 
 Route::get('sarana', [SaranaController::class, 'index'])->name('sarana');

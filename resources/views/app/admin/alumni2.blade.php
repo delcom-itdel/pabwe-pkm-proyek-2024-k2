@@ -12,15 +12,16 @@
 
             <!-- Alert Messages -->
             @if (session()->has('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
             @endif
             @if (session()->has('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
             @endif
+
             <!-- Table Section -->
             <div class="card">
                 <div class="card-header">
@@ -47,7 +48,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form action="{{ route('admin.alumni.store') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('addalumni') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="modal-body">
                                         <div class="mb-3">
@@ -82,37 +83,38 @@
                             </div>
                         </div>
                     </div>
+
                     <!-- Tabel Alumni -->
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>No</th>
+                                <th>No <i class="fas fa-sort" data-column="no"></i></th>
                                 <th>Foto</th>
-                                <th>Nama</th>
-                                <th>Jurusan</th>
-                                <th>Tahun Lulus</th>
-                                <th>Testimoni</th>
+                                <th>Nama <i class="fas fa-sort" data-column="name"></i></th>
+                                <th>Jurusan <i class="fas fa-sort" data-column="jurusan"></i></th>
+                                <th>Tahun Lulus <i class="fas fa-sort" data-column="tahun_lulus"></i></th>
+                                <th>Testimoni <i class="fas fa-sort" data-column="testimoni"></i></th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody id="alumniTable">
-                            @forelse($alumni as $index => $item)
-                                <tr>
-                                    <td>{{ $index + 1 }}</td>
-                                    <td><img src="{{ asset('storage/' . $item->photo) }}" alt="Photo" width="50"></td>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{{ $item->jurusan }}</td>
-                                    <td>{{ $item->tahun_lulus }}</td>
-                                    <td>{{ $item->testimoni }}</td>
-                                    <td>
-                                        <button type="button" class="btn btn-warning btn-sm" data-id="{{ $item->id }}" data-toggle="modal" data-target="#editModal">Edit</button>
-                                        <button type="button" class="btn btn-danger btn-sm" data-id="{{ $item->id }}" data-toggle="modal" data-target="#deleteModal">Delete</button>
-                                    </td>
-                                </tr>
+                            @forelse($data['alumni'] as $index => $item)
+                            <tr>
+                                <td>{{ $index + 1 }}</td>
+                                <td><img src="{{ asset('alumni_img/' . $item->photo) }}" alt="Photo" width="50"></td>
+                                <td>{{ $item->name }}</td>
+                                <td>{{ $item->jurusan }}</td>
+                                <td>{{ $item->tahun_lulus }}</td>
+                                <td>{{ $item->testimoni }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-warning btn-sm" data-id="{{ $item->id }}" data-toggle="modal" data-target="#editModal">Edit</button>
+                                    <button type="button" class="btn btn-danger btn-sm" data-id="{{ $item->id }}" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                                </td>
+                            </tr>
                             @empty
-                                <tr>
-                                    <td colspan="7" class="text-center">Tidak ada data.</td>
-                                </tr>
+                            <tr>
+                                <td colspan="7" class="text-center">Tidak ada data.</td>
+                            </tr>
                             @endforelse
                         </tbody>
                     </table>
@@ -132,11 +134,12 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('admin.alumni.update') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('editalumni') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="modal-body">
-                    <input type="hidden" name="alumni_id" value="">
+                    <input type="hidden" name="alumni_id" id="edit_alumni_id" value="">
+
                     <div class="mb-3">
                         <label for="editPhoto" class="form-label">Foto</label>
                         <input type="file" class="form-control" id="editPhoto" name="photo">
@@ -171,8 +174,6 @@
 </div>
 
 
-
-
 <!-- Modal Delete Data -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -183,12 +184,12 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('admin.alumni.destroy') }}" method="POST">
+            <form action="{{ route('deletealumni') }}" method="POST">
                 @csrf
                 @method('DELETE')
+                <input type="hidden" name="alumni_id" value="">
                 <div class="modal-body">
-                    <input type="hidden" name="alumni_id" value="">
-                    <p>Apakah Anda yakin ingin menghapus data ini?</p>
+                    <p>Apakah Anda yakin ingin menghapus data alumni ini?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -199,27 +200,132 @@
     </div>
 </div>
 
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('[data-toggle="modal"]').forEach(button => {
-            button.addEventListener('click', function () {
-                const alumniId = this.getAttribute('data-id');
-                if (this.getAttribute('data-target') === "#editModal") {
-                    fetch(`/alumni/${alumniId}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            document.querySelector('#editModal input[name="alumni_id"]').value = data.id;
-                            document.querySelector('#editModal #editName').value = data.name;
-                            document.querySelector('#editModal #editTahunLulus').value = data.tahun_lulus;
-                            document.querySelector('#editModal #editJurusan').value = data.jurusan;
-                            document.querySelector('#editModal #editTestimoni').value = data.testimoni;
-                        });
-                } else if (this.getAttribute('data-target') === "#deleteModal") {
-                    document.querySelector('#deleteModal input[name="alumni_id"]').value = alumniId;
+        let sortOrder = {
+            column: null,
+            direction: 'asc'
+        };
+
+        // Fungsi untuk mengurutkan tabel
+        function sortTable(column, direction) {
+            const rows = Array.from(document.querySelectorAll('#alumniTable tr'));
+            const columnIndex = {
+                no: 0,
+                name: 2,
+                jurusan: 3,
+                tahun_lulus: 4,
+                testimoni: 5
+            } [column];
+
+            // Sorting berdasarkan kolom dan arah
+            rows.sort((rowA, rowB) => {
+                const cellA = rowA.cells[columnIndex].textContent.trim();
+                const cellB = rowB.cells[columnIndex].textContent.trim();
+
+                if (direction === 'asc') {
+                    return cellA.localeCompare(cellB);
+                } else {
+                    return cellB.localeCompare(cellA);
                 }
+            });
+
+            // Memasukkan kembali baris yang telah diurutkan ke dalam tbody
+            const tbody = document.querySelector('#alumniTable');
+            rows.forEach(row => tbody.appendChild(row));
+        }
+
+        // Event listener untuk sorting
+        document.querySelectorAll('th .fas').forEach(icon => {
+            icon.addEventListener('click', () => {
+                const column = icon.getAttribute('data-column');
+                const th = icon.closest('th');
+
+                // Menentukan arah sorting
+                if (sortOrder.column === column) {
+                    sortOrder.direction = sortOrder.direction === 'asc' ? 'desc' : 'asc';
+                } else {
+                    sortOrder.column = column;
+                    sortOrder.direction = 'asc';
+                }
+
+                // Mengatur ikon panah yang aktif
+                document.querySelectorAll('th').forEach(th => {
+                    th.classList.remove('sorted-asc', 'sorted-desc');
+                });
+                th.classList.add(sortOrder.direction === 'asc' ? 'sorted-asc' : 'sorted-desc');
+
+                // Mengurutkan tabel
+                sortTable(column, sortOrder.direction);
             });
         });
     });
-
 </script>
+
+<script>
+    // Fungsi untuk menyaring tabel berdasarkan input pencarian
+    function filterTable() {
+        const searchInput = document.getElementById("search").value.toLowerCase();
+        const rows = document.querySelectorAll("#alumniTable tr");
+        rows.forEach(row => {
+            const cells = row.getElementsByTagName("td");
+            const nameCell = cells[2];
+            const jurusanCell = cells[3];
+            const tahunLulusCell = cells[4];
+            const testimoniCell = cells[5];
+
+            // Jika salah satu kolom mengandung kata yang dicari, tampilkan baris tersebut
+            if (nameCell && jurusanCell && tahunLulusCell && testimoniCell) {
+                const name = nameCell.textContent.toLowerCase();
+                const jurusan = jurusanCell.textContent.toLowerCase();
+                const tahunLulus = tahunLulusCell.textContent.toLowerCase();
+                const testimoni = testimoniCell.textContent.toLowerCase();
+
+                // Cek apakah salah satu kolom mengandung input pencarian
+                if (name.includes(searchInput) || jurusan.includes(searchInput) || tahunLulus.includes(searchInput) || testimoni.includes(searchInput)) {
+                    row.style.display = ""; // Tampilkan baris
+                } else {
+                    row.style.display = "none"; // Sembunyikan baris
+                }
+            }
+        });
+    }
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Isi data lama ke modal edit
+        document.querySelectorAll('[data-target="#editModal"]').forEach(button => {
+            button.addEventListener('click', function() {
+                const alumniId = this.getAttribute('data-id');
+                const row = this.closest('tr');
+                const name = row.querySelector('td:nth-child(3)').textContent.trim();
+                const tahunLulus = row.querySelector('td:nth-child(5)').textContent.trim();
+                const jurusan = row.querySelector('td:nth-child(4)').textContent.trim();
+                const testimoni = row.querySelector('td:nth-child(6)').textContent.trim();
+
+                // Memasukkan data ke dalam modal
+                document.getElementById('edit_alumni_id').value = alumniId;
+                document.getElementById('editName').value = name;
+                document.getElementById('editTahunLulus').value = tahunLulus;
+                document.getElementById('editJurusan').value = jurusan;
+                document.getElementById('editTestimoni').value = testimoni;
+            });
+        });
+
+
+
+        // Set ID untuk Delete
+        document.querySelectorAll('[data-target="#deleteModal"]').forEach(button => {
+            button.addEventListener('click', function() {
+                const alumniId = this.getAttribute('data-id');
+                document.querySelector('#deleteModal input[name="alumni_id"]').value = alumniId;
+            });
+        });
+    });
+</script>
+
+
 @endsection

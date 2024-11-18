@@ -3,161 +3,111 @@
 namespace App\Http\Controllers;
 
 use App\Models\Alumni;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class AlumniController extends Controller
 {
-    /**
-     * Menampilkan data alumni
-     *
-     * @return \Illuminate\View\View
-     */
-    public function index()
+    public function index(): View
     {
-        $alumni = Alumni::all();
-        return view('app.admin.alumni2', compact('alumni'));
+        $data['alumni'] = Alumni::all();
+        return view('app.admin.alumni2', ['data' => $data]);
     }
 
-    /**
-     * Menyimpan data alumni baru
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'photo' => 'required|image',
-            'name' => 'required|string',
-            'tahun_lulus' => 'required|integer',
-            'jurusan' => 'required|string',
-            'testimoni' => 'nullable|string',
-        ]);
-
-        // Proses menyimpan foto
-        $path = $request->file('photo')->store('alumni_photos', 'public');
-
-        // Membuat data alumni baru
-        $alumni = Alumni::create(array_merge($validated, ['photo' => $path]));
-
-        // Catat log aktivitas menambahkan data alumni
-        DB::table('log')->insert([
-            'pesan' => "'" . Auth::user()->name . "' menambahkan data Alumni dengan nama '" . $request->name . "'.",
-            'created_at' => now(),
-        ]);
-
-        return redirect()->back()->with('success', 'Data berhasil ditambahkan!');
-    }
-
-    /**
-     * Menampilkan form edit alumni untuk modal
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function edit($id)
-    {
-        $alumni = Alumni::findOrFail($id);
-        return response()->json($alumni); // Kirim data alumni ke modal dalam format JSON
-    }
-
-    /**
-     * Memperbarui data alumni
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(Request $request, $id)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string',
-            'tahun_lulus' => 'required|integer',
-            'jurusan' => 'required|string',
-            'testimoni' => 'nullable|string',
-            'photo' => 'nullable|image', // Foto tidak wajib, hanya jika di-upload
-        ]);
-
-        // Mencari alumni berdasarkan ID yang diterima
-        $alumni = Alumni::findOrFail($id);
-
-        // Jika ada foto baru yang di-upload, simpan foto tersebut
-        if ($request->hasFile('photo')) {
-            // Hapus foto lama jika ada
-            if ($alumni->photo && Storage::disk('public')->exists($alumni->photo)) {
-                Storage::disk('public')->delete($alumni->photo);
-            }
-
-            // Simpan foto baru
-            $validated['photo'] = $request->file('photo')->store('alumni_photos', 'public');
-        }
-
-        // Update data alumni
-        $alumni->update($validated);
-
-        // Catat log aktivitas pembaruan data alumni
-        DB::table('log')->insert([
-            'pesan' => "'" . Auth::user()->name . "' memperbarui data Alumni dengan nama '" . $request->name . "'.",
-            'created_at' => now(),
-        ]);
-
-        return redirect()->back()->with('success', 'Data berhasil diperbarui!');
-    }
-
-    /**
-     * Menghapus data alumni
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function destroy(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'alumni_id' => 'required|exists:alumni,id',
+            'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'name' => 'required|string|max:255',
+            'tahun_lulus' => 'required|integer',
+            'jurusan' => 'required|string|max:255',
+            'testimoni' => 'nullable|string|max:1000',
         ]);
 
-        $alumni = Alumni::findOrFail($request->alumni_id);
+        $fileName = time() . '.' . $request->photo->getClientOriginalExtension();
+        $request->photo->move(public_path('alumni_img'), $fileName);
 
-        // Hapus foto dari penyimpanan jika ada
-        if ($alumni->photo && Storage::disk('public')->exists($alumni->photo)) {
-            Storage::disk('public')->delete($alumni->photo);
-        }
+        $alumni = Alumni::create([
+            'photo' => $fileName,
+            'name' => $request->name,
+            'tahun_lulus' => $request->tahun_lulus,
+            'jurusan' => $request->jurusan,
+            'testimoni' => $request->testimoni,
+        ]);
 
-        $alumniName = $alumni->name;
-        $alumni->delete();
-
-        // Catat log aktivitas penghapusan data alumni
+        // Catat log aktivitas menambahkan alumni
         DB::table('log')->insert([
-            'pesan' => "'" . Auth::user()->name . "' menghapus data Alumni dengan nama '" . $alumniName . "'.",
+            'pesan' => "'" . Auth::user()->name . "' menambahkan data Alumni '" . $request->name . "'.",
             'created_at' => now(),
         ]);
 
-        return redirect()->back()->with('success', 'Data berhasil dihapus!');
+        return $alumni
+            ? redirect()->route('alumni2')->with('success', 'Data berhasil ditambahkan.')
+            : redirect()->route('alumni2')->with('error', 'Data tidak berhasil ditambahkan.');
     }
 
-    /**
-     * Menampilkan semua data alumni untuk user
-     *
-     * @return \Illuminate\View\View
-     */
-    public function indexForUser()
+    public function edit(Request $request): RedirectResponse
     {
-        $alumni = Alumni::all();
-        return view('app.alumni', compact('alumni'));
+        $alumni = Alumni::find($request->alumni_id);
+
+        if ($alumni) {
+            if ($request->hasFile('photo')) {
+                if (File::exists(public_path('alumni_img/' . $alumni->photo))) {
+                    File::delete(public_path('alumni_img/' . $alumni->photo));
+                }
+
+                $fileName = time() . '.' . $request->photo->getClientOriginalExtension();
+                $request->photo->move(public_path('alumni_img'), $fileName);
+                $alumni->photo = $fileName;
+            }
+
+            $alumni->name = $request->name;
+            $alumni->tahun_lulus = $request->tahun_lulus;
+            $alumni->jurusan = $request->jurusan;
+            $alumni->testimoni = $request->testimoni;
+
+            $result = $alumni->save();
+
+            // Catat log aktivitas mengedit alumni
+            DB::table('log')->insert([
+                'pesan' => "'" . Auth::user()->name . "' mengubah data Alumni '" . $request->name . "'.",
+                'created_at' => now(),
+            ]);
+
+            return $result
+                ? redirect()->route('alumni2')->with('success', 'Data berhasil diubah.')
+                : redirect()->route('alumni2')->with('error', 'Gagal mengubah data.');
+        }
+
+        return redirect()->route('alumni2')->with('error', 'Data tidak ditemukan.');
     }
 
-    /**
-     * Menampilkan detail alumni berdasarkan ID
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function show($id)
+    public function delete(Request $request): RedirectResponse
     {
-        $alumni = Alumni::findOrFail($id); // Menggunakan findOrFail untuk memastikan data ditemukan
-        return response()->json($alumni); // Mengirimkan data alumni dalam format JSON
+        $alumni = Alumni::find($request->alumni_id);
+
+        if ($alumni) {
+            if (File::exists(public_path('alumni_img/' . $alumni->photo))) {
+                File::delete(public_path('alumni_img/' . $alumni->photo));
+            }
+
+            $result = $alumni->delete();
+
+            // Catat log aktivitas menghapus alumni
+            DB::table('log')->insert([
+                'pesan' => "'" . Auth::user()->name . "' menghapus data Alumni '" . $alumni->name . "'.",
+                'created_at' => now(),
+            ]);
+
+            return $result
+                ? redirect()->route('alumni2')->with('success', 'Data berhasil dihapus.')
+                : redirect()->route('alumni2')->with('error', 'Gagal menghapus data.');
+        }
+
+        return redirect()->route('alumni2')->with('error', 'Data tidak ditemukan.');
     }
 }
