@@ -7,6 +7,7 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class PrestasiController extends Controller
 {
@@ -16,14 +17,10 @@ class PrestasiController extends Controller
      * @return View
      */
     public function index(): View
-{
-    // Retrieve all prestasi records from the database
-    $prestasi = Prestasi::all();
-
-    // Pass the $prestasi variable directly to the view
-    return view('app.admin.prestasi', compact('prestasi'));
-}
-
+    {
+        $prestasi = Prestasi::all();
+        return view('app.admin.prestasi', compact('prestasi'));
+    }
 
     /**
      * Menyimpan data prestasi baru
@@ -53,10 +50,17 @@ class PrestasiController extends Controller
             'deskripsi'       => $request->deskripsi
         ]);
 
-        // Cek jika data prestasi berhasil disimpan
-        return $prestasi
-            ? redirect()->route('prestasi')->with('success', 'Data prestasi berhasil ditambahkan.')
-            : redirect()->route('prestasi')->with('error', 'Data prestasi tidak berhasil ditambahkan.');
+        // Simpan log aktivitas jika data berhasil disimpan
+        if ($prestasi) {
+            DB::table('log')->insert([
+                'pesan' => "'" . Auth::user()->name . "' menambahkan data Prestasi '" . $request->judul . "' pada bagian Admin Prestasi.",
+                'created_at' => date('Y-m-d H:i:s'),
+            ]);
+
+            return redirect()->route('prestasi')->with('success', 'Data prestasi berhasil ditambahkan.');
+        }
+
+        return redirect()->route('prestasi')->with('error', 'Data prestasi tidak berhasil ditambahkan.');
     }
 
     /**
@@ -70,22 +74,26 @@ class PrestasiController extends Controller
         $prestasi = Prestasi::find($request->prestasi_id);
 
         if ($prestasi) {
-            // Periksa apakah ada file gambar baru yang diunggah
             if ($request->hasFile('cover')) {
                 $fileName = time() . '.' . $request->cover->getClientOriginalExtension();
                 $request->file('cover')->move(public_path('prestasi_img'), $fileName);
                 $prestasi->cover = $fileName;
             }
 
-            // Update field lainnya
             $prestasi->judul = $request->judul;
             $prestasi->tahun_perolehan = $request->tahun_perolehan;
             $prestasi->deskripsi = $request->deskripsi;
 
-            // Simpan perubahan
-            return $prestasi->save()
-                ? redirect()->route('prestasi')->with('success', 'Data berhasil diubah.')
-                : redirect()->route('prestasi')->with('error', 'Gagal mengubah data.');
+            // Simpan perubahan dan log aktivitas
+            if ($prestasi->save()) {
+                DB::table('log')->insert([
+                    'pesan' => "'" . Auth::user()->name . "' mengubah data Prestasi '" . $request->judul . "' pada bagian Admin Prestasi.",
+                    'created_at' => date('Y-m-d H:i:s'),
+                ]);
+
+                return redirect()->route('prestasi')->with('success', 'Data berhasil diubah.');
+            }
+            return redirect()->route('prestasi')->with('error', 'Gagal mengubah data.');
         }
 
         return redirect()->route('prestasi')->with('error', 'Data tidak ditemukan.');
@@ -101,18 +109,29 @@ class PrestasiController extends Controller
     {
         $prestasi = Prestasi::find($request->prestasi_id);
 
-        if ($prestasi && $prestasi->delete()) {
-            return redirect()->route('prestasi')->with('success', 'Data berhasil dihapus.');
+        if ($prestasi) {
+            $judul = $prestasi->judul;
+            if ($prestasi->delete()) {
+                DB::table('log')->insert([
+                    'pesan' => "'" . Auth::user()->name . "' menghapus data Prestasi '" . $judul . "' pada bagian Admin Prestasi.",
+                    'created_at' => date('Y-m-d H:i:s'),
+                ]);
+
+                return redirect()->route('prestasi')->with('success', 'Data berhasil dihapus.');
+            }
         }
 
         return redirect()->route('prestasi')->with('error', 'Gagal menghapus data.');
     }
-   public function showPrestasi()
-    {
-        // Retrieve all prestasi records from the database
-        $prestasi = Prestasi::all();
 
-        // Pass the $prestasi variable to the 'prestasi' view
+    /**
+     * Menampilkan semua data prestasi
+     *
+     * @return View
+     */
+    public function showPrestasi(): View
+    {
+        $prestasi = Prestasi::all();
         return view('app.admin.prestasi', compact('prestasi'));
     }
 }

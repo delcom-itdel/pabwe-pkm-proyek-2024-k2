@@ -7,6 +7,8 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class StaffController extends Controller
 {
@@ -35,11 +37,18 @@ class StaffController extends Controller
             'position' => $request->position
         ]);
 
-        return $staff
-            ? redirect()->route('staff')->with('success', 'Data staff berhasil ditambahkan.')
-            : redirect()->route('staff')->with('error', 'Data staff tidak berhasil ditambahkan.');
-    }
+        if ($staff) {
+            // Simpan log aktivitas
+            DB::table('log')->insert([
+                'pesan' => "'" . Auth::user()->name . "' menambahkan data Staff '" . $request->name . "' pada bagian Admin Staff.",
+                'created_at' => date('Y-m-d H:i:s'),
+            ]);
 
+            return redirect()->route('staff')->with('success', 'Data staff berhasil ditambahkan.');
+        }
+
+        return redirect()->route('staff')->with('error', 'Data staff tidak berhasil ditambahkan.');
+    }
 
     public function edit(Request $request): RedirectResponse
     {
@@ -60,9 +69,17 @@ class StaffController extends Controller
             $staff->group = $request->group;
             $staff->position = $request->position;
 
-            return $staff->save()
-                ? redirect()->route('staff')->with('success', 'Data staff berhasil diubah.')
-                : redirect()->route('staff')->with('error', 'Gagal mengubah data staff.');
+            if ($staff->save()) {
+                // Simpan log aktivitas
+                DB::table('log')->insert([
+                    'pesan' => "'" . Auth::user()->name . "' mengubah data Staff '" . $request->name . "' pada bagian Admin Staff.",
+                    'created_at' => date('Y-m-d H:i:s'),
+                ]);
+
+                return redirect()->route('staff')->with('success', 'Data staff berhasil diubah.');
+            }
+
+            return redirect()->route('staff')->with('error', 'Gagal mengubah data staff.');
         }
 
         return redirect()->route('staff')->with('error', 'Data staff tidak ditemukan.');
@@ -77,13 +94,24 @@ class StaffController extends Controller
                 File::delete(public_path('staff_img/' . $staff->photo));
             }
 
-            return $staff->delete()
-                ? redirect()->route('staff')->with('success', 'Data staff berhasil dihapus.')
-                : redirect()->route('staff')->with('error', 'Gagal menghapus data staff.');
+            $name = $staff->name; // Save the name for logging
+
+            if ($staff->delete()) {
+                // Simpan log aktivitas
+                DB::table('log')->insert([
+                    'pesan' => "'" . Auth::user()->name . "' menghapus data Staff '" . $name . "' pada bagian Admin Staff.",
+                    'created_at' => date('Y-m-d H:i:s'),
+                ]);
+
+                return redirect()->route('staff')->with('success', 'Data staff berhasil dihapus.');
+            }
+
+            return redirect()->route('staff')->with('error', 'Gagal menghapus data staff.');
         }
 
         return redirect()->route('staff')->with('error', 'Data staff tidak ditemukan.');
     }
+
     public function showStaff()
     {
         $staff = DB::table('staff')->get(); // Get all staff data from the table

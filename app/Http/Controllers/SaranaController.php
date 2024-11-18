@@ -35,9 +35,10 @@ class SaranaController extends Controller
             'description' => $request->deskripsi
         ]);
 
+        // Simpan log aktivitas
         DB::table('log')->insert([
-            'pesan' => "'" . Auth::user()->name . "' " . 'menambahkan data Sarana' . " '" . $request->nama . "' " . 'pada bagian Sarana.',
-            'created_at' => date('Y-m-d H:i:s'),
+            'pesan' => "'" . Auth::user()->name . "' menambahkan data Sarana '" . $request->nama . "' pada bagian Sarana.",
+            'created_at' => now(),
         ]);
 
         return $sarana
@@ -63,9 +64,17 @@ class SaranaController extends Controller
             $sarana->name = $request->nama;
             $sarana->description = $request->deskripsi;
 
-            return $sarana->save()
-                ? redirect()->route('sarana')->with('success', 'Data berhasil diubah.')
-                : redirect()->route('sarana')->with('error', 'Gagal mengubah data.');
+            // Simpan perubahan dan log aktivitas
+            if ($sarana->save()) {
+                DB::table('log')->insert([
+                    'pesan' => "'" . Auth::user()->name . "' mengubah data Sarana '" . $request->nama . "' pada bagian Sarana.",
+                    'created_at' => now(),
+                ]);
+
+                return redirect()->route('sarana')->with('success', 'Data berhasil diubah.');
+            }
+
+            return redirect()->route('sarana')->with('error', 'Gagal mengubah data.');
         }
 
         return redirect()->route('sarana')->with('error', 'Data tidak ditemukan.');
@@ -80,9 +89,17 @@ class SaranaController extends Controller
                 File::delete(public_path('sarana_img/' . $sarana->image));
             }
 
-            return $sarana->delete()
-                ? redirect()->route('sarana')->with('success', 'Data berhasil dihapus.')
-                : redirect()->route('sarana')->with('error', 'Gagal menghapus data.');
+            // Hapus data dan simpan log aktivitas
+            if ($sarana->delete()) {
+                DB::table('log')->insert([
+                    'pesan' => "'" . Auth::user()->name . "' menghapus data Sarana '" . $sarana->name . "' pada bagian Sarana.",
+                    'created_at' => now(),
+                ]);
+
+                return redirect()->route('sarana')->with('success', 'Data berhasil dihapus.');
+            }
+
+            return redirect()->route('sarana')->with('error', 'Gagal menghapus data.');
         }
 
         return redirect()->route('sarana')->with('error', 'Data tidak ditemukan.');
