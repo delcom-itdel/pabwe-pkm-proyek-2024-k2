@@ -134,7 +134,6 @@ Route::get('prestasi', [PrestasiController::class, 'index'])->name('prestasi');
 Route::post('prestasi', [PrestasiController::class, 'store'])->name('addprestasi');
 Route::post('edit-prestasi', [PrestasiController::class, 'edit'])->name('editprestasi');
 Route::post('delete-prestasi', [PrestasiController::class, 'delete'])->name('deleteprestasi');
-Route::get('/prestasi', [PrestasiController::class, 'showPrestasi'])->name('prestasi');
 
 Route::get('/adminppdb', function () {
     return view('app/admin/adminppdb');
@@ -212,9 +211,7 @@ Route::prefix('editor')->group(function () {
     Route::get('/informasi-dasars', [InformasiDasarController::class, 'indexInformasiDasar1'])->name('editor.informasiDasar.index');
     Route::post('/informasi-dasars', [InformasiDasarController::class, 'updateInformasiDasar1'])->name('editor.informasiDasar.update');
 });
-//mengambil data peta lokasi
-Route::get('/lokasi', [InformasiDasarController::class, 'showPetaLokasi'])->name('peta_lokasi');
-Route::get('/', [InformasiDasarController::class, 'showHighlight'])->name('highlight');
+Route::get('/home', [InformasiDasarController::class, 'indexHome']);
 
 //route platform
 Route::get('/platform', [AdminController::class, 'index'])->name('platform');

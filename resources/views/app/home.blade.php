@@ -3,6 +3,47 @@
 @section('title', 'SMAN 1 Balige')
 
 @section('content')
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    .funfact {
+        text-align: center;
+        border-top: 3px solid #007bff;
+        /* Warna biru sesuai contoh */
+        padding-top: 20px;
+        width: 200px;
+    }
+
+    .number {
+        font-size: 2em;
+        /* Membuat angka lebih besar */
+        color: #007bff;
+        /* Warna biru */
+        font-weight: bold;
+    }
+
+    .description {
+        font-size: 1.2em;
+        /* Ukuran teks lebih kecil dari angka */
+        display: block;
+        margin-top: 10px;
+        color: #333;
+        /* Warna teks */
+    }
+</style>
+
 <main class="main">
 
     <!-- Hero Section -->
@@ -12,16 +53,16 @@
         </div>
         <div class="container text-center">
             <div class="d-flex flex-column justify-content-center align-items-center">
-                <h1 data-aos="fade-up">Bersama <span>SMA Negeri 1 Balige</span>, Capai Impianmu</h1>
-                <p data-aos="fade-up" data-aos-delay="100">Ketersediaan lingkungan yang nyaman dan guru yang
-                    berpengalaman
-                    akan mendorong kamu dari awal hingga akhir proses pembelajaran.<br></p>
+                <h1 data-aos="fade-up">
+                    <span>{{ session('informasiDasar.highlight') ?? $informasi->highlight ?? '' }}</span>
+                </h1>
+                <p data-aos="fade-up" data-aos-delay="100">
+                    {{ session('informasiDasar.sub_highlight') ?? $informasi->sub_highlight ?? '' }}<br>
+                </p>
                 <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-                    <a href="#about" class="btn-get-started">Get Started</a>
-                    <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8"
+                    <a href="{{ session('informasiDasar.link_video') ?? $informasi->link_video ?? '' }}"
                         class="glightbox btn-watch-video d-flex align-items-center"><i
-                            class="bi bi-play-circle"></i><span>Watch
-                            Video</span></a>
+                            class="bi bi-play-circle"></i><span>{{ session('informasiDasar.judul_video') ?? $informasi->judul_video ?? '' }}</span></a>
                 </div>
                 <img src="assets/img/hero-services-img.webp" class="img-fluid hero-img" alt="" data-aos="zoom-out"
                     data-aos-delay="300">
@@ -34,45 +75,26 @@
     <section id="featured-services" class="featured-services section light-background">
 
         <div class="container">
-
-            <div class="row gy-4">
-
-                <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="service-item d-flex">
-                        <div class="icon flex-shrink-0"><i class="bi bi-briefcase"></i></div>
-                        <div>
-                            <h4 class="title"><a href="#" class="stretched-link">Lorem Ipsum</a></h4>
-                            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias
-                                excepturi</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Service Item -->
-
-                <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="service-item d-flex">
-                        <div class="icon flex-shrink-0"><i class="bi bi-card-checklist"></i></div>
-                        <div>
-                            <h4 class="title"><a href="#" class="stretched-link">Dolor Sitema</a></h4>
-                            <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                aliquip exa</p>
-                        </div>
-                    </div>
-                </div><!-- End Service Item -->
-
-                <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="service-item d-flex">
-                        <div class="icon flex-shrink-0"><i class="bi bi-bar-chart"></i></div>
-                        <div>
-                            <h4 class="title"><a href="#" class="stretched-link">Sed ut perspiciatis</a></h4>
-                            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                            </p>
-                        </div>
-                    </div>
-                </div><!-- End Service Item -->
-
+            <div class="funfact col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                <span class="number">
+                    <span class="purecounter" data-purecounter-end="200">200</span>+
+                </span>
+                <span class="description">Peserta Didik</span>
             </div>
 
+            <div class="funfact col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                <span class="number">
+                    <span class="purecounter" data-purecounter-end="60">60</span>+
+                </span>
+                <span class="description">Guru & Tendik</span>
+            </div>
+
+            <div class="funfact col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="300">
+                <span class="number">
+                    <span class="purecounter" data-purecounter-end="99">99</span>+
+                </span>
+                <span class="description">Kelas</span>
+            </div>
         </div>
 
     </section><!-- /Featured Services Section -->
@@ -328,11 +350,11 @@
                     <div class="service-item item-cyan position-relative">
                         <i class="bi bi-activity icon"></i>
                         <div>
-                            <h3>Nesciunt Mete</h3>
+                            <h3>Penerimaan Peserta Didik Baru</h3>
                             <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores
                                 iure
                                 perferendis tempore et consequatur.</p>
-                            <a href="#" class="read-more stretched-link">Learn More <i
+                            <a href="{{ route('ppdb') }}" class="read-more stretched-link">Learn More <i
                                     class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
@@ -342,11 +364,11 @@
                     <div class="service-item item-orange position-relative">
                         <i class="bi bi-broadcast icon"></i>
                         <div>
-                            <h3>Eosle Commodi</h3>
+                            <h3>Berita dan Artikel</h3>
                             <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum
                                 hic non ut
                                 nesciunt dolorem.</p>
-                            <a href="#" class="read-more stretched-link">Learn More <i
+                            <a href="{{ route('beritaArtikel') }}" class="read-more stretched-link">Learn More <i
                                     class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
@@ -356,11 +378,11 @@
                     <div class="service-item item-teal position-relative">
                         <i class="bi bi-easel icon"></i>
                         <div>
-                            <h3>Ledo Markt</h3>
+                            <h3>Galeri</h3>
                             <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id
                                 voluptas adipisci
                                 eos earum corrupti.</p>
-                            <a href="#" class="read-more stretched-link">Learn More <i
+                            <a href="{{ route('galeri1') }}" class="read-more stretched-link">Learn More <i
                                     class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
@@ -370,11 +392,11 @@
                     <div class="service-item item-red position-relative">
                         <i class="bi bi-bounding-box-circles icon"></i>
                         <div>
-                            <h3>Asperiores Commodi</h3>
+                            <h3>Arsip</h3>
                             <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga
                                 sit provident
                                 adipisci neque.</p>
-                            <a href="#" class="read-more stretched-link">Learn More <i
+                            <a href="{{ route('arsip1') }}" class="read-more stretched-link">Learn More <i
                                     class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
@@ -384,11 +406,11 @@
                     <div class="service-item item-indigo position-relative">
                         <i class="bi bi-calendar4-week icon"></i>
                         <div>
-                            <h3>Velit Doloremque.</h3>
+                            <h3>Hubungi Kami</h3>
                             <p>Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut. Sed
                                 animi at
                                 autem alias eius labore.</p>
-                            <a href="#" class="read-more stretched-link">Learn More <i
+                            <a href="{{ route('hubungiKami') }}" class="read-more stretched-link">Learn More <i
                                     class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
@@ -828,7 +850,7 @@
                         data-aos="fade-up" data-aos-delay="200">
                         <i class="bi bi-geo-alt"></i>
                         <h3>Address</h3>
-                        <p>A108 Adam Street, New York, NY 535022</p>
+                        <p>{{ session('informasiDasar.alamat_lokasi') ?? $informasi->alamat_lokasi ?? '' }}</p>
                     </div>
                 </div><!-- End Info Item -->
 
@@ -837,7 +859,7 @@
                         data-aos="fade-up" data-aos-delay="300">
                         <i class="bi bi-telephone"></i>
                         <h3>Call Us</h3>
-                        <p>+1 5589 55488 55</p>
+                        <p>{{ session('informasiDasar.kontak_phone') ?? $informasi->kontak_phone ?? '' }}</p>
                     </div>
                 </div><!-- End Info Item -->
 
@@ -846,7 +868,7 @@
                         data-aos="fade-up" data-aos-delay="400">
                         <i class="bi bi-envelope"></i>
                         <h3>Email Us</h3>
-                        <p>info@example.com</p>
+                        <p>{{ session('informasiDasar.kontak_email') ?? $informasi->kontak_email ?? '' }}</p>
                     </div>
                 </div><!-- End Info Item -->
 
@@ -854,8 +876,7 @@
 
             <div class="row gy-4 mt-1">
                 <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
-                    <iframe
-                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=2.3345170356360474%2C%2099.06446066660614&zoom=18&maptype=roadmap"
+                    <iframe src="{{ session('informasiDasar.peta_lokasi') ?? $informasi->peta_lokasi ?? '' }}"
                         frameborder="0" style="border:0; width: 100%; height: 400px;" allowfullscreen="" loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div><!-- End Google Maps -->
@@ -903,6 +924,4 @@
     </section><!-- /Contact Section -->
 
 </main>
-@include('partials.footer')
-
 @endsection

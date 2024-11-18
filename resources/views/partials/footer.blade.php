@@ -6,16 +6,17 @@
                     <span class="sitename">QuickStart</span>
                 </a>
                 <div class="footer-contact pt-3">
-                    <p>A108 Adam Street</p>
-                    <p>New York, NY 535022</p>
-                    <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-                    <p><strong>Email:</strong> <span>info@example.com</span></p>
+                    <p>SMA N 1 BALIGE</p>
+                    <p>{{ session('informasiDasar.nama_lokasi') ?? $informasi->nama_lokasi ?? '' }}</p>
+                    <p class="mt-3"><strong>Phone:</strong> <span>{{ session('informasiDasar.kontak_phone') ?? $informasi->kontak_phone ?? '' }}</span></p>
+                    <p><strong>Email:</strong> <span>{{ session('informasiDasar.kontak_email') ?? $informasi->kontak_email ?? '' }}</span></p>
                 </div>
                 <div class="social-links d-flex mt-4">
-                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                    <a href=""><i class="bi bi-facebook"></i></a>
-                    <a href=""><i class="bi bi-instagram"></i></a>
-                    <a href=""><i class="bi bi-linkedin"></i></a>
+                    <a href="{{ session('informasiDasar.twitter') ?? $informasi->twitter ?? '' }}"><i class="bi bi-twitter-x"></i></a>
+                    <a href="{{ session('informasiDasar.facebook') ?? $informasi->facebook ?? '' }}"><i class="bi bi-facebook"></i></a>
+                    <a href="{{ session('informasiDasar.instagram') ?? $informasi->instagram ?? '' }}"><i class="bi bi-instagram"></i></a>
+                    <a href="{{ session('informasiDasar.youtube') ?? $informasi->youtube ?? '' }}"><i class="bi bi-youtube"></i></a>
+                    <a href="{{ session('informasiDasar.tiktok') ?? $informasi->tiktok ?? '' }}"><i class="bi bi-tiktok"></i></a>
                 </div>
             </div>
             <div class="col-lg-2 col-md-3 footer-links">
@@ -53,11 +54,10 @@
         </div>
     </div>
     <div class="container copyright text-center mt-4">
-        <p>© <span>Copyright</span> <strong class="px-1 sitename">QuickStart</strong><span>All Rights Reserved</span>
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">SMA N 1 Balige</strong><span>All Rights Reserved</span>
         </p>
         <div class="credits">
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Dist<a
-                href="https://themewagon.com">ThemeWagon
+            Designed by <a href="">Kelompok 2</a>
         </div>
     </div>
 </footer>
