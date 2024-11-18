@@ -41,58 +41,29 @@ class AlumniController extends Controller
         return response()->json($alumni);  // Kirim data alumni ke modal dalam format JSON
     }
 
-    // Memperbarui data alumni
-    // public function update(Request $request, $id)
-    // {
-    //     $validated = $request->validate([
-    //         'name' => 'required|string',
-    //         'tahun_lulus' => 'required|integer',
-    //         'jurusan' => 'required|string',
-    //         'testimoni' => 'nullable|string',
-    //         'photo' => 'nullable|image',  // Foto tidak wajib, hanya jika di-upload
-    //     ]);
-
-    //     // Mencari alumni berdasarkan ID yang diterima
-    //     $alumni = Alumni::findOrFail($id);
-
-    //     // Jika ada foto baru yang di-upload, simpan foto tersebut
-    //     if ($request->hasFile('photo')) {
-    //         $validated['photo'] = $request->file('photo')->store('alumni_photos', 'public');
-    //     }
-
-    //     // Update data alumni
-    //     $alumni->update($validated);
-
-    //     return redirect()->back()->with('success', 'Data berhasil diperbarui!');
-    // }
-
-public function update(Request $request)
+//Memperbarui data alumni
+public function update(Request $request, $id)
 {
-    // Validasi input dari request
     $validated = $request->validate([
         'name' => 'required|string',
         'tahun_lulus' => 'required|integer',
         'jurusan' => 'required|string',
         'testimoni' => 'nullable|string',
-        'photo' => 'nullable|image',
-    ]);
+        'photo' => 'nullable|image',  // Foto tidak wajib, hanya jika di-upload
+        ]);
 
-    // Mencari alumni berdasarkan alumni_id yang dikirim dari form
-    $alumni = Alumni::findOrFail($request->alumni_id);
-
-    // Jika ada file foto baru yang diupload, simpan file tersebut
-    if ($request->hasFile('photo')) {
+         // Mencari alumni berdasarkan ID yang diterima
+        $alumni = Alumni::findOrFail($id);
+         // Jika ada foto baru yang di-upload, simpan foto tersebut
+        if ($request->hasFile('photo')) {
         $validated['photo'] = $request->file('photo')->store('alumni_photos', 'public');
     }
 
-    // Update data alumni
+     // Update data alumni
     $alumni->update($validated);
 
-    // Redirect dengan pesan sukses
     return redirect()->back()->with('success', 'Data berhasil diperbarui!');
-}
-
-
+    }
 
     // Menghapus data alumni
     public function destroy(Request $request)
