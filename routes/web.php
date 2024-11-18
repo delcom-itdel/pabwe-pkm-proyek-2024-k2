@@ -115,7 +115,7 @@ Route::get('/staff', function () {
     return view('app/admin/staff');
 })->name('staff');
 
-Route::get('/prestasi', function () {
+Route::get('/admin/prestasi', function () {
     return view('app/admin/prestasi');
 })->name('prestasi');
 
@@ -133,7 +133,8 @@ Route::delete('delete-sarana', [SaranaController::class, 'delete'])->name('delet
 Route::get('prestasi', [PrestasiController::class, 'index'])->name('prestasi');
 Route::post('prestasi', [PrestasiController::class, 'store'])->name('addprestasi');
 Route::post('edit-prestasi', [PrestasiController::class, 'edit'])->name('editprestasi');
-Route::post('delete-sarana', [PrestasiController::class, 'delete'])->name('deleteprestasi');
+Route::post('delete-prestasi', [PrestasiController::class, 'delete'])->name('deleteprestasi');
+Route::get('/prestasi', [PrestasiController::class, 'showPrestasi'])->name('prestasi');
 
 Route::get('/adminppdb', function () {
     return view('app/admin/adminppdb');
@@ -146,7 +147,6 @@ Route::get('/berita', function () {
 Route::get('/galeri', function () {
     return view('app/admin/galeri');
 })->name('galeri');
-
 
 
 Route::get('/arsip2', function () {
@@ -261,6 +261,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/admin/informasi-ppdb', [InforrmasiPpdbController::class, 'edit'])->name('admin.informasiPpdb.edit');
     Route::post('/admin/informasi-ppdb', [InforrmasiPpdbController::class, 'save'])->name('admin.informasiPpdb.save');
 });
+
 // Route untuk Editor
 Route::prefix('editor')->group(function () {
     Route::get('/editor/informasi-ppdb', [InforrmasiPpdbController::class, 'edit1'])->name('editor.informasiPpdb.edit');
@@ -276,6 +277,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/admin/hubungikami', [HubungiKamiController::class, 'edit'])->name('admin.hubungiKami.edit');
     Route::post('/admin/hubungikami', [HubungiKamiController::class, 'save'])->name('admin.hubungi.save');
 });
+
 // Route untuk Editor
 Route::prefix('editor')->group(function () {
     Route::get('/editor/hubungikami', [HubungiKamiController::class, 'edit1'])->name('editor.hubungiKami.edit');
@@ -284,6 +286,7 @@ Route::prefix('editor')->group(function () {
 
 //mengambil data hubungi kami
 Route::get('/hubungiKami', [HubungiKamiController::class, 'showInfoHubungiKami'])->name('hubungiKami');
+
 
 //route arsip
 // Route untuk Admin

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\Prestasi;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Share the $prestasi variable with all views
+        view()->composer('*', function ($view) {
+            $prestasi = Prestasi::all();
+            $view->with('prestasi', $prestasi);
+        });
+
     }
 }

@@ -16,13 +16,14 @@ class PrestasiController extends Controller
      * @return View
      */
     public function index(): View
-    {
-        // Ambil semua data prestasi dan simpan dalam array $data
-        $data['prestasi'] = Prestasi::all();
+{
+    // Retrieve all prestasi records from the database
+    $prestasi = Prestasi::all();
 
-        // Tampilkan view dengan data prestasi
-        return view('app.admin.prestasi', ['data' => $data]);
-    }
+    // Pass the $prestasi variable directly to the view
+    return view('app.admin.prestasi', compact('prestasi'));
+}
+
 
     /**
      * Menyimpan data prestasi baru
@@ -105,5 +106,13 @@ class PrestasiController extends Controller
         }
 
         return redirect()->route('prestasi')->with('error', 'Gagal menghapus data.');
+    }
+   public function showPrestasi()
+    {
+        // Retrieve all prestasi records from the database
+        $prestasi = Prestasi::all();
+
+        // Pass the $prestasi variable to the 'prestasi' view
+        return view('app.admin.prestasi', compact('prestasi'));
     }
 }

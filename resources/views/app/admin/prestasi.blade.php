@@ -155,21 +155,22 @@
                             </tr>
                         </thead>
                         <tbody id="prestasiTable">
-                            <?php $i = 1 ?>
-                            @foreach ($data['prestasi'] as $prestasi)
-                                <tr>
-                                    <td>{{ $i++ }}</td>
-                                    <td><img src="{{ asset('prestasi_img/' . $prestasi['cover']) }}" height="120rem"></td>
-                                    <td>{{ $prestasi['judul'] }}</td>
-                                    <td>{{ $prestasi['tahun_perolehan'] }}</td>
-                                    <td>{{ $prestasi['deskripsi'] }}</td>
-                                    <td>
-                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editModal" data-id="{{ $prestasi['id'] }}">Edit</button>
-                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-id="{{ $prestasi['id'] }}" data-target="#deleteModal">Delete</button>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
+    <?php $i = 1 ?>
+    @foreach ($prestasi as $item)
+        <tr>
+            <td>{{ $i++ }}</td>
+            <td><img src="{{ asset('prestasi_img/' . $item->cover) }}" height="120rem"></td>
+            <td>{{ $item->judul }}</td>
+            <td>{{ $item->tahun_perolehan }}</td>
+            <td>{{ $item->deskripsi }}</td>
+            <td>
+                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editModal" data-id="{{ $item->id }}">Edit</button>
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-id="{{ $item->id }}" data-target="#deleteModal">Delete</button>
+            </td>
+        </tr>
+    @endforeach
+</tbody>
+
                     </table>
                 </div>
             </div>
