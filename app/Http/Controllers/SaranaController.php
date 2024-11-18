@@ -6,6 +6,8 @@ use App\Models\Sarana;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
 class SaranaController extends Controller
@@ -31,6 +33,11 @@ class SaranaController extends Controller
             'image' => $fileName,
             'name' => $request->nama,
             'description' => $request->deskripsi
+        ]);
+
+        DB::table('log')->insert([
+            'pesan' => "'" . Auth::user()->name . "' " . 'menambahkan data Sarana' . " '" . $request->nama . "' " . 'pada bagian Sarana.',
+            'created_at' => date('Y-m-d H:i:s'),
         ]);
 
         return $sarana

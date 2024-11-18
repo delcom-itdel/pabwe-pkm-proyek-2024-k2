@@ -17,6 +17,7 @@ use App\Http\Controllers\HubungiKamiController;
 use App\Http\Controllers\ArsipController;
 use App\Http\Controllers\AlumniController;
 
+use App\Http\Controllers\LogController;
 
 //awal
 Route::get('/', function () {
@@ -184,9 +185,7 @@ Route::get('/kelola', function () {
     return view('app/admin/kelola');
 })->name('kelola');
 
-Route::get('/log', function () {
-    return view('app/admin/log');
-})->name('log');
+Route::get('/log', [LogController::class, 'index'])->name('log');
 
 
 Route::get('/informasi3', function () {

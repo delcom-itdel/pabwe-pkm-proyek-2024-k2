@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Platform; // Import Platform model
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -20,6 +22,11 @@ class AdminController extends Controller
         Platform::create([
             'name' => $request->name,
             'url' => $request->url,
+        ]);
+
+        DB::table('log')->insert([
+            'pesan' => "'" . Auth::user()->name . "' " . 'menambahkan data Platform' . " '" . $request->name . "' " . 'pada bagian Admin Platform.',
+            'created_at' => date('Y-m-d H:i:s'),
         ]);
 
         // Redirect back with success message
@@ -41,6 +48,11 @@ class AdminController extends Controller
             'url' => $request->url,
         ]);
 
+        DB::table('log')->insert([
+            'pesan' => "'" . Auth::user()->name . "' " . 'mengubah data Platform' . " '" . $request->name . "' " . 'pada bagian Admin Platform.',
+            'created_at' => date('Y-m-d H:i:s'),
+        ]);
+
         return redirect()->back()->with('success', 'Platform berhasil diperbarui!');
     }
 
@@ -49,6 +61,11 @@ class AdminController extends Controller
     {
         $platform = Platform::findOrFail($id);
         $platform->delete();
+
+        DB::table('log')->insert([
+            'pesan' => "'" . Auth::user()->name . "' " . 'menghapus data Platform' . " '" . $platform->name . "' " . 'pada bagian Admin Platform.',
+            'created_at' => date('Y-m-d H:i:s'),
+        ]);
         return redirect()->route('platform')->with('success', 'Platform berhasil dihapus.');
     }
 
