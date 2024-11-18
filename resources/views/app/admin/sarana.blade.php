@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="content">
-    <section id="prestasi" class="prestasi-section mt-5" data-aos="fade-up">
+    <section id="sarana" class="sarana-section mt-5" data-aos="fade-up">
         <div class="section-title">
             <h2>Sarana & Prasarana</h2>
         </div>
@@ -143,7 +143,7 @@
                             <th scope="col">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody id="prestasiTable">
+                    <tbody id="saranaTable">
                         <?php $i = 1 ?>
                         @foreach ($data['sarana'] as $sarana)
                         <tr>

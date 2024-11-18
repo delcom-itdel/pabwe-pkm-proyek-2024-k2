@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Sarana - SMAN 1 Balige')
+@section('title', 'Sarana & Prasarana - SMAN 1 Balige')
 
 @section('content')
 
