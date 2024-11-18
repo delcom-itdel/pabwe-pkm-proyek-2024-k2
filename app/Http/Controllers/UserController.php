@@ -8,39 +8,52 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
-        return view('app.admin.kelola', compact('users'));
+        // Ambil keyword dari input pencarian
+        $search = $request->input('search');
+
+        // Query untuk mendapatkan data dengan pencarian
+        $users = User::when($search, function ($query, $search) {
+            return $query->where('name', 'like', "%{$search}%")
+                         ->orWhere('email', 'like', "%{$search}%")
+                         ->orWhere('role', 'like', "%{$search}%");
+        })->get();
+
+        return view('app.admin.kelola', compact('users', 'search'));
     }
 
     public function store(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|unique:users,email',
-        'password' => 'required|min:6',
-        'role' => 'required|in:editor,admin',
-        'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-    ]);
-
-    $fileName = null;
-    if ($request->hasFile('photo')) {
-        $fileName = time() . '.' . $request->photo->getClientOriginalExtension();
-        $request->photo->move(public_path('user_photos'), $fileName);
+    {
+        \Log::info('Masuk ke metode store', $request->all());
+    
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
+            'role' => 'required|in:editor,admin',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+    
+        $fileName = null;
+        if ($request->hasFile('photo')) {
+            $fileName = time() . '.' . $request->photo->getClientOriginalExtension();
+            $request->photo->move(public_path('user_photos'), $fileName);
+        }
+    
+        \Log::info('File uploaded: ' . $fileName);
+    
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => $request->role,
+            'photo' => $fileName,
+        ]);
+    
+        \Log::info('User berhasil dibuat');
+        return redirect()->route('kelola')->with('success', 'Pengguna berhasil ditambahkan.');
     }
-
-    User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => Hash::make($request->password),
-        'role' => $request->role,
-        'photo' => $fileName,
-    ]);
-
-    return redirect()->route('kelola')->with('success', 'Pengguna berhasil ditambahkan.');
-}
-
 
     public function edit(Request $request, $id)
     {
@@ -56,7 +69,7 @@ class UserController extends Controller
             'role' => 'required|in:editor,admin',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-
+        
         if ($request->hasFile('photo')) {
             $fileName = time() . '.' . $request->photo->getClientOriginalExtension();
             $request->photo->move(public_path('user_photos'), $fileName);
@@ -73,22 +86,21 @@ class UserController extends Controller
     }
 
     public function delete($id)
-{
-    $user = User::find($id);
+    {
+        $user = User::find($id);
 
-    if (!$user) {
-        return redirect()->route('kelola')->with('error', 'Pengguna tidak ditemukan.');
+        if (!$user) {
+            return redirect()->route('kelola')->with('error', 'Pengguna tidak ditemukan.');
+        }
+
+        // Hapus foto pengguna jika ada
+        if ($user->photo && file_exists(public_path('user_photos/' . $user->photo))) {
+            unlink(public_path('user_photos/' . $user->photo));
+        }
+
+        // Hapus pengguna
+        $user->delete();
+
+        return redirect()->route('kelola')->with('success', 'Pengguna berhasil dihapus.');
     }
-
-    // Hapus foto pengguna jika ada
-    if ($user->photo && file_exists(public_path('user_photos/' . $user->photo))) {
-        unlink(public_path('user_photos/' . $user->photo));
-    }
-
-    // Hapus pengguna
-    $user->delete();
-
-    return redirect()->route('kelola')->with('success', 'Pengguna berhasil dihapus.');
-}
-
 }
