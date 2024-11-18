@@ -6,6 +6,8 @@ use App\Models\BeritaArtikel;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
 class BeritaArtikelController extends Controller
@@ -33,6 +35,12 @@ class BeritaArtikelController extends Controller
             'tindakan' => $request->tindakan,
         ]);
 
+        // Catat log aktivitas menambahkan berita
+        DB::table('log')->insert([
+            'pesan' => "'" . Auth::user()->name . "' menambahkan data Berita '" . $request->judul . "' pada bagian Berita.",
+            'created_at' => now(),
+        ]);
+
         return $berita
             ? redirect()->route('berita')->with('success', 'Data berhasil ditambahkan.')
             : redirect()->route('berita')->with('error', 'Data tidak berhasil ditambahkan.');
@@ -56,7 +64,15 @@ class BeritaArtikelController extends Controller
             $berita->judul = $request->judul;
             $berita->tindakan = $request->tindakan;
 
-            return $berita->save()
+            $result = $berita->save();
+
+            // Catat log aktivitas mengedit berita
+            DB::table('log')->insert([
+                'pesan' => "'" . Auth::user()->name . "' mengubah data Berita '" . $request->judul . "' pada bagian Berita.",
+                'created_at' => now(),
+            ]);
+
+            return $result
                 ? redirect()->route('berita')->with('success', 'Data berhasil diubah.')
                 : redirect()->route('berita')->with('error', 'Gagal mengubah data.');
         }
@@ -73,7 +89,15 @@ class BeritaArtikelController extends Controller
                 File::delete(public_path('berita_img/' . $berita->cover));
             }
 
-            return $berita->delete()
+            $result = $berita->delete();
+
+            // Catat log aktivitas menghapus berita
+            DB::table('log')->insert([
+                'pesan' => "'" . Auth::user()->name . "' menghapus data Berita '" . $berita->judul . "' pada bagian Berita.",
+                'created_at' => now(),
+            ]);
+
+            return $result
                 ? redirect()->route('berita')->with('success', 'Data berhasil dihapus.')
                 : redirect()->route('berita')->with('error', 'Gagal menghapus data.');
         }

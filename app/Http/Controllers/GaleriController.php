@@ -8,7 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Auth;
 
 class GaleriController extends Controller
 {
@@ -47,6 +47,12 @@ class GaleriController extends Controller
             'description' => $request->description
         ]);
 
+        // Catat log aktivitas menambahkan data galeri
+        DB::table('log')->insert([
+            'pesan' => "'" . Auth::user()->name . "' menambahkan data Galeri dengan deskripsi '" . $request->description . "'.",
+            'created_at' => now(),
+        ]);
+
         return $galeri
             ? redirect()->route('galeri')->with('success', 'Data galeri berhasil ditambahkan.')
             : redirect()->route('galeri')->with('error', 'Data galeri tidak berhasil ditambahkan.');
@@ -75,8 +81,15 @@ class GaleriController extends Controller
             }
 
             $galeri->description = $request->description;
+            $result = $galeri->save();
 
-            return $galeri->save()
+            // Catat log aktivitas mengubah data galeri
+            DB::table('log')->insert([
+                'pesan' => "'" . Auth::user()->name . "' mengubah data Galeri dengan deskripsi '" . $request->description . "'.",
+                'created_at' => now(),
+            ]);
+
+            return $result
                 ? redirect()->route('galeri')->with('success', 'Data galeri berhasil diubah.')
                 : redirect()->route('galeri')->with('error', 'Gagal mengubah data galeri.');
         }
@@ -100,13 +113,25 @@ class GaleriController extends Controller
                 File::delete(public_path('galeri_img/' . $galeri->photo));
             }
 
-            return $galeri->delete()
+            $result = $galeri->delete();
+
+            // Catat log aktivitas menghapus data galeri
+            DB::table('log')->insert([
+                'pesan' => "'" . Auth::user()->name . "' menghapus data Galeri dengan deskripsi '" . $galeri->description . "'.",
+                'created_at' => now(),
+            ]);
+
+            return $result
                 ? redirect()->route('galeri')->with('success', 'Data galeri berhasil dihapus.')
                 : redirect()->route('galeri')->with('error', 'Gagal menghapus data galeri.');
         }
 
         return redirect()->route('galeri')->with('error', 'Data galeri tidak ditemukan.');
     }
+
+    /**
+     * Show gallery items to the home page.
+     */
     public function showGallery()
     {
         $galleries = DB::table('galeri')->get(); // Ambil semua data dari tabel galeri
