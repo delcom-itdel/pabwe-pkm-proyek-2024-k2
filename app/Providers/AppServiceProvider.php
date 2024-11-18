@@ -26,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
             $prestasi = Prestasi::all();
             $view->with('prestasi', $prestasi);
         });
+        
         // Share the $prestasi variable with all views
         view()->composer('*', function ($view) {
             // Fetch all galleries from the database

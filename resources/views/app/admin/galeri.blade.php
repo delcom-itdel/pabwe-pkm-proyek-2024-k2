@@ -140,7 +140,7 @@
                             @foreach ($galleries as $galeri)
                                 <tr>
                                     <td>{{ $i++ }}</td>
-                                    <td><img src="{{'galeri_img/' . $galeri['photo' }}" height="120rem"></td>
+                                    <td><img src="{{'galeri_img/' . $galeri['photo'] }}" height="120rem"></td>
                                     <td>{{ $galeri['description'] }}</td>
                                     <td>
                                         <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editModal" data-id="{{ $galeri['id'] }}">Edit</button>
