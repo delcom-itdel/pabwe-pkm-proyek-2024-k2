@@ -94,7 +94,7 @@
               <td>
                 <button class="btn btn-warning btn-sm" data-toggle="modal"
                   data-target="#editModal{{ $user->id }}">Edit</button>
-                <button class="btn btn-danger btn-sm">Hapus</button>
+                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ $user->id }}">Hapus</button>
               </td>
             </tr>
 
@@ -140,6 +140,31 @@
                 </div>
               </div>
             </div>
+
+            <!-- Modal Konfirmasi Hapus -->
+<div class="modal fade" id="deleteModal{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form action="{{ route('deleteuser', $user->id) }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Hapus Pengguna</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Apakah Anda yakin ingin menghapus pengguna <strong>{{ $user->name }}</strong>?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-danger">Hapus</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
             @endforeach
           </tbody>
         </table>

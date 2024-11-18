@@ -304,3 +304,5 @@ Route::get('/showGallery', [GaleriController::class, 'showGallery'])->name('show
 Route::get('kelola', [UserController::class, 'index'])->name('kelola');
 Route::post('add-user', [UserController::class, 'store'])->name('adduser');
 Route::post('edit-user/{id}', [UserController::class, 'edit'])->name('edituser');
+
+Route::delete('delete-user/{id}', [UserController::class, 'delete'])->name('deleteuser');

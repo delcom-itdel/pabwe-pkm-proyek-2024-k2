@@ -71,4 +71,24 @@ class UserController extends Controller
 
         return redirect()->route('kelola')->with('success', 'Pengguna berhasil diubah.');
     }
+
+    public function delete($id)
+{
+    $user = User::find($id);
+
+    if (!$user) {
+        return redirect()->route('kelola')->with('error', 'Pengguna tidak ditemukan.');
+    }
+
+    // Hapus foto pengguna jika ada
+    if ($user->photo && file_exists(public_path('user_photos/' . $user->photo))) {
+        unlink(public_path('user_photos/' . $user->photo));
+    }
+
+    // Hapus pengguna
+    $user->delete();
+
+    return redirect()->route('kelola')->with('success', 'Pengguna berhasil dihapus.');
+}
+
 }
