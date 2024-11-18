@@ -41,8 +41,8 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="{{ route('home') }}">Beranda</a></li>
-          <li class="dropdown"><a href="#about"><span>Profil</span> <i
+          <li><a href="{{ route('home') }}" >Beranda</a></li>
+          <li class="dropdown"><a href="#about" class="{{ Request::routeIs('sejarah', 'visiMisi', 'struktur', 'program', 'staf', 'prestasi1', 'alumni') ? 'active' : '' }}"><span>Profil</span> <i
                 class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="{{ route('sejarah') }}">Sejarah</a></li>
@@ -54,9 +54,10 @@
               <li><a href="{{ route('alumni') }}">Alumni</a></li>
             </ul>
           </li>
-          <li><a href="{{ route('saranaPrasarana') }}">Sarana & Prasarana</a></li>
-
-          <li class="dropdown"><a href="#services"><span>Informasi</span>
+          <li>
+            <a href="{{ route('saranaPrasarana') }}" class="{{ Request::routeIs('saranaPrasarana') ? 'active' : '' }}">Sarana & Prasarana</a>
+        </li>
+          <li class="dropdown"><a href="#services" class="{{ Request::routeIs('ppdb', 'beritaArtikel', 'galeri1', 'arsip1', 'hubungiKami' ) ? 'active' : '' }}"><span>Informasi</span>
               <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="{{ route('ppdb') }}">PPDB</a></li>
