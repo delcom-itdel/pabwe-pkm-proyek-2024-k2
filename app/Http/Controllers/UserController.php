@@ -56,51 +56,58 @@ class UserController extends Controller
     }
 
     public function edit(Request $request, $id)
-    {
-        $user = User::find($id);
+{
+    $user = User::find($id);
 
-        if (!$user) {
-            return redirect()->route('kelola')->with('error', 'Pengguna tidak ditemukan.');
-        }
-
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $id,
-            'role' => 'required|in:editor,admin',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
-        
-        if ($request->hasFile('photo')) {
-            $fileName = time() . '.' . $request->photo->getClientOriginalExtension();
-            $request->photo->move(public_path('user_photos'), $fileName);
-            $user->photo = $fileName;
-        }
-
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->role = $request->role;
-
-        $user->save();
-
-        return redirect()->route('kelola')->with('success', 'Pengguna berhasil diubah.');
+    if (!$user) {
+        \Log::error("Pengguna dengan ID $id tidak ditemukan");
+        return redirect()->route('kelola')->with('error', 'Pengguna tidak ditemukan.');
     }
 
-    public function delete($id)
-    {
-        $user = User::find($id);
+    \Log::info("Pengguna ditemukan: ", $user->toArray());
 
-        if (!$user) {
-            return redirect()->route('kelola')->with('error', 'Pengguna tidak ditemukan.');
-        }
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email,' . $id,
+        'role' => 'required|in:editor,admin',
+        'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+    ]);
 
-        // Hapus foto pengguna jika ada
-        if ($user->photo && file_exists(public_path('user_photos/' . $user->photo))) {
-            unlink(public_path('user_photos/' . $user->photo));
-        }
-
-        // Hapus pengguna
-        $user->delete();
-
-        return redirect()->route('kelola')->with('success', 'Pengguna berhasil dihapus.');
+    if ($request->hasFile('photo')) {
+        $fileName = time() . '.' . $request->photo->getClientOriginalExtension();
+        $request->photo->move(public_path('user_photos'), $fileName);
+        $user->photo = $fileName;
     }
+
+    $user->name = $request->name;
+    $user->email = $request->email;
+    $user->role = $request->role;
+    $user->save();
+
+    \Log::info("Pengguna berhasil diperbarui: ", $user->toArray());
+
+    return redirect()->route('kelola')->with('success', 'Pengguna berhasil diubah.');
+}
+
+
+public function delete($id)
+{
+    $user = User::find($id);
+
+    if (!$user) {
+        \Log::error("Pengguna dengan ID $id tidak ditemukan");
+        return redirect()->route('kelola')->with('error', 'Pengguna tidak ditemukan.');
+    }
+
+    if ($user->photo && file_exists(public_path('user_photos/' . $user->photo))) {
+        unlink(public_path('user_photos/' . $user->photo));
+    }
+
+    $user->delete();
+
+    \Log::info("Pengguna dengan ID $id berhasil dihapus");
+
+    return redirect()->route('kelola')->with('success', 'Pengguna berhasil dihapus.');
+}
+
 }
