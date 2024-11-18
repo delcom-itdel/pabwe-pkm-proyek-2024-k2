@@ -13,7 +13,6 @@ class StaffController extends Controller
     public function index(): View
     {
         $staff = Staff::all(); // Ambil data
-
         return view('app.admin.staff', compact('staff'));
     }
 
@@ -84,5 +83,10 @@ class StaffController extends Controller
         }
 
         return redirect()->route('staff')->with('error', 'Data staff tidak ditemukan.');
+    }
+    public function showStaff()
+    {
+        $staff = DB::table('staff')->get(); // Get all staff data from the table
+        return view('app.home', compact('staff'));
     }
 }
