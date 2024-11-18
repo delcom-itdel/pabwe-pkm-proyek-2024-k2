@@ -300,3 +300,7 @@ Route::get('/struktur-organisasi', [ProfilInformasiDasarController::class, 'show
 Route::get('/program-sekolah', [ProfilInformasiDasarController::class, 'showProgram'])->name('program');
 
 Route::get('/showGallery', [GaleriController::class, 'showGallery'])->name('showGallery');
+
+Route::get('kelola', [UserController::class, 'index'])->name('kelola');
+Route::post('add-user', [UserController::class, 'store'])->name('adduser');
+Route::post('edit-user/{id}', [UserController::class, 'edit'])->name('edituser');
