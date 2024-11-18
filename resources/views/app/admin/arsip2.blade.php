@@ -1,4 +1,4 @@
-@extends('layouts.editorLayout')
+@extends('layouts.adminLayout')
 
 @section('title', 'Arsip - SMAN 1 Balige')
 
@@ -9,7 +9,7 @@
     <div class="card-body">
       <p>Diperbarui pada: {{session('dataArsip')->updated_at ?? $data->updated_at ?? ''}}</p>
 
-      <form action="{{ route('editor.informasiArsip.save') }}" method="POST">
+      <form action="{{ route('admin.informasiArsip.save') }}" method="POST">
         @csrf
         <div class="mb-3">
           <textarea class="form-control" id="info_arsip" name="info_arsip" rows="5"

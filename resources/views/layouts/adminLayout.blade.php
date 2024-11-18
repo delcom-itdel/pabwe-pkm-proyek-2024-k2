@@ -215,7 +215,7 @@
           <a class="nav-link" href="{{ route('adminppdb') }}">PPDB</a>
           <a class="nav-link" href="{{ route('berita') }}">Berita & Artikel</a>
           <a class="nav-link" href="{{ route('galeri') }}">Galeri</a>
-          <a class="nav-link" href="{{ route('arsip') }}">Arsip</a>
+          <a class="nav-link" href="{{ route('arsip2') }}">Arsip</a>
           <a class="nav-link" href="{{ route('hubungi') }}">Hubungi Kami</a>
         </div>
       </li>

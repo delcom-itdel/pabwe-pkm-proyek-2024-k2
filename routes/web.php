@@ -14,6 +14,7 @@ use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\InforrmasiPpdbController;
 use App\Http\Controllers\HubungiKamiController;
+use App\Http\Controllers\ArsipController;
 
 //awal
 Route::get('/', function () {
@@ -148,9 +149,9 @@ Route::get('/galeri', function () {
 
 
 
-Route::get('/arsip', function () {
-    return view('app/admin/arsip');
-})->name('arsip');
+Route::get('/arsip2', function () {
+    return view('app/admin/arsip2');
+})->name('arsip2');
 
 Route::get('/hubungi', function () {
     return view('app/admin/hubungi');
@@ -260,8 +261,6 @@ Route::prefix('admin')->group(function () {
     Route::get('/admin/informasi-ppdb', [InforrmasiPpdbController::class, 'edit'])->name('admin.informasiPpdb.edit');
     Route::post('/admin/informasi-ppdb', [InforrmasiPpdbController::class, 'save'])->name('admin.informasiPpdb.save');
 });
-
-
 // Route untuk Editor
 Route::prefix('editor')->group(function () {
     Route::get('/editor/informasi-ppdb', [InforrmasiPpdbController::class, 'edit1'])->name('editor.informasiPpdb.edit');
@@ -277,8 +276,6 @@ Route::prefix('admin')->group(function () {
     Route::get('/admin/hubungikami', [HubungiKamiController::class, 'edit'])->name('admin.hubungiKami.edit');
     Route::post('/admin/hubungikami', [HubungiKamiController::class, 'save'])->name('admin.hubungi.save');
 });
-
-
 // Route untuk Editor
 Route::prefix('editor')->group(function () {
     Route::get('/editor/hubungikami', [HubungiKamiController::class, 'edit1'])->name('editor.hubungiKami.edit');
@@ -287,6 +284,21 @@ Route::prefix('editor')->group(function () {
 
 //mengambil data hubungi kami
 Route::get('/hubungiKami', [HubungiKamiController::class, 'showInfoHubungiKami'])->name('hubungiKami');
+
+//route arsip
+// Route untuk Admin
+Route::prefix('admin')->group(function () {
+    Route::get('/admin/arsip', [ArsipController::class, 'edit'])->name('admin.informasiArsip.edit');
+    Route::post('/admin/arsip', [ArsipController::class, 'save'])->name('admin.informasiArsip.save');
+});
+// Route untuk Editor
+Route::prefix('editor')->group(function () {
+    Route::get('/editor/arsip', [ArsipController::class, 'edit1'])->name('editor.informasiArsip.edit');
+    Route::post('/editor/arsip', [ArsipController::class, 'save1'])->name('editor.informasiArsip.save');
+});
+
+//mengambil data arsip
+Route::get('/arsip', [ArsipController::class, 'showInfoArsip'])->name('arsip');
 
 //mengambil data sejarah
 Route::get('/sejarah', [ProfilInformasiDasarController::class, 'showSejarah'])->name('sejarah');
@@ -300,9 +312,3 @@ Route::get('/struktur-organisasi', [ProfilInformasiDasarController::class, 'show
 Route::get('/program-sekolah', [ProfilInformasiDasarController::class, 'showProgram'])->name('program');
 
 Route::get('/showGallery', [GaleriController::class, 'showGallery'])->name('showGallery');
-
-Route::get('kelola', [UserController::class, 'index'])->name('kelola');
-Route::post('add-user', [UserController::class, 'store'])->name('adduser');
-Route::post('edit-user/{id}', [UserController::class, 'edit'])->name('edituser');
-
-Route::delete('delete-user/{id}', [UserController::class, 'delete'])->name('deleteuser');
