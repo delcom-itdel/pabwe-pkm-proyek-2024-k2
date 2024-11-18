@@ -62,6 +62,7 @@
                     @error('email')
                     <span class="invalid-feedback">{{ $message }}</span>
                     @enderror
+                    <small class="form-text text-muted">Gunakan alamat email yang valid dan unik.</small>
                   </div>
                   <div class="mb-3">
                     <label for="role" class="form-label">Role</label>
@@ -81,6 +82,7 @@
                     @error('password')
                     <span class="invalid-feedback">{{ $message }}</span>
                     @enderror
+                    <small class="form-text text-muted">Minimal 6 karakter dengan kombinasi huruf dan angka.</small>
                   </div>
                 </div>
                 <div class="modal-footer">
