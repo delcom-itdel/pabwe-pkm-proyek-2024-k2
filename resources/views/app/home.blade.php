@@ -41,11 +41,12 @@
 
                 <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="service-item d-flex">
-                        <div class="icon flex-shrink-0"><i class="bi bi-briefcase"></i></div>
+                        <div class="icon flex-shrink-0"><i class="bi bi-person-lines-fill"></i></div>
                         <div>
                             <h4 class="title"><a href="#" class="stretched-link">Peserta Didik</a></h4>
-                            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias
-                                excepturi</p>
+                            <p class="description">
+                                {{ session('informasiDasar.jumlah_peserta_didik') ?? $informasi->jumlah_peserta_didik ?? '' }}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -53,21 +54,23 @@
 
                 <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="200">
                     <div class="service-item d-flex">
-                        <div class="icon flex-shrink-0"><i class="bi bi-card-checklist"></i></div>
+                        <div class="icon flex-shrink-0"><i class="bi bi-people"></i></div>
                         <div>
                             <h4 class="title"><a href="#" class="stretched-link">Guru & Tendik</a></h4>
-                            <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                aliquip exa</p>
+                            <p class="description">
+                                {{ session('informasiDasar.jumlah_guru') ?? $informasi->jumlah_guru ?? '' }}
+                            </p>
                         </div>
                     </div>
                 </div><!-- End Service Item -->
 
                 <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="300">
                     <div class="service-item d-flex">
-                        <div class="icon flex-shrink-0"><i class="bi bi-bar-chart"></i></div>
+                        <div class="icon flex-shrink-0"><i class="bi bi-building"></i></div>
                         <div>
                             <h4 class="title"><a href="#" class="stretched-link">Kelas</a></h4>
-                            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                            <p class="description">
+                                {{ session('informasiDasar.jumlah_kelas') ?? $informasi->jumlah_kelas ?? '' }}
                             </p>
                         </div>
                     </div>
@@ -153,40 +156,34 @@
 
     </section><!-- /Clients Section -->
 
-    <!-- Features Details Section -->
     <section id="features-details" class="features-details section light-background">
 
-            <!-- Section Title -->
-            <div class="container section-title" data-aos="fade-up">
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
             <h2>Prestasi</h2>
         </div><!-- End Section Title -->
 
         <div class="container">
 
             <div class="row gy-4 justify-content-between features-item">
-
-                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                    <img src="assets/img/features-1.jpg" class="img-fluid" alt="">
-                </div>
-
-                <div class="col-lg-5 d-flex align-items-center" data-aos="fade-up" data-aos-delay="200">
-                    <div class="content">
-                        <h3>Corporis temporibus maiores provident</h3>
-                        <p>
-                            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                            reprehenderit in
-                            voluptate
-                            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                            proident.
-                        </p>
-                        <a href="#" class="btn more-btn">Learn More</a>
+                @foreach($prestasi as $item)
+                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                        <img src="{{ asset('prestasi_img/' . $item->cover) }}" class="img-fluid" alt="">
                     </div>
-                </div>
 
+                    <div class="col-lg-5 d-flex align-items-center" data-aos="fade-up" data-aos-delay="200">
+                        <div class="content">
+                            <h3>{{ $item->judul }}</h3>
+                            <p>{{ $item->deskripsi }}</p>
+                            <a href="#" class="btn more-btn">Learn More</a>
+                        </div>
+                    </div>
+                @endforeach
             </div><!-- Features Item -->
         </div>
 
     </section><!-- /Features Details Section -->
+
 
     <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials section">
