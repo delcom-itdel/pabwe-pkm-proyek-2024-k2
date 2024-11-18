@@ -119,12 +119,6 @@
                         font-weight: bold;
                         margin-bottom: 5px;
                     }
-
-                    /* Style untuk container */
-                    .container {
-                        max-width: 1000px;
-                        margin: 0 auto;
-                    }
                 </style>
 
             </div>
