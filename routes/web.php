@@ -15,6 +15,8 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\InforrmasiPpdbController;
 use App\Http\Controllers\HubungiKamiController;
 use App\Http\Controllers\ArsipController;
+use App\Http\Controllers\AlumniController;
+
 
 //awal
 Route::get('/', function () {
@@ -122,6 +124,20 @@ Route::get('/admin/prestasi', function () {
 Route::get('/alumni2', function () {
     return view('app/admin/alumni2');
 })->name('alumni2');
+
+// Rute untuk Alumni
+Route::get('/alumni2', [AlumniController::class, 'index'])->name('alumni2');
+
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::get('/alumni2', [AlumniController::class, 'index'])->name('alumni.index');
+    Route::post('/alumni2', [AlumniController::class, 'store'])->name('alumni.store');  // Definisikan route store
+    Route::put('/alumni2', [AlumniController::class, 'update'])->name('alumni.update');// routes/web.php
+    // Route::put('/alumni2/{id}', [AlumniController::class, 'update'])->name('alumni.update');
+    Route::delete('/alumni2', [AlumniController::class, 'destroy'])->name('alumni.destroy');
+});
+
+Route::get('/alumni', [AlumniController::class, 'indexForUser'])->name('alumni');
+
 
 Route::get('sarana', [SaranaController::class, 'index'])->name('sarana');
 Route::post('add-sarana', [SaranaController::class, 'store'])->name('addsarana');
