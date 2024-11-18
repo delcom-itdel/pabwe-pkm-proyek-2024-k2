@@ -1,4 +1,4 @@
-<footer id="footer" class="footer position-relative light-background">
+<footer id="footer" class="footer position-relative dark-background" style="background-color: #4A7A94;"">
     <div class="container footer-top">
         <div class="row gy-4">
             <div class="col-lg-4 col-md-6 footer-about">
@@ -32,11 +32,11 @@
             <div class="col-lg-2 col-md-3 footer-links">
                 <h4>Our Services</h4>
                 <ul>
-                    <li><a href="#">Web Design</a></li>
-                    <li><a href="#">Web Development</a></li>
-                    <li><a href="#">Product Management</a></li>
-                    <li><a href="#">Marketing</a></li>
-                    <li><a href="#">Graphic Design</a></li>
+                    <li><a href="#">Ekstrakulikuler</a></li>
+                    <li><a href="#">Les Sore</a></li>
+                    <li><a href="#">English Morning</a></li>
+                    <li><a href="#">Sabtu Bersih</a></li>
+                    <li><a href="#">Lingkungan Nyaman</a></li>
                 </ul>
             </div>
             <div class="col-lg-4 col-md-12 footer-newsletter">
@@ -57,7 +57,7 @@
         <p>© <span>Copyright</span> <strong class="px-1 sitename">SMA N 1 Balige</strong><span>All Rights Reserved</span>
         </p>
         <div class="credits">
-            Designed by <a href="">Kelompok 2</a>
+        Designed by <a href="" style="color: #C0C0C0; text-decoration: none;">Kelompok 2</a>
         </div>
     </div>
 </footer>
