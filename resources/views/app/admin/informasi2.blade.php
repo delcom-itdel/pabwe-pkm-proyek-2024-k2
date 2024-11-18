@@ -102,7 +102,7 @@
           <!-- Video -->
           <div class="form-group mb-3">
             <label for="cover">Cover</label>
-            <input type="file" class="form-control-file" id="cover" name="cover">
+            <input type="file" class="form-control-file" id="cover" name="cover">{{ session('informasiDasar.cover_video') ?? $informasi->cover ?? '' }}
           </div>
           <div class="form-group mb-3">
             <label for="judulVideo">Judul Video</label>

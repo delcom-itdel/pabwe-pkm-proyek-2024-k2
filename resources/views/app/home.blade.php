@@ -3,47 +3,6 @@
 @section('title', 'SMAN 1 Balige')
 
 @section('content')
-<style>
-    body {
-        font-family: Arial, sans-serif;
-    }
-
-    .container {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        max-width: 1000px;
-        margin: 0 auto;
-        padding-top: 50px;
-        padding-bottom: 50px;
-    }
-
-    .funfact {
-        text-align: center;
-        border-top: 3px solid #007bff;
-        /* Warna biru sesuai contoh */
-        padding-top: 20px;
-        width: 200px;
-    }
-
-    .number {
-        font-size: 2em;
-        /* Membuat angka lebih besar */
-        color: #007bff;
-        /* Warna biru */
-        font-weight: bold;
-    }
-
-    .description {
-        font-size: 1.2em;
-        /* Ukuran teks lebih kecil dari angka */
-        display: block;
-        margin-top: 10px;
-        color: #333;
-        /* Warna teks */
-    }
-</style>
-
 <main class="main">
 
     <!-- Hero Section -->
@@ -64,7 +23,7 @@
                         class="glightbox btn-watch-video d-flex align-items-center"><i
                             class="bi bi-play-circle"></i><span>{{ session('informasiDasar.judul_video') ?? $informasi->judul_video ?? '' }}</span></a>
                 </div>
-                <img src="assets/img/hero-services-img.webp" class="img-fluid hero-img" alt="" data-aos="zoom-out"
+                <img src="{{ asset(session('informasiDasar.cover') ?? $informasi->cover ?? 'img/cover_video/default_image.webp') }}" class="img-fluid hero-img" alt="" data-aos="zoom-out"
                     data-aos-delay="300">
             </div>
         </div>
@@ -75,26 +34,45 @@
     <section id="featured-services" class="featured-services section light-background">
 
         <div class="container">
-            <div class="funfact col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                <span class="number">
-                    <span class="purecounter" data-purecounter-end="200">200</span>+
-                </span>
-                <span class="description">Peserta Didik</span>
+
+            <div class="row gy-4">
+
+                <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-item d-flex">
+                        <div class="icon flex-shrink-0"><i class="bi bi-briefcase"></i></div>
+                        <div>
+                            <h4 class="title"><a href="#" class="stretched-link">Peserta Didik</a></h4>
+                            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias
+                                excepturi</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Service Item -->
+
+                <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-item d-flex">
+                        <div class="icon flex-shrink-0"><i class="bi bi-card-checklist"></i></div>
+                        <div>
+                            <h4 class="title"><a href="#" class="stretched-link">Guru & Tendik</a></h4>
+                            <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip exa</p>
+                        </div>
+                    </div>
+                </div><!-- End Service Item -->
+
+                <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-item d-flex">
+                        <div class="icon flex-shrink-0"><i class="bi bi-bar-chart"></i></div>
+                        <div>
+                            <h4 class="title"><a href="#" class="stretched-link">Kelas</a></h4>
+                            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                            </p>
+                        </div>
+                    </div>
+                </div><!-- End Service Item -->
+
             </div>
 
-            <div class="funfact col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                <span class="number">
-                    <span class="purecounter" data-purecounter-end="60">60</span>+
-                </span>
-                <span class="description">Guru & Tendik</span>
-            </div>
-
-            <div class="funfact col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="300">
-                <span class="number">
-                    <span class="purecounter" data-purecounter-end="99">99</span>+
-                </span>
-                <span class="description">Kelas</span>
-            </div>
         </div>
 
     </section><!-- /Featured Services Section -->
@@ -445,51 +423,17 @@
 
                 <div class="col-lg-6 d-flex flex-column justify-content-center order-2 order-lg-1" data-aos="fade-up"
                     data-aos-delay="100">
-                    <h3>Enim quis est voluptatibus aliquid consequatur</h3>
-                    <p>Esse voluptas cumque vel exercitationem. Reiciendis est hic accusamus. Non ipsam et sed minima
-                        temporibus
-                        laudantium. Soluta voluptate sed facere corporis dolores excepturi</p>
+                    <h3>SAMBUTAN KEPALA SEKOLAH</h3>
+                    <p>{{ session('informasiDasar.sambutan_kepala_sekolah') ?? $informasi->sambutan_kepala_sekolah ?? '' }}</p><br>
 
-                    <div class="row">
-
-                        <div class="col-lg-6 icon-box d-flex">
-                            <i class="bi bi-easel flex-shrink-0"></i>
-                            <div>
-                                <h4>Lorem Ipsum</h4>
-                                <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias </p>
-                            </div>
-                        </div><!-- End Icon Box -->
-
-                        <div class="col-lg-6 icon-box d-flex">
-                            <i class="bi bi-patch-check flex-shrink-0"></i>
-                            <div>
-                                <h4>Nemo Enim</h4>
-                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiise</p>
-                            </div>
-                        </div><!-- End Icon Box -->
-
-                        <div class="col-lg-6 icon-box d-flex">
-                            <i class="bi bi-brightness-high flex-shrink-0"></i>
-                            <div>
-                                <h4>Dine Pad</h4>
-                                <p>Explicabo est voluptatum asperiores consequatur magnam. Et veritatis odit</p>
-                            </div>
-                        </div><!-- End Icon Box -->
-
-                        <div class="col-lg-6 icon-box d-flex">
-                            <i class="bi bi-brightness-high flex-shrink-0"></i>
-                            <div>
-                                <h4>Tride clov</h4>
-                                <p>Est voluptatem labore deleniti quis a delectus et. Saepe dolorem libero sit</p>
-                            </div>
-                        </div><!-- End Icon Box -->
-
+                    <div class="kepala-sekolah">
+                        <p><b>{{ session('informasiDasar.nama_kepala_sekolah') ?? $informasi->nama_kepala_sekolah ?? '' }}</b><br>(Kepala Sekolah)</p>
                     </div>
 
                 </div>
 
                 <div class="features-image col-lg-5 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="200">
-                    <img src="assets/img/features-3.jpg" alt="">
+                    <img src="{{ asset(session('informasiDasar.foto_kepala_sekolah') ?? $informasi->foto_kepala_sekolah ?? '') }}" alt="">
                 </div>
 
             </div>

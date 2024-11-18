@@ -54,6 +54,7 @@
                   <div class="mb-3">
                     <label for="role" class="form-label">Role</label>
                     <select class="form-control" id="role" name="role">
+                    <option value="" disabled selected>Pilih Role</option>
                       <option value="editor">Editor</option>
                       <option value="admin">Admin</option>
                     </select>

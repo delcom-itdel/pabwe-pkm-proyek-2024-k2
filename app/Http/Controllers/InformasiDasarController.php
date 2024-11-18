@@ -36,7 +36,37 @@ class InformasiDasarController extends Controller
             'jumlah_kelas' => 'nullable|integer|min:0',
             'nama_kepala_sekolah' => 'nullable|string|max:255',
             'sambutan_kepala_sekolah' => 'nullable|string|max:1000',
+            'cover' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'foto_kepala_sekolah' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
+
+        $informasi = InformasiDasar::first();
+
+        // Memproses file 'cover' jika ada di request
+        if ($request->hasFile('cover')) {
+            // Menghapus cover lama jika ada
+            if ($informasi && $informasi->cover && file_exists(public_path($informasi->cover))) {
+                unlink(public_path($informasi->cover));
+            }
+
+            // Menyimpan file cover baru
+            $fileNameCover = time() . '_cover.' . $request->cover->getClientOriginalExtension();
+            $request->cover->move(public_path('img/cover_video'), $fileNameCover);
+            $validated['cover'] = 'img/cover_video/' . $fileNameCover;
+        }
+
+        // Memproses file 'foto kepala sekolah' jika ada di request
+        if ($request->hasFile('foto_kepala_sekolah')) {
+            // Menghapus foto kepala sekolah lama jika ada
+            if ($informasi && $informasi->foto_kepala_sekolah && file_exists(public_path($informasi->foto_kepala_sekolah))) {
+                unlink(public_path($informasi->foto_kepala_sekolah));
+            }
+
+            // Menyimpan file foto kepala sekolah baru
+            $fileNameFotoKepalaSekolah = time() . '_foto.' . $request->foto_kepala_sekolah->getClientOriginalExtension();
+            $request->foto_kepala_sekolah->move(public_path('img/foto_kepsek'), $fileNameFotoKepalaSekolah);
+            $validated['foto_kepala_sekolah'] = 'img/foto_kepsek/' . $fileNameFotoKepalaSekolah;
+        }
 
         InformasiDasar::updateOrCreate([], $validated);
         session(['informasiDasar' => $validated]);
@@ -72,14 +102,46 @@ class InformasiDasarController extends Controller
             'jumlah_kelas' => 'nullable|integer|min:0',
             'nama_kepala_sekolah' => 'nullable|string|max:255',
             'sambutan_kepala_sekolah' => 'nullable|string|max:1000',
+            'cover' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'foto_kepala_sekolah' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
+
+        $informasi = InformasiDasar::first();
+
+        // Memproses file 'cover' jika ada di request
+        if ($request->hasFile('cover')) {
+            // Menghapus cover lama jika ada
+            if ($informasi && $informasi->cover && file_exists(public_path($informasi->cover))) {
+                unlink(public_path($informasi->cover));
+            }
+
+            // Menyimpan file cover baru
+            $fileNameCover = time() . '_cover.' . $request->cover->getClientOriginalExtension();
+            $request->cover->move(public_path('img/cover_video'), $fileNameCover);
+            $validated['cover'] = 'img/cover_video/' . $fileNameCover;
+        }
+
+        // Memproses file 'foto kepala sekolah' jika ada di request
+        if ($request->hasFile('foto_kepala_sekolah')) {
+            // Menghapus foto kepala sekolah lama jika ada
+            if ($informasi && $informasi->foto_kepala_sekolah && file_exists(public_path($informasi->foto_kepala_sekolah))) {
+                unlink(public_path($informasi->foto_kepala_sekolah));
+            }
+
+            // Menyimpan file foto kepala sekolah baru
+            $fileNameFotoKepalaSekolah = time() . '_foto.' . $request->foto_kepala_sekolah->getClientOriginalExtension();
+            $request->foto_kepala_sekolah->move(public_path('img/foto_kepsek'), $fileNameFotoKepalaSekolah);
+            $validated['foto_kepala_sekolah'] = 'img/foto_kepsek/' . $fileNameFotoKepalaSekolah;
+        }
+
 
         InformasiDasar::updateOrCreate([], $validated);
         session(['informasiDasar' => $validated]);
         return redirect()->route('editor.informasiDasar.index')->with('success', 'Informasi Dasar berhasil disimpan.');
     }
 
-    public function indexHome(){
+    public function indexHome()
+    {
         $informasi = InformasiDasar::first();
 
         return view('app.home', compact('informasi'));
