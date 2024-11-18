@@ -131,6 +131,8 @@ Route::get('/alumni2', [AlumniController::class, 'index'])->name('alumni2');
 Route::post('/alumni2', [AlumniController::class, 'store'])->name('addalumni');
 Route::put('/alumni2', [AlumniController::class, 'edit'])->name('editalumni');
 Route::delete('/alumni2', [AlumniController::class, 'delete'])->name('deletealumni');
+Route::get('/alumni2', [AlumniController::class, 'indexForUser'])->name('alumni.user');
+
 
 
 

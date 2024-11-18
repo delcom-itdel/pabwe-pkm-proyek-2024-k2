@@ -110,4 +110,11 @@ class AlumniController extends Controller
 
         return redirect()->route('alumni2')->with('error', 'Data tidak ditemukan.');
     }
+    public function indexForUser(): View
+{
+    $alumni = Alumni::all();
+    return view('app.user.alumni', compact('alumni'));
+}
+
+
 }

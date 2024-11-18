@@ -6,6 +6,7 @@ use App\Models\Sarana;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\BeritaArtikel;
+use App\Models\Alumni;
 use Illuminate\Support\Facades\Auth;
 
 class ProfilController extends Controller
@@ -41,7 +42,8 @@ class ProfilController extends Controller
 
     public function alumni()
     {
-        return view('app.alumni');
+        $data['alumni'] = Alumni::all();
+        return view('app.alumni', compact('data'));
     }
 
     public function ppdb()
