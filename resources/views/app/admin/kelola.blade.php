@@ -41,28 +41,46 @@
                 <div class="modal-body">
                   <div class="mb-3">
                     <label for="photo" class="form-label">Photo</label>
-                    <input type="file" class="form-control" id="photo" name="photo">
+                    <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo"
+                      name="photo">
+                    @error('photo')
+                    <span class="invalid-feedback">{{ $message }}</span>
+                    @enderror
                   </div>
                   <div class="mb-3">
                     <label for="name" class="form-label">Nama</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama">
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
+                      value="{{ old('name') }}" placeholder="Masukkan nama">
+                    @error('name')
+                    <span class="invalid-feedback">{{ $message }}</span>
+                    @enderror
                   </div>
                   <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan email">
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email"
+                      name="email" value="{{ old('email') }}" placeholder="Masukkan email">
+                    @error('email')
+                    <span class="invalid-feedback">{{ $message }}</span>
+                    @enderror
                   </div>
                   <div class="mb-3">
                     <label for="role" class="form-label">Role</label>
-                    <select class="form-control" id="role" name="role">
-                    <option value="" disabled selected>Pilih Role</option>
-                      <option value="editor">Editor</option>
-                      <option value="admin">Admin</option>
+                    <select class="form-control @error('role') is-invalid @enderror" id="role" name="role">
+                      <option value="" disabled selected>Pilih Role</option>
+                      <option value="editor" {{ old('role') == 'editor' ? 'selected' : '' }}>Editor</option>
+                      <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
                     </select>
+                    @error('role')
+                    <span class="invalid-feedback">{{ $message }}</span>
+                    @enderror
                   </div>
                   <div class="mb-3">
                     <label for="password" class="form-label">Kata Sandi</label>
-                    <input type="password" class="form-control" id="password" name="password"
-                      placeholder="Masukkan kata sandi">
+                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password"
+                      name="password" placeholder="Masukkan kata sandi">
+                    @error('password')
+                    <span class="invalid-feedback">{{ $message }}</span>
+                    @enderror
                   </div>
                 </div>
                 <div class="modal-footer">
@@ -70,6 +88,7 @@
                   <button class="btn btn-primary" type="submit">Simpan</button>
                 </div>
               </form>
+
             </div>
           </div>
         </div>
