@@ -127,11 +127,14 @@ Route::get('/alumni2', function () {
 })->name('alumni2');
 
 // Rute untuk Alumni
-Route::get('/alumni2', [AlumniController::class, 'index'])->name('alumni2');
+// Rute untuk melihat daftar alumni bagi admin
+Route::get('/alumni2', [AlumniController::class, 'index'])->name('alumni2');  // Admin route
 Route::post('/alumni2', [AlumniController::class, 'store'])->name('addalumni');
 Route::put('/alumni2', [AlumniController::class, 'edit'])->name('editalumni');
 Route::delete('/alumni2', [AlumniController::class, 'delete'])->name('deletealumni');
-Route::get('/alumni', [AlumniController::class, 'indexForUser'])->name('alumni.user');
+
+// Rute untuk melihat daftar alumni bagi user (this route is separate for user view)
+Route::get('/alumni-user', [AlumniController::class, 'indexForUser'])->name('alumni.user');
 
 
 
