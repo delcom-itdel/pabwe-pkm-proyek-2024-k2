@@ -17,10 +17,10 @@ class GaleriController extends Controller
      *
      * @return View
      */
-    public function index(): View
+    public function index()
     {
-        $data['galeri'] = Gallery::all();
-        return view('app.admin.galeri', ['data' => $data]);
+        $galleries = Gallery::all();
+        return view('app.admin.galeri', compact('galleries'));
     }
 
     /**
@@ -110,6 +110,6 @@ class GaleriController extends Controller
     public function showGallery()
     {
         $galleries = DB::table('galeri')->get(); // Ambil semua data dari tabel galeri
-        return view('app.galeri', compact('galleries'));
+        return view('app.home', compact('galleries'));
     }
 }
