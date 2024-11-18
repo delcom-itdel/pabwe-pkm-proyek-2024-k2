@@ -37,46 +37,100 @@
 
         <div class="container">
 
-            <div class="row gy-4">
+            <div class="row gy-4 justify-content-center">
 
                 <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="service-item d-flex">
+                    <div class="service-item d-flex align-items-center">
                         <div class="icon flex-shrink-0"><i class="bi bi-briefcase"></i></div>
                         <div>
                             <h4 class="title"><a href="#" class="stretched-link">Peserta Didik</a></h4>
-                            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias
-                                excepturi</p>
+                            <p class="description highlight-data">
+                                {{ session('informasiDasar.jumlah_peserta_didik') ?? $informasi->jumlah_peserta_didik ?? '-' }}
+                            </p>
                         </div>
                     </div>
                 </div>
                 <!-- End Service Item -->
 
                 <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="service-item d-flex">
+                    <div class="service-item d-flex align-items-center">
                         <div class="icon flex-shrink-0"><i class="bi bi-card-checklist"></i></div>
                         <div>
                             <h4 class="title"><a href="#" class="stretched-link">Guru & Tendik</a></h4>
-                            <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                aliquip exa</p>
-                        </div>
-                    </div>
-                </div><!-- End Service Item -->
-
-                <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="service-item d-flex">
-                        <div class="icon flex-shrink-0"><i class="bi bi-bar-chart"></i></div>
-                        <div>
-                            <h4 class="title"><a href="#" class="stretched-link">Kelas</a></h4>
-                            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                            <p class="description highlight-data">
+                                {{ session('informasiDasar.jumlah_guru') ?? $informasi->jumlah_guru ?? '-' }}
                             </p>
                         </div>
                     </div>
-                </div><!-- End Service Item -->
+                </div>
+                <!-- End Service Item -->
+
+                <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-item d-flex align-items-center">
+                        <div class="icon flex-shrink-0"><i class="bi bi-bar-chart"></i></div>
+                        <div>
+                            <h4 class="title"><a href="#" class="stretched-link">Kelas</a></h4>
+                            <p class="description highlight-data">
+                                {{ session('informasiDasar.jumlah_kelas') ?? $informasi->jumlah_kelas ?? '-' }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Service Item -->
+
+                <style>
+                    .highlight-data {
+                        color: #388DA8;
+                        font-size: 31px !important;
+                        font-weight: bold;
+                        margin: 0;
+                    }
+
+                    /* Gaya untuk elemen container */
+                    .service-item {
+                        display: flex;
+                        align-items: center;
+                        gap: 15px;
+                        transition: transform 0.3s ease, box-shadow 0.3s ease;
+                        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+                        border-radius: 10px;
+                        padding: 15px 20px;
+
+                        max-width: 300px;
+
+                        margin: 0 auto;
+                    }
+
+                    /* Efek hover */
+                    .service-item:hover {
+                        transform: scale(1.05);
+                        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+                    }
+
+                    /* Gaya untuk ikon */
+                    .icon {
+                        font-size: 40px;
+                        color: #388DA8;
+                    }
+
+                    /* Gaya untuk judul */
+                    .title {
+                        font-size: 18px;
+                        font-weight: bold;
+                        margin-bottom: 5px;
+                    }
+
+                    /* Style untuk container */
+                    .container {
+                        max-width: 1000px;
+                        margin: 0 auto;
+                    }
+                </style>
 
             </div>
-
         </div>
 
+        </div>
     </section><!-- /Featured Services Section -->
 
     <!-- More Features Section -->
@@ -156,8 +210,8 @@
     <!-- Features Details Section -->
     <section id="features-details" class="features-details section light-background">
 
-            <!-- Section Title -->
-            <div class="container section-title" data-aos="fade-up">
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
             <h2>Prestasi</h2>
         </div><!-- End Section Title -->
 
@@ -201,30 +255,30 @@
 
             <div class="swiper init-swiper">
                 <script type="application/json" class="swiper-config">
-  {
-    "loop": true,
-    "speed": 600,
-    "autoplay": {
-      "delay": 5000
-    },
-    "slidesPerView": "auto",
-    "pagination": {
-      "el": ".swiper-pagination",
-      "type": "bullets",
-      "clickable": true
-    },
-    "breakpoints": {
-      "320": {
-        "slidesPerView": 1,
-        "spaceBetween": 40
-      },
-      "1200": {
-        "slidesPerView": 3,
-        "spaceBetween": 1
-      }
-    }
-  }
-  </script>
+                    {
+                        "loop": true,
+                        "speed": 600,
+                        "autoplay": {
+                            "delay": 5000
+                        },
+                        "slidesPerView": "auto",
+                        "pagination": {
+                            "el": ".swiper-pagination",
+                            "type": "bullets",
+                            "clickable": true
+                        },
+                        "breakpoints": {
+                            "320": {
+                                "slidesPerView": 1,
+                                "spaceBetween": 40
+                            },
+                            "1200": {
+                                "slidesPerView": 3,
+                                "spaceBetween": 1
+                            }
+                        }
+                    }
+                </script>
                 <div class="swiper-wrapper">
 
                     <div class="swiper-slide">

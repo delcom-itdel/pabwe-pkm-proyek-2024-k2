@@ -12,8 +12,8 @@
       <div class="card-body pb-5">
 
         @if(session('success'))
-      <div class="alert alert-success mt-3">{{ session('success') }}</div>
-    @endif
+        <div class="alert alert-success mt-3">{{ session('success') }}</div>
+        @endif
 
         <form action="{{ route('admin.informasiDasar.update') }}" method="POST" enctype="multipart/form-data">
           @csrf
