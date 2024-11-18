@@ -17,8 +17,6 @@ class StaffController extends Controller
         return view('app.admin.staff', compact('staff'));
     }
 
-
-
     public function store(Request $request): RedirectResponse
     {
         $request->validate([

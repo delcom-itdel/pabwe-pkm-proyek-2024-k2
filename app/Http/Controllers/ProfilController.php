@@ -5,18 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Sarana;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use App\Models\BeritaArtikel;
 use Illuminate\Support\Facades\Auth;
 
 class ProfilController extends Controller
 {
     public function sejarah()
     {
-        return view('app.sejarah'); // Mengarah ke resources/views/app/sejarah.blade.php
+        return view('app.sejarah');
     }
 
     public function visiMisi()
     {
-        return view('app.visi-misi'); // Mengarah ke resources/views/app/visi-misi.blade.php
+        return view('app.visi-misi');
     }
     public function struktur()
     {
@@ -55,7 +56,8 @@ class ProfilController extends Controller
     }
     public function beritaArtikel()
     {
-        return view('app.beritaArtikel');
+        $data['berita'] = BeritaArtikel::all();
+        return view('app.beritaArtikel', compact('data'));
     }
     public function galeri1()
     {
@@ -64,12 +66,10 @@ class ProfilController extends Controller
 
     public function arsip1()
     {
-        return view('app.arsip'); // Mengarah ke resources/views/app/arsip.blade.php
+        return view('app.arsip');
     }
     public function hubungiKami()
     {
-        return view('app.hubungiKami'); // Mengarah ke resources/views/app/hubungiKami.blade.php
+        return view('app.hubungiKami');
     }
-
-
 }
