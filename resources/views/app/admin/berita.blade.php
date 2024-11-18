@@ -83,18 +83,18 @@
               <form action="{{ route('editberita') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
-                  <input type="hidden" name="berita_id" value="">
+                  <input type="hidden" name="berita_id" id="edit_berita_id" value="">
                   <div class="mb-3">
-                    <label for="cover" class="form-label">Cover (Optional)</label>
-                    <input type="file" class="form-control" id="cover" name="cover">
+                    <label for="edit_cover" class="form-label">Cover (Optional)</label>
+                    <input type="file" class="form-control" id="edit_cover" name="cover">
                   </div>
                   <div class="mb-3">
-                    <label for="judul" class="form-label">Judul</label>
-                    <input type="text" class="form-control" id="judul" name="judul" placeholder="Enter title">
+                    <label for="edit_judul" class="form-label">Judul</label>
+                    <input type="text" class="form-control" id="edit_judul" name="judul" placeholder="Enter title" value="">
                   </div>
                   <div class="mb-3">
-                    <label for="tindakan" class="form-label">Tindakan</label>
-                    <textarea class="form-control" id="tindakan" name="tindakan" rows="4" placeholder="Enter content"></textarea>
+                    <label for="edit_tindakan" class="form-label">Tindakan</label>
+                    <textarea class="form-control" id="edit_tindakan" name="tindakan" rows="4" placeholder="Enter content"></textarea>
                   </div>
                 </div>
                 <div class="modal-footer">
@@ -170,13 +170,11 @@
     cursor: pointer;
     margin-left: 5px;
     color: #6c757d;
-    /* Warna default */
   }
 
   /* Highlight saat aktif */
   .sort-icon.active {
     color: #007bff;
-    /* Warna biru untuk status aktif */
   }
 </style>
 <!-- Tambahkan Script -->
@@ -247,11 +245,17 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // Set ID untuk Edit
+    // Isi data lama ke modal edit
     document.querySelectorAll('[data-target="#editModal"]').forEach(button => {
       button.addEventListener('click', function() {
         const beritaId = this.getAttribute('data-id');
-        document.querySelector('#editModal input[name="berita_id"]').value = beritaId;
+        const row = this.closest('tr');
+        const judul = row.querySelector('.judul').textContent.trim();
+        const tindakan = row.querySelector('.tindakan').textContent.trim();
+
+        document.getElementById('edit_berita_id').value = beritaId;
+        document.getElementById('edit_judul').value = judul;
+        document.getElementById('edit_tindakan').value = tindakan;
       });
     });
 
